@@ -1,0 +1,120 @@
+{
+  "qa": {
+    "method": "Native browser rendered all eight generated assets on light cream and dark navy surfaces; image geometry inspected through read-only DOM.",
+    "sizes": {
+      "hero": [
+        256,
+        384
+      ],
+      "cards": [
+        320,
+        240
+      ],
+      "cannon": [
+        320,
+        180
+      ],
+      "avatars": [
+        180,
+        180
+      ]
+    },
+    "allImagesLoaded": true,
+    "allObjectFit": "contain",
+    "findings": [
+      "Ship mast tops, flags, ram and bowsprit remain within image bounds.",
+      "Both speaking avatars preserve complete heads, telescope, fingers and torso silhouettes.",
+      "No visible halos, detached fragments or background rectangles on the transparent portraits at 180px.",
+      "Warm orange wood, clear cobalt sky, turquoise water and angular painterly shading are consistent across this generated set."
+    ],
+    "evidence": [
+      "production-qa.png",
+      "production-qa-fleet.png",
+      "production-qa-avatars.png"
+    ],
+    "limitation": "This is asset-level QA, not a completed in-game layout review."
+  },
+  "referenceUse": "Reference screenshots guide style only. No screenshot crops, UI slices or rasterized source text are used as product assets.",
+  "productionDate": "2026-09-30",
+  "generator": "Built-in image_gen.imagegen",
+  "style": "Sunny vivid hand-painted pirate cartoon: cobalt sky, turquoise sea, warm orange wood and golden highlights, humorous expressive faces.",
+  "referenceImages": [
+    "codex-clipboard-e96e7f51-b1a2-4894-a32f-ee98fe7c5ebf.png",
+    "codex-clipboard-8dc7c7cb-7a9c-45c8-bb6f-4a490396379e.png",
+    "codex-clipboard-cc456c09-4052-4eb6-a37d-4aff772015bd.png"
+  ],
+  "assets": [
+    {
+      "file": "harbor-hero.png",
+      "width": 1024,
+      "height": 1536,
+      "type": "hero",
+      "prompt": "Use case: style-transfer. Edit target: first image, the vertical crew illustration. Supporting STYLE REFERENCE: second image, pirate interface painting. Change ONLY the rendering style of the first image to match the second image's beautiful vivid 2D hand-painted pirate cartoon illustration. Keep the same captain, woman treasure carrier, carpenter, cannon, cat, sunny castle harbor, vertical portrait composition. The second reference's illustration has lively bold angular shapes, painterly broad color planes, crisp stylized linework, extremely saturated clear royal blue sky, honey orange woods, appealing exaggerated expressive faces. Repaint the first image using EXACTLY that illustrative treatment; NO photographic pores, strands of hair, fuzzy realism, 3D render lighting or generic semi-realistic storybook finish. Make gold highlights and deep clean navy shadows graphic and colorful. Larger appealing smiles, playful confident characters. Do not reproduce any reference UI, text, border, menu, numbers or layout; only match the painted art style. Finish as one polished vertical 2:3 image with no typography, no watermark. Keep hands natural with proper fingers, no severed fragments.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-ad4b6ad0-bd22-49c3-aaaf-b20eac0ea08b.png",
+      "review": "Initial overly realistic rendering rejected; reference-based repaint accepted."
+    },
+    {
+      "file": "repairer-card.png",
+      "width": 1448,
+      "height": 1086,
+      "type": "card",
+      "prompt": "Use case: illustration-story. Asset type: single landscape 4:3 finished illustrated character card for a premium pirate adventure game. Hand-painted colorful 2D cartoon illustration with broad angular color planes and crisp brush-defined contours, NOT a 3D render, NOT photorealistic. Scene: on a sunlit honey-orange wooden ship deck, a stocky cheerful ship carpenter with brown beard, cobalt blue bandana, white rolled sleeves and leather apron repairs a wooden rail with a short iron-headed hammer. Pose is three-quarter view, strong friendly face with raised eyebrow and a mischievous smile looking toward viewer. His two clearly formed hands occupy separate readable positions: right hand wraps naturally around hammer handle, left hand holds the plank well away from the hammer. No tattoo needed. A brass lantern, timber mast, clean taut rigging, turquoise harbor and tan castle tower against a brilliant saturated royal blue sky with creamy white clouds form the background. Framing: head, both shoulders, both hands and hammer fully inside the picture with generous margin, medium close-up from waist upward, face high center, useful at 320×240. Style: polished expressive premium pirate cartoon painting, graphic rich navy shadows, warm gold sunlight, orange wood planes, cobalt accents, elegant simplified brush texture, smooth readable forms. No UI, no text, no title, no numbers, no borders, no logos, no watermark. No detached body fragments, duplicated hands, fused fingers, tiny eyes, photographic pores or individual realistic hairs.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-e0b092d7-3ec1-428f-9492-cb6f7f136241.png",
+      "review": "Both hands and hammer fully formed; face and bandana intact."
+    },
+    {
+      "file": "looter-card.png",
+      "width": 1448,
+      "height": 1086,
+      "type": "card",
+      "prompt": "Use case: illustration-story. Asset type: a single finished 4:3 landscape illustrated character card for the same sunny Pirate Tides adventure game. Vivid sophisticated 2D painted pirate cartoon art: broad angular brush color planes, clear expressive animated-feature faces, warm honey-orange light against saturated cobalt and turquoise, clean readable premium illustration rather than photographic realism. A cheerful confident Black woman pirate treasure hunter with beautiful dark skin, thick wavy black hair and bright yellow knotted headscarf, gold hoop earrings, white puffed short sleeves, brown leather corset belt. She grins triumphantly while carrying a small wooden treasure chest with brass corners across her body. Both hands are naturally placed underneath supporting the chest, each anatomically clear and separate. A few shiny gold coins tumble in the sunlight. Scene on a timber ship deck with rigging and a black skull pirate flag, tropical island harbor, turquoise water, brilliant blue sky, creamy cloud forms. Composition medium upper-body portrait, face high center, full head and both shoulders, both hands and the entire chest inside the frame with margin; readable at a small 320×240 card size. Polished playful storytelling, clean rich navy shadows, warm gold highlights, expressive eyebrows and smile. No text, numbers, typography, border, menu, UI, watermark. No duplicate hands, amputated fragments, fused fingers, photographic skin texture, tiny unreadable features or blank backgrounds.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-0610c9c5-2db3-444a-8ffe-f309e683bf3d.png",
+      "review": "Both hands supporting chest, face and headscarf intact; preserve 4:3 crop."
+    },
+    {
+      "file": "explorer-card.png",
+      "width": 1448,
+      "height": 1086,
+      "type": "card",
+      "prompt": "Use case: precise-object-edit. Edit only the framing of this pirate explorer boat illustration. Preserve the EXACT boat, faces, sail design, hull design, painting style, colors and lighting. Pull the camera back slightly so the full top of the mast and its finial are visible with clear blue sky above. ALL of the ship, mast top, flag, bowsprit must be fully inside the landscape 4:3 frame with 5 percent safety margin. Do not change the ship or draw extra masts. Keep this as one coherent full-bleed illustration, no border, no text, no UI, no watermark. Maintain the wonderful vivid hand-painted style and white bow waves.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-7dd18186-157f-45ad-9396-b4bcc3dcaf0e.png",
+      "review": "Initial cropped mast rejected; framing repaired, whole mast and bowsprit intact."
+    },
+    {
+      "file": "guard-card.png",
+      "width": 1448,
+      "height": 1086,
+      "type": "card",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the framing of this guard-coast pirate ship illustration. Keep the identical two-masted armored ship, red sail shield designs, crew, tropical tower and vivid painted cartoon style. Pull camera back by about 12 percent so BOTH complete golden mast tops have at least 5 percent blue-sky margin above them; whole short ram, whole hull and black flag also clearly inside. Maintain landscape 4:3, no border and no text or UI. Do not change the number of masts or cannons. Everything stays a single believable coherent ship on turquoise water with beautiful sea foam.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-001481cb-ce8e-4a6f-bca5-b346af4b8540.png",
+      "review": "Initial crowded masts rejected; framing repaired with sky margins."
+    },
+    {
+      "file": "cannon-card.png",
+      "width": 1672,
+      "height": 941,
+      "type": "wide",
+      "prompt": "Use case: illustration-story. Asset type: finished wide landscape 16:9 illustrated arsenal hero image for the Pirate Tides pirate game. A beautiful dynamic close-up of a heavy black iron pirate cannon on a chunky wooden wheeled carriage firing from a honey-orange ship deck across the turquoise Caribbean. Cannon sits in the left half, muzzle points toward right, entire iron barrel and barrel rim clearly readable and physically correct, golden brass trunnion rings and iron carriage fastenings. A big brilliant yellow-white and orange muzzle flash bursts out of the muzzle, a single dark iron cannonball flies just ahead toward the right half, soft creamy smoke curls upward, sparks glow. Behind cannon at upper left a cheeky red-bandana pirate gunner in white rolled sleeves shields his ear with one natural hand and grins. Taut rigging, timber rail, soft castle island silhouettes, cobalt blue sky and cream clouds behind; cinematic diagonal yet fully coherent barrel perspective. Style: premium vividly colored 2D hand-painted pirate cartoon adventure illustration, broad crisp angular painted color planes, expressive face, clean shapes, rich navy iron shadows, warm gold highlights, lively humorous energy. Framing wide16:9, dramatic focal barrel and muzzle flash kept inside frame with margins; visible full carriage, hand and face. No text, UI, labels, numbers, border, watermark, overly photographic surfaces, mechanical distortion, duplicated barrels, cannonball inside the barrel or flames unrelated to the muzzle.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-7547b95a-1efe-49a6-ad25-975dfc80a747.png",
+      "review": "Single coherent barrel, muzzle flash and separate cannonball."
+    },
+    {
+      "file": "lookout-avatar.png",
+      "width": 1254,
+      "height": 1254,
+      "type": "avatar",
+      "prompt": "Use case: illustration-story. Asset type: isolated upper-body pirate dialogue avatar for a premium hand-painted cartoon game, true transparent background. Subject: a cheerful adventurous woman pirate LOOKOUT, warm brown skin, dark curly hair tucked under a deep cobalt-blue knotted bandana, large expressive eyes, raised eyebrows and excited lopsided grin because she has spotted treasure. Rolled white sleeves, blue waistcoat, brown leather crossbody strap, small gold hoop earrings. She holds a short polished brass telescope in one hand upright beside her shoulder, pointing it diagonally upward, other hand gestures toward a discovery. Two hands anatomically clear and complete, five fingers naturally posed, no detached fragments. Style: sophisticated vivid 2D hand-painted pirate cartoon with broad angular brush planes and clear edges, same as colorful pirate adventure shop art; warm honey-gold sunlight, clean rich navy shadows, lively humorous face, slight exaggerated silhouette, polished eye and smile design. Composition centered bust from belt upward, full bandana, full hair silhouette, both shoulders, both hands and telescope completely contained with generous 12 percent clear transparent margins on ALL sides; telescope no higher than head top; artwork occupies about 75 percent canvas, balanced square1:1. No scenery, background, rectangle, colored halo, floor, shadow behind figure, text, UI, label, border, watermark, photographic hairs or skin pores, separate limbs.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-606db0fc-190f-4dd7-a5de-3828cef6923e.png",
+      "review": "True RGBA; opaque bounds57,91,1219,1143; complete head, fingers and telescope."
+    },
+    {
+      "file": "boatswain-avatar.png",
+      "width": 1254,
+      "height": 1254,
+      "type": "avatar",
+      "prompt": "Use case: illustration-story. Asset type: isolated upper-body speaking pirate avatar for a beautiful premium 2D painted cartoon pirate game, TRUE TRANSPARENT background. Subject: funny charismatic stocky pirate BOATSWAIN with a deep crimson red bandana, dark thick eyebrows, broad dark curled mustache and short scruffy dark beard, gold hoop earring, weathered but friendly warm tan face, large expressive eyes. His mouth open in an enthusiastic hearty announcement and one eyebrow cocked. White rolled-sleeve shirt and brown leather vest with a wide belt and brass buckle. One hand confidently points toward the right with a natural index finger and clearly bent other fingers, the other rests on his belt. Both hands complete and anatomically correct. Same vivid painterly pirate adventure style as sunny shop-screen illustrations: broad angular brush color planes, crisp playful contours, warm honey gold light, deep clean navy shadows, polished expressive face, humorous energy. Composition a centered upper-body bust from belt upward in a square1:1 canvas. Full bandana/hair and full shoulders, both complete hands and pointing fingertip fully contained with 12 percent transparent margin all around. Upper body occupies approximately 75 percent canvas. No background scene, rectangle, visible colored halo, text, UI, label, border, watermark, cropped head, detached fragments, duplicated limbs, 3D render or photographic pores.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-9ce0e60c-99ed-4616-b288-e976d194a671.png",
+      "review": "True RGBA; opaque bounds40,90,1220,1196; complete head and pointing fingers."
+    }
+  ]
+}

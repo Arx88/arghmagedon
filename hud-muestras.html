@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muestras · Tarjeta de barco (revisión) · Pirate Tides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e2b36b; --gold-dim:#a8814a; --gold-line:#dfb57355;
+  --name:#fff0d5; --sub:#b5d8df; --mute:#6f97a3;
+  --hp-a:#c0ed9e; --hp-b:#55c78c; --ghost:#a8402f;
+  --crit:#e4795a; --crit-deep:#8f3520;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#050d14;color:#cfe3e8;font:400 14px/1.6 Manrope,system-ui,sans-serif;padding:30px 24px 90px}
+h1{font:600 30px/1.15 'Cormorant Garamond',Georgia,serif;color:var(--name);margin:0 0 8px;letter-spacing:.5px}
+h1 small{display:block;font:600 10px/1.6 Manrope,sans-serif;letter-spacing:2.6px;color:var(--mute);text-transform:uppercase;margin-top:9px}
+.lede{max-width:880px;color:#8fb3bd;font-size:13px;margin:16px 0 26px;line-height:1.7}
+.lede b{color:var(--gold);font-weight:600}
+
+.panel{
+  position:sticky;top:0;z-index:50;margin:0 0 34px;padding:14px 18px;
+  background:linear-gradient(180deg,#0b202bee,#071824f4);backdrop-filter:blur(10px);
+  border:1px solid #1d4553;border-radius:10px;box-shadow:0 12px 34px #0009;
+  display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+}
+.panel .ctl{display:flex;flex-direction:column;gap:6px;min-width:210px}
+.panel label{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font:600 9px/1 Manrope,sans-serif;letter-spacing:1.8px;color:var(--mute);text-transform:uppercase}
+.panel label b{font:700 13px/1 Manrope,sans-serif;letter-spacing:0;color:var(--name);text-transform:none}
+.panel label b.hot{color:var(--gold)}
+.panel input[type=range]{width:100%;accent-color:var(--gold);height:16px;cursor:pointer}
+
+.stage{margin:0 0 40px;max-width:1160px}
+.stage-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.stage-head h3{margin:0;font:700 11px/1 Manrope,sans-serif;letter-spacing:2.4px;color:var(--name);text-transform:uppercase}
+.stage-head h3 span{color:var(--gold)}
+.stage-head p{margin:0;font-size:12.5px;color:#89aeb9;max-width:820px;line-height:1.7}
+.scene{
+  position:relative;height:250px;border-radius:8px;overflow:hidden;border:1px solid #123340;
+  background:radial-gradient(120% 95% at 68% 18%,#0e3f4d 0%,#072431 46%,#04121b 100%);
+}
+.scene::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(105% 82% at 48% 42%,transparent 42%,#000a 100%)}
+.scene.hull{height:290px}
+.note{margin-top:14px;padding:13px 16px;border-left:2px solid var(--gold);background:#0a1f2ac9;border-radius:0 6px 6px 0;font-size:12.5px;line-height:1.75;color:#9dc2cc}
+.note b{color:var(--name)}
+.note ul{margin:9px 0 0;padding-left:18px}
+.note li{margin:5px 0}
+
+/* ============================================================
+   TARJETA — réplica fiel de hud.css + hud-polish.css
+   ============================================================ */
+.card{position:absolute;left:0;bottom:4px;width:410px;display:flex;gap:14px;align-items:center;padding:0 15px 0 0;isolation:isolate}
+.card::before{content:'';position:absolute;inset:0 -7px 0 86px;z-index:-1;
+  background:linear-gradient(110deg,#071e2cf7,#092734ee 68%,#082b3666);
+  clip-path:polygon(0 3%,94% 2%,90% 8%,98% 16%,94% 22%,100% 30%,96% 43%,99% 57%,95% 68%,99% 84%,93% 86%,97% 97%,0 96%)}
+.card::after{content:'';position:absolute;left:94px;right:18px;top:2%;height:1px;background:linear-gradient(90deg,#e2b36b,#dfb57355)}
+.card-art{position:absolute;inset:0;width:100%;height:100%;z-index:-2;object-fit:cover;clip-path:inset(0 0 0 34%);opacity:.9}
+.emblem{position:relative;flex:0 0 144px;width:144px;height:144px;margin-left:24px;
+  background:url('/assets/pirate-ui/compass-rim-v3.png') center top/100% auto no-repeat}
+.emblem .portrait{position:absolute;inset:17% 13% 13%;display:grid;place-items:center}
+.emblem .portrait svg{width:92%;height:auto;filter:drop-shadow(0 2px 4px #0009)}
+.medal{position:absolute;bottom:1%;left:50%;transform:translateX(-50%);display:grid;place-items:center;width:34px;height:34px;
+  background:url('/assets/pirate-ui/v2/medal.webp') center/contain no-repeat;font:24px/1 Georgia,serif;color:#f4ca85;z-index:1}
+.details{flex:1;min-width:0;padding:12px 0}
+.sname h2{margin:0;font:400 24px/1.1 Georgia,serif;text-transform:uppercase;letter-spacing:.6px;color:var(--name);white-space:nowrap}
+.sname>span{display:block;font:600 12px/1.5 Manrope,sans-serif;letter-spacing:.6px;margin-top:6px;color:var(--sub)}
+.xp{position:relative;width:100%;height:1px;background:#98734277;margin:10px 0 9px}
+.xp i{display:block;height:100%;width:0;background:#79c5d7;box-shadow:0 0 6px #8cdeeb55}
+.hull,.crew{display:flex;align-items:center;gap:10px}
+.hull .ico,.crew .ico{width:22px;height:22px;flex:none}
+.hull>div,.crew>div{flex:1;min-width:0}
+.hrow{display:flex;justify-content:space-between;gap:8px;margin:0 0 4px;font:800 12px/1 Manrope,sans-serif}
+.hrow>span{font:400 7px/1 Manrope,sans-serif;letter-spacing:1.4px;align-self:center;color:#94acb3;text-transform:uppercase}
+.htrack{height:11px;background:#102c34;overflow:hidden;position:relative}
+.htrack>div{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#b8ed99,#56e59b 70%,#21df81);transition:width .14s linear}
+.htrack>div.crit{background:linear-gradient(90deg,#f3a878,#d1563d)}
+.crew{margin-top:9px}
+.cline{font:600 12px/1 Manrope,sans-serif;letter-spacing:1px;display:block;color:#c4dde2}
+.cline b{color:#fff0cc}
+.dots{display:flex;gap:3px;margin-top:5px;flex-wrap:nowrap;max-width:100%;overflow:hidden}
+.dots i{position:relative;flex:1 1 8px;max-width:12px;min-width:3px;height:12px}
+.dots i::before{content:'';position:absolute;left:2px;top:0;width:4px;height:4px;border-radius:50%;background:#eab96d}
+.dots i::after{content:'';position:absolute;left:0;top:4px;width:8px;height:8px;background:#eab96d;clip-path:polygon(25% 0,75% 0,100% 60%,75% 60%,75% 100%,25% 100%,25% 60%,0 60%)}
+.hull-critical .emblem{border:3px solid #e47956;border-radius:50%}
+.hull-critical .medal{color:#f99e72}
+
+/* ---------- REV 1: la misma tarjeta, cuatro arreglos ---------- */
+.rev .xp{height:2px;background:#7d5c2e88}
+.rev .xp::after{content:'';position:absolute;right:0;top:-2.5px;width:6px;height:6px;border:1px solid #e8b86c;transform:rotate(45deg);background:#112c35}
+.rev .xp i{background:linear-gradient(90deg,#c99a52,#f0cf96);box-shadow:0 0 7px #e2b36b66}
+.rev .htrack>u{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#8f3520,var(--ghost));transition:width 1.15s cubic-bezier(.2,.7,.3,1)}
+.rev .hrow b{transition:color .25s}
+.rev .hull-critical .hrow b{color:var(--crit)}
+.rev .card::before{transition:background .5s}
+.rev .hull-critical .card::before{background:linear-gradient(110deg,#2a0f10f7,#0d2a33ee 62%,#082b3666)}
+.rev .hull-critical .htrack{box-shadow:inset 0 0 0 1px #e4795688;animation:breathe 1.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+.rev .dots i::before,.rev .dots i::after{background:var(--c,#eab96d)}
+.rev .dots i{transition:background .3s}
+
+/* ---------- PANEL 3: la embestida, fuera de la tarjeta ---------- */
+.helm{display:flex;gap:26px;align-items:center;flex-wrap:wrap;padding:8px 0 0}
+.helm figure{margin:0;text-align:center}
+.helm figure.prose{text-align:left}
+.helm figure.prose p{text-align:left}
+.helm figcaption{margin-top:10px;font:600 9px/1.5 Manrope,sans-serif;letter-spacing:1.8px;color:var(--mute);text-transform:uppercase}
+.helm .sea{position:relative;width:330px;height:200px;border-radius:8px;border:1px solid #123340;
+  background:radial-gradient(120% 100% at 50% 30%,#0e3f4d,#05202c 60%,#03101a);
+  display:grid;place-items:center;overflow:hidden}
+.helm .sea svg{width:270px;height:auto}
+.bow-glow{opacity:0;transition:opacity .35s}
+.ready .bow-glow{opacity:1}
+.legend-mini{display:flex;gap:16px;flex-wrap:wrap;margin-top:4px}
+.legend-mini div{display:inline-flex;align-items:center;gap:7px;font:500 11.5px Manrope,sans-serif;color:#8fb3bd}
+.legend-mini i{width:10px;height:10px;border-radius:50%;flex:none}
+</style>
+</head>
+<body>
+
+<h1>Tarjeta de barco, segunda vuelta<small>Una propuesta, no cuatro · nada implementado todavía</small></h1>
+
+<p class="lede">
+  La primera versión falló por criterio, no por acabado: metí ocho filas de datos en una placa que solo debe decir quién eres y qué puedes perder, y para hacer espacio tiré el borde rasgado, la rosa de los vientos, los iconos y la jerarquía tipográfica que ya estaban bien.
+  Esta vez la tarjeta <b>no crece, no pierde elementos y no baja ni un píxel de jerarquía</b>: mismo esqueleto, mismos iconos, misma tipografía, y <b>+1 px de alto medidos</b> (160 contra 159), que es lo que tarda la barra de EXP en dejar de ser un pelo. Y la señal de embestida se muda fuera de la pantalla, al barco.
+</p>
+
+<section class="panel">
+  <div class="ctl">
+    <label>Casco <b id="hpOut">160 / 170</b></label>
+    <input type="range" id="hp" min="0" max="170" value="160">
+  </div>
+  <div class="ctl">
+    <label>Velocidad <b id="spOut">7.0 nudos</b></label>
+    <input type="range" id="sp" min="0" max="160" value="70">
+  </div>
+  <div class="ctl" style="min-width:300px">
+    <label>Tripulación</label>
+    <div class="presets" id="crewPresets" style="display:flex;gap:7px;flex-wrap:wrap"></div>
+  </div>
+</section>
+
+<div id="stages"></div>
+
+<script>
+const A='/assets/pirate-ui/';
+const MAXHP=170, RAM=11;
+const state={hp:160,sp:7,rank:1,xp:70,crew:8,maxCrew:12,
+  roles:{repairers:0,gunners:0,looters:0,boarders:0}};
+
+const ROLE=[
+  {k:'repairers',n:'Reparadores',c:'#7fd4a8'},
+  {k:'gunners',  n:'Artilleros', c:'#e4795a'},
+  {k:'looters',  n:'Saqueadores',c:'#e9c36e'},
+  {k:'boarders', n:'Abordadores',c:'#79c5d7'},
+];
+const MARINER='#a8823f';
+const CREW_PRESETS=[
+  {label:'Sin especialistas',roles:{repairers:0,gunners:0,looters:0,boarders:0},crew:8},
+  {label:'Dos reparadores',roles:{repairers:2,gunners:0,looters:0,boarders:0},crew:8},
+  {label:'Tripulación completa',roles:{repairers:2,gunners:3,looters:1,boarders:1},crew:12},
+];
+
+const pct=()=>Math.max(0,state.hp/MAXHP*100);
+const crit=()=>state.hp/MAXHP<.3;
+const ready=()=>state.sp>=RAM;
+
+const shipSvg=`<svg viewBox="0 0 100 100" aria-hidden="true">
+  <path d="M13 63h74l-10 16H23z" fill="#8a5a30"/><path d="M13 63h74l-4 6H17z" fill="#6b4423"/>
+  <rect x="47.5" y="13" width="3.5" height="50" fill="#6b4a2a"/>
+  <path d="M51 17c14.5 6.5 22.5 17 24.5 31.5H51z" fill="#f2e6cb"/>
+  <path d="M47.5 23c-11.5 5.5-17.5 15-19.5 27.5h19.5z" fill="#e0cfa8"/>
+  <path d="M51 17c14.5 6.5 22.5 17 24.5 31.5H51z" fill="none" stroke="#b9a67f" stroke-width=".8"/>
+  <path d="M47.5 23c-11.5 5.5-17.5 15-19.5 27.5h19.5z" fill="none" stroke="#b9a67f" stroke-width=".8"/>
+  <rect x="28" y="61" width="4" height="7" fill="#c99a52"/><rect x="43" y="61" width="4" height="7" fill="#c99a52"/><rect x="59" y="61" width="4" height="7" fill="#c99a52"/>
+</svg>`;
+const emblem=r=>`<div class="emblem"><div class="portrait">${shipSvg}</div><span class="medal">${r}</span></div>`;
+const xpBar=()=>`<div class="xp"><i style="width:${Math.min(100,state.xp/(state.rank*80)*100)}%"></i></div>`;
+
+/* dots: los especialistas teñidos, los marineros en el oro de siempre */
+const tintedDots=()=>{
+  const out=[];
+  for(const r of ROLE) for(let i=0;i<state.roles[r.k];i++) out.push(`<i style="--c:${r.c}"></i>`);
+  while(out.length<state.crew) out.push('<i></i>');
+  return out.slice(0,state.crew).join('');
+};
+const legend=()=>`<div class="legend-mini">${ROLE.map(r=>
+  `<div><i style="background:${r.c};opacity:${state.roles[r.k]?1:.3}"></i>${r.n} <b style="color:var(--name)">${state.roles[r.k]}</b></div>`).join('')}
+  <div><i style="background:${MARINER}"></i>Marineros <b style="color:var(--name)">${state.crew-ROLE.reduce((a,r)=>a+state.roles[r.k],0)}</b></div></div>`;
+
+/* --- tarjeta actual, sin tocar --- */
+const now=()=>`<div class="stage"><div class="stage-head">
+  <h3>Referencia · <span>lo que hay hoy</span></h3>
+  <p>Ni un cambio. Está para comparar, y también para dejar claro que el problema nunca fue el aspecto: la tarjeta está bien hecha y aun así no sirve, porque tres de las cosas que importan no están en ella.</p></div>
+  <div class="scene"><img class="card-art" src="${A}ship-panel-v3.png" alt="">
+    <div class="card ${crit()?'hull-critical':''}">${emblem(state.rank)}
+      <div class="details">
+        <div class="sname"><h2>La Indomable</h2><span>RANGO ${state.rank} · ${state.xp}/${state.rank*80} EXP</span></div>
+        ${xpBar()}
+        <div class="hull"><img class="ico" src="${A}shield.webp" alt=""><div>
+          <div class="hrow"><span>Casco</span><b>${Math.ceil(state.hp)} / ${MAXHP}</b></div>
+          <div class="htrack"><div class="${crit()?'crit':''}" style="width:${pct()}%"></div></div></div></div>
+        <div class="crew"><img class="ico" src="${A}crew.webp" alt=""><div>
+          <span class="cline"><b>${state.crew}</b> / ${state.maxCrew} TRIPULANTES</span>
+          <span class="dots">${'<i></i>'.repeat(state.crew)}</span></div></div>
+      </div></div></div>
+  <div class="note"><b>Tres fallos, medidos en el navegador:</b>
+    <ul>
+      <li>La barra de EXP mide <b>1 px</b> (<code>hud-polish.css</code>: <code>height:1px</code>). En la captura de arriba no se ve. La progresión de rango es la meta de la partida y no ocupa ningún espacio perceptible.</li>
+      <li>A <b>30 % de casco</b>, <code>hull-critical</code> solo tiñe el borde del emblema y el número de la medalla (<code>hud.css:30</code>). La barra se pinta de naranja pero no avisa de nada más: no hay pulso, no hay sonido, no hay estela. Te enteras de que te están matando por el ruido del daño, no por el HUD.</li>
+      <li>Los <b>puntos de tripulación son idénticos</b>. Hay reparadores, artilleros, saqueadores y abordadores —cuatro mecánicas reales que se pagan con oro en el puerto— y la tarjeta no los distingue. A 24 de tripulación además cada punto se estruja de 8 px a 6 px.</li>
+    </ul></div></div>`;
+
+/* --- propuesta: misma tarjeta, cuatro arreglos --- */
+const rev=()=>`<div class="stage"><div class="stage-head">
+  <h3>Propuesta · <span>la misma tarjeta, mejor hecha</span></h3>
+  <p>Cero filas nuevas, cero iconos fuera, cero cambios de jerarquía. Lo único que cambia es que cuatro cosas que ya estaban a medio hacer se terminan de verdad.</p></div>
+  <div class="scene"><img class="card-art" src="${A}ship-panel-v3.png" alt="">
+    <div class="card rev ${crit()?'hull-critical':''}">${emblem(state.rank)}
+      <div class="details">
+        <div class="sname"><h2>La Indomable</h2><span>RANGO ${state.rank} · ${state.xp}/${state.rank*80} EXP</span></div>
+        ${xpBar()}
+        <div class="hull"><img class="ico" src="${A}shield.webp" alt=""><div>
+          <div class="hrow"><span>Casco</span><b>${Math.ceil(state.hp)} / ${MAXHP}</b></div>
+          <div class="htrack"><u id="ghost"></u><div class="${crit()?'crit':''}" style="width:${pct()}%"></div></div></div></div>
+        <div class="crew"><img class="ico" src="${A}crew.webp" alt=""><div>
+          <span class="cline"><b>${state.crew}</b> / ${state.maxCrew} TRIPULANTES</span>
+          <span class="dots" id="tinted">${tintedDots()}</span></div></div>
+      </div></div></div>
+  ${legend()}
+  <div class="note"><b>Los cuatro arreglos, y por qué la tarjeta no crece:</b>
+    <ul>
+      <li><b>La EXP pasa de 1 px a 2 px</b> y se pone en oro, el mismo metal que la medalla y el filete. Antes iba en azul, que es el color de carga —decía "cargando" cuando lo que hacía era progresar—. Recupera el remate de diamante que el CSS ya tenía guardado.</li>
+      <li><b>Estela de daño.</b> Una segunda capa dentro de la pista que ya existía, en ladrillo, que tarda 1,15 s en desaparecer. No añade altura ni un solo elemento: ahora ves <i>cuánto</i> te acabas de perder, no solo cuánto te queda.</li>
+      <li><b>Casco crítico sin gritar.</b> En vez de cinco señales —filete rojo, número rojo, etiqueta roja, barra roja y temblor— son dos: el número se pone rojo y la pista respira. Un temblor en el HUD es vomitón; el rojo en el número se lee sin apartar la vista de la cubierta.</li>
+      <li><b>Los puntos se tiñen por especialidad.</b> Los mismos muñecos, los mismos ocho píxeles de ancho, los mismos tres de separación, el mismo hueco. Solo cambia el color, y el reparto sale en el <code>title</code> del elemento al pasar el ratón. Pasa de decoración a información sin costar nada.</li>
+    </ul>
+    <div style="margin-top:10px">Mueve <b>Casco</b> hacia abajo y verás la estela. Pulsa los botones de <b>Tripulación</b> y verás cómo cambia el color de los puntos y el reparto de la leyenda.</div></div></div>`;
+
+/* --- la embestida, fuera del HUD --- */
+const helm=()=>`<div class="stage"><div class="stage-head">
+  <h3>La embestida · <span>fuera de la pantalla</span></h3>
+  <p>El playtest dio 151 de daño en 2,3 s con una embestida, contra 163,7 en 12 s con el mejor cañón. La embestida es la única mecánica que funciona de verdad y su puerta son los 11 nudos. Meter ese dato en la tarjeta fue mi error: no es información de identidad, es información de maniobra, y el sitio donde vive la maniobra es el barco.</p></div>
+  <div class="scene hull">
+    <div class="helm">
+      <figure><div class="sea" id="seaSlow">
+        <svg viewBox="0 0 300 180" aria-label="Barco a 7 nudos">
+          <defs><radialGradient id="wg" cx=".5" cy=".5"><stop offset="0" stop-color="#ffb066" stop-opacity=".9"/><stop offset="1" stop-color="#ff7a2e" stop-opacity="0"/></radialGradient></defs>
+          <ellipse class="bow-glow" cx="150" cy="46" rx="52" ry="40" fill="url(#wg)"/>
+          <path d="M150 18c26 20 38 52 40 92l-40 34-40-34c2-40 14-72 40-92z" fill="#6b4423" stroke="#c99a52" stroke-width="1.5"/>
+          <path d="M150 34c14 16 21 40 22 66l-22 18-22-18c1-26 8-50 22-66z" fill="#1d5a68" opacity=".55"/>
+          <rect x="143" y="30" width="14" height="86" rx="6" fill="#c99a52" opacity=".5"/>
+          <path d="M62 158c30 12 62 16 88 16s58-4 88-16" stroke="#5fc4d8" stroke-width="2.5" fill="none" opacity=".5" stroke-linecap="round"/>
+          <path d="M96 174c20 6 40 8 54 8s34-2 54-8" stroke="#5fc4d8" stroke-width="2" fill="none" opacity=".28" stroke-linecap="round"/>
+        </svg>
+      </div><figcaption>7 nudos · proa apagada</figcaption></figure>
+      <figure><div class="sea ready" id="seaFast">
+        <svg viewBox="0 0 300 180" aria-label="Barco a 14 nudos, proa encendida">
+          <defs><radialGradient id="wg2" cx=".5" cy=".5"><stop offset="0" stop-color="#ffd9a8" stop-opacity=".95"/><stop offset="1" stop-color="#ff6a1e" stop-opacity="0"/></radialGradient></defs>
+          <ellipse class="bow-glow" cx="150" cy="46" rx="66" ry="52" fill="url(#wg2)"/>
+          <ellipse class="bow-glow" cx="150" cy="52" rx="34" ry="26" fill="#ffcf95" opacity=".5"/>
+          <path d="M150 18c26 20 38 52 40 92l-40 34-40-34c2-40 14-72 40-92z" fill="#7d4f28" stroke="#f0cf96" stroke-width="1.8"/>
+          <path d="M150 34c14 16 21 40 22 66l-22 18-22-18c1-26 8-50 22-66z" fill="#22697a" opacity=".6"/>
+          <rect x="143" y="30" width="14" height="86" rx="6" fill="#f0cf96" opacity=".55"/>
+          <path d="M56 158c34 13 66 17 94 17s60-4 94-17" stroke="#8fe3f5" stroke-width="3" fill="none" opacity=".7" stroke-linecap="round"/>
+          <path d="M84 174c24 7 46 9 66 9s42-2 66-9" stroke="#8fe3f5" stroke-width="2.4" fill="none" opacity=".4" stroke-linecap="round"/>
+          <path d="M112 188c22 5 34 6 38 6s16-1 38-6" stroke="#8fe3f5" stroke-width="2" fill="none" opacity=".22" stroke-linecap="round"/>
+        </svg>
+      </div><figcaption>14 nudos · proa encendida · ¡ya!</figcaption></figure>
+      <figure class="prose" style="max-width:300px">
+        <div class="sea" style="height:auto;padding:18px 20px;display:block">
+          <p style="margin:0 0 12px;font:600 10px/1.7 Manrope,sans-serif;letter-spacing:1.6px;color:var(--mute);text-transform:uppercase">Qué ganas y qué pierdes</p>
+          <p style="margin:0 0 12px;font:500 13px/1.8 Manrope,sans-serif;color:#9dc2cc">
+            <b style="color:var(--name)">Ganas:</b> la señal aparece exactamente cuando la flota te deja acelerar contra ella, en el sitio donde ya estás mirando, y desaparece sola al soltar. No ocupa un píxel de HUD ni compite con nada.</p>
+          <p style="margin:0;font:500 13px/1.8 Manrope,sans-serif;color:#9dc2cc">
+            <b style="color:var(--name)">Pierdes:</b> deja de ser un dato y pasa a ser una señal periférica, no un número que puedas leer de un vistazo. Si prefieres leerlo en cifras, el sitio natural es la etiqueta del rival —que ya muestra su nombre, su oro y su casco—, no esta tarjeta.</p>
+        </div><figcaption>la decisión que hay que tomar</figcaption></figure>
+    </div></div></div>`;
+
+function render(){document.getElementById('stages').innerHTML=now()+rev()+helm();
+  requestAnimationFrame(()=>{const g=document.getElementById('ghost');if(g)g.style.width=pct()+'%'})}
+
+let ghost=state.hp;
+function read(){
+  state.hp=+hp.value; state.sp=+sp.value/10;
+  hpOut.textContent=`${state.hp} / ${MAXHP}`;
+  spOut.textContent=ready()?`⚓ lista para embestir`:`${state.sp.toFixed(1)} nudos`;
+  spOut.className=ready()?'hot':'';
+  render();
+}
+for(const id of['hp','sp']) document.getElementById(id).addEventListener('input',read);
+
+const cp=document.getElementById('crewPresets');
+cp.innerHTML=CREW_PRESETS.map((p,i)=>`<button data-i="${i}" class="${i===2?'on':''}">${p.label}</button>`).join('');
+cp.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  const p=CREW_PRESETS[+b.dataset.i];
+  state.roles={...p.roles}; state.crew=p.crew;
+  [...cp.children].forEach(c=>c.classList.toggle('on',c===b));
+  render();
+});
+cp.querySelectorAll('button').forEach(b=>{
+  b.style.cssText='font:600 11px Manrope,sans-serif;color:#bfe0e6;background:#0f2e3c;border:1px solid #23596b;border-radius:6px;padding:7px 10px;cursor:pointer';
+});
+cp.querySelector('button.on').style.cssText='font:600 11px Manrope,sans-serif;color:#08202c;background:#e2b36b;border:1px solid #e2b36b;border-radius:6px;padding:7px 10px;cursor:pointer';
+function markOn(){cp.querySelectorAll('button').forEach(b=>{b.style.cssText='font:600 11px Manrope,sans-serif;color:'+(b.classList.contains('on')?'#08202c':'#bfe0e6')+';background:'+(b.classList.contains('on')?'#e2b36b':'#0f2e3c')+';border:1px solid '+(b.classList.contains('on')?'#e2b36b':'#23596b')+';border-radius:6px;padding:7px 10px;cursor:pointer'})}
+markOn();
+
+function tick(){
+  const g=document.getElementById('ghost');
+  if(g){ghost+=(state.hp-ghost)*0.055;g.style.width=Math.max(0,ghost/MAXHP*100)+'%'}
+  requestAnimationFrame(tick);
+}
+state.roles={...CREW_PRESETS[2].roles}; state.crew=CREW_PRESETS[2].crew;
+read(); requestAnimationFrame(tick);
+</script>
+</body>
+</html>

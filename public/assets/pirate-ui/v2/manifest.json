@@ -1,0 +1,166 @@
+{
+  "match": {
+    "source": "exec-a50843d1-5751-4004-8583-9d68c9713464.png",
+    "source_size": [
+      2181,
+      721
+    ],
+    "crop": [
+      37,
+      51,
+      2144,
+      631
+    ],
+    "width": 1200,
+    "height": 330,
+    "ratio": 3.636364,
+    "center_alpha": 253
+  },
+  "compass": {
+    "source": "exec-d3abf82b-5303-4224-80a4-da70a6dba064.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      76,
+      33,
+      1175,
+      1172
+    ],
+    "width": 1139,
+    "height": 1139,
+    "ratio": 1.0,
+    "center_alpha": 0
+  },
+  "medal": {
+    "source": "exec-9b0ea9f2-c5f2-4257-aea6-4af9c952377f.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      46,
+      48,
+      1207,
+      1196
+    ],
+    "width": 1161,
+    "height": 1161,
+    "ratio": 1.0,
+    "center_alpha": 253
+  },
+  "ship-panel": {
+    "source": "exec-99174649-5599-41cd-8015-63eefe9d05d9.png",
+    "source_size": [
+      2172,
+      724
+    ],
+    "crop": [
+      11,
+      15,
+      2150,
+      703
+    ],
+    "width": 1200,
+    "height": 386,
+    "ratio": 3.108808,
+    "center_alpha": 253
+  },
+  "dialogue": {
+    "source": "exec-a33a8625-5e15-402e-9106-2ed41656229d.png",
+    "source_size": [
+      2172,
+      724
+    ],
+    "crop": [
+      8,
+      65,
+      2165,
+      658
+    ],
+    "width": 1200,
+    "height": 330,
+    "ratio": 3.636364,
+    "center_alpha": 253
+  },
+  "cannon": {
+    "source": "exec-4f7d0563-dca8-4d79-9f95-6e43f94260b4.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      125,
+      192,
+      1188,
+      1117
+    ],
+    "width": 1063,
+    "height": 925,
+    "ratio": 1.149189,
+    "center_alpha": 253
+  },
+  "swords": {
+    "source": "exec-b80143ad-6e3a-49ac-a020-0dc5aca65a0b.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      81,
+      85,
+      1173,
+      1129
+    ],
+    "width": 1092,
+    "height": 1044,
+    "ratio": 1.045977,
+    "center_alpha": 0
+  },
+  "chest": {
+    "source": "exec-93c579a7-ce5e-4764-9de1-57564d450a3f.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      154,
+      111,
+      1141,
+      1174
+    ],
+    "width": 987,
+    "height": 1063,
+    "ratio": 0.928504,
+    "center_alpha": 252
+  },
+  "fire": {
+    "source": "exec-da6b28cf-7efd-45f7-bfee-22a170540f5d.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "crop": [
+      190,
+      155,
+      1067,
+      1034
+    ],
+    "width": 877,
+    "height": 879,
+    "ratio": 0.997725,
+    "center_alpha": 252
+  },
+  "crew-pip": {
+    "width": 101,
+    "height": 236,
+    "source": "../crew.webp",
+    "crop": [
+      118,
+      41,
+      219,
+      277
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "C:/Users/juanp/AppData/Local/Temp/codex-clipboard-4f65609e-60bd-49e4-a3e1-02183d480d1d.png",
+  "constraints": [
+    "Original generated assets; no reference crops",
+    "World geometry, materials and pixel style retained",
+    "Character portraits not changed",
+    "Main gameplay action illustrations retained; generated silhouettes replace small functional glyphs"
+  ],
+  "sails": [
+    {
+      "file": "scout-i-spyglass-v1.png",
+      "prompt": "Use case: stylized-concept. Production asset: flat square UV albedo texture for a pirate ship sail in Three.js. Reference image: use ONLY the cream Explorador I sail in the middle fleet card for the exact palette and telescope emblem, NOT the screenshot layout or the pirate characters. Generate ORIGINAL clean artwork. Full-bleed square warm ivory sailcloth, faint straight vertical sewn cloth panels and very subtle flat painterly fabric grain. LARGE centered DARK NAVY silhouette of the spyglass shown in the reference: diagonal tube rising from lower left to upper right, broad circular lens at upper right, three thick sections separated by ivory bands. Symbol occupies about 58 percent of the canvas width, 45 percent height. Bold simple readable solid planes. Orthographic completely flat texture, NO perspective, NO sail outline, NO surrounding ship, NO background scene, NO baked highlights/shadows/folds, NO skulls, NO border, NO lettering. All four corners are cloth. Keep the warm cream, navy and amber pirate reference art style.",
+      "outputHint": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-ce41a614-0367-4fb5-9dae-ba6113a3fe34.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "scout-ii-compass-v1.png",
+      "prompt": "Use case: stylized-concept. Production asset: flat square UV albedo texture for a pirate ship sail in Three.js. Reference image: use ONLY the blue Explorador II sail in the center fleet card for the exact navy and gold cardinal wheel emblem; NOT the screenshot layout or the characters. Generate ORIGINAL clean artwork. Full-bleed square DEEP NAVY BLUE sailcloth, faint straight vertical sewn cloth panels and very subtle flat painterly fabric grain. LARGE centered WARM GOLD eight-point compass rose / ship wheel, EXACT motif of reference sail: open gold ring, four strong cardinal spokes pointing up/right/down/left, four diagonal thinner spokes, a SIMPLE small ivory skull at center. Large open negative spaces. Symbol occupies 62 percent width and height. Bold thick readable solid planes, not ornate jewelry. Orthographic completely flat texture, NO perspective, NO sail outline, NO surrounding ship, NO background scene, NO baked highlights/shadows/folds, NO border, NO lettering. All four corners are cloth. Do not change reference palette or emblem design.",
+      "outputHint": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-d64748b8-3204-4914-a1e0-b03f603c5ada.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "guard-tower-v1.png",
+      "prompt": "Use case: stylized-concept. Production asset: flat square UV albedo texture for a pirate ship sail in Three.js. Reference image: use ONLY the red Guardacostas sail in right fleet card for the exact red and ivory tower emblem; NOT the screenshot layout or the characters. Generate ORIGINAL clean artwork. Full-bleed square rich brick crimson red sailcloth, faint straight vertical sewn cloth panels and very subtle flat painterly fabric grain. LARGE centered WARM IVORY crenellated lighthouse/watchtower emblem EXACT motif of reference sail: upright broad tower, three block battlements, narrower upper body and flared strong lower walls, one wide arched dark doorway and two simple windows. NOT a shield, not a skull. Symbol occupies 50 percent width and 66 percent height. Bold thick simple readable solid planes. Orthographic completely flat texture, NO perspective, NO sail outline, NO surrounding ship, NO background scene, NO baked highlights/shadows/folds, NO border, NO lettering. All four corners are cloth. Do not change the reference palette or motif.",
+      "outputHint": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-5d4a5e2c-78e8-4059-8fd4-3d687b62faa8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ],
+  "glyphs": {
+    "file": "../pirate-ui/glyph-atlas-v7.png",
+    "prompt": "Production raster HUD sprite atlas, exactly 5 equal columns and 4 equal rows. PURE SOLID BLACK BACKGROUND (#000000) everywhere between symbols. No alpha transparency. Twenty simple clean FLAT vector-like GOLD silhouettes in the style of the FUNCTIONAL SMALL GOLD UI GLYPHS in the supplied pirate reference, not ornate illustrations. NO TEXTURE, NO DUST, NO NOISE, NO SPECKLES, NO BEVEL, NO SHADOW, NO OUTER HALO, NO FINE LINES, NO SHINY 3D. Render as sharp uniformly solid warm pale gold (#f6ce76), one color only. Bold contours and spacious thick negative-space cutouts, legible at 24px. Five by four uniform rectangular tiles, glyphs centered occupying 72 percent tile, equally sized. Row1: sailboat, three crew busts, crossed swords, three ship fleet, palm island. Row2: anchor, wrench, shield, stopwatch, target crosshair. Row3: coin with central large diamond cutout, treasure chest, telescope spyglass, rum bottle, cannon on wheels. Row4: curved grappling hook, flame, two cannonballs with three chain links, round fuse bomb, eight-spoke helm wheel. Show a SINGLE coherent icon in every tile. Do NOT add badges, frames, backgrounds behind icons or lettering. Black background must be perfectly smooth and uniform.",
+    "outputHint": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-7f08bbe5-3cb0-4e8c-8cfa-d30c0ab97b21.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "method": "CSS luminance sampling from generated atlas; no SVG and no hand-painted icon substitutions"
+  },
+  "rejected": [
+    {
+      "id": "5ae4e389-4889-4731-a85f-965d1a4ee519",
+      "reason": "Stray gold/red pixels and shading unsuitable for small glyphs"
+    },
+    {
+      "id": "0a92bee0-fc36-489e-9e1e-2b39190973b4",
+      "reason": "Transparent output retained noisy halos"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "cannon": {
+    "width": 288,
+    "height": 268
+  },
+  "swords": {
+    "width": 279,
+    "height": 292
+  },
+  "chest": {
+    "width": 306,
+    "height": 258
+  },
+  "fire": {
+    "width": 263,
+    "height": 296
+  },
+  "rum": {
+    "width": 180,
+    "height": 308
+  },
+  "anchor": {
+    "width": 267,
+    "height": 307
+  },
+  "coin": {
+    "width": 272,
+    "height": 245
+  },
+  "wheel": {
+    "width": 302,
+    "height": 301
+  },
+  "crew": {
+    "width": 296,
+    "height": 287
+  },
+  "shield": {
+    "width": 301,
+    "height": 313
+  },
+  "note": {
+    "width": 265,
+    "height": 305
+  },
+  "gear": {
+    "width": 290,
+    "height": 299
+  },
+  "harpoon": {
+    "width": 301,
+    "height": 275
+  },
+  "chain": {
+    "width": 314,
+    "height": 273
+  },
+  "bomb": {
+    "width": 313,
+    "height": 273
+  },
+  "spyglass": {
+    "width": 305,
+    "height": 262
+  },
+  "compass": {
+    "width": 605,
+    "height": 638
+  },
+  "medal": {
+    "width": 602,
+    "height": 576
+  },
+  "scoreboard": {
+    "width": 605,
+    "height": 251
+  },
+  "dialogue-frame": {
+    "width": 607,
+    "height": 213
+  },
+  "boatswain": {
+    "width": 420,
+    "height": 420
+  },
+  "lookout": {
+    "width": 420,
+    "height": 420
+  },
+  "harpooner": {
+    "width": 420,
+    "height": 420
+  },
+  "sailor": {
+    "width": 420,
+    "height": 420
+  },
+  "carpenter": {
+    "width": 420,
+    "height": 420
+  },
+  "captain": {
+    "width": 420,
+    "height": 420
+  },
+  "ship-panel": {
+    "width": 1100,
+    "height": 419
+  },
+  "ship-emblem": {
+    "width": 410,
+    "height": 458
+  },
+  "ship-banner": {
+    "width": 900,
+    "height": 348
+  },
+  "rope": {
+    "width": 480,
+    "height": 27
+  }
+}

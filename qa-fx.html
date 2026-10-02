@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>QA · efectos de disparo</title>
+<style>
+  html,body{margin:0;height:100%;background:#0b3a44;overflow:hidden}
+  canvas{display:block}
+  #tag{position:fixed;left:10px;top:8px;color:#ffd98a;font:12px/1.3 system-ui;text-shadow:0 1px 3px #000}
+</style>
+</head>
+<body>
+<div id="tag"></div>
+<script type="module">
+import * as THREE from 'three';
+import { SeaEffects } from '/src/sea-effects.js';
+import { ShotEffects } from '/src/shot-effects.js';
+import { BALL_COLOR, BALL_SCALE, BALL_SPIN, WAKE_PUFF, WAKE_GAP, WAKE_SIZE, WAKE_LIFE } from '/src/projectile-look.js';
+
+// A bare stage for judging muzzle and tracer work: no game loop, no stalls. Every
+// frame below is laid out by hand so a screenshot shows exactly one moment.
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(1);
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const q = new URLSearchParams(location.search);
+// Judging additive fire over a dark slate was misleading: the real sea is a bright
+// turquoise, and anything that reads as a hot glow against a dark background
+// washes out to white against that. The default here matches the water the game
+// actually sails on, and `pull` backs the camera off to the distance the player
+// actually plays at, so a screenshot means the same thing the game does.
+scene.background = new THREE.Color(0x1f8a80);
+const pull = Number(q.get('pull') ?? 1);
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, .1, 400);
+camera.position.set(-2, 6, 15).multiplyScalar(pull);
+camera.lookAt(-4 * pull, 1.5 * pull, 0);
+scene.add(new THREE.HemisphereLight(0xbfe9f0, 0x0d3a34, 2.2));
+const sun = new THREE.DirectionalLight(0xffe7ae, 2.4);
+sun.position.set(8, 20, 10); scene.add(sun);
+
+const fx = new SeaEffects(scene, 1800);
+const shotFx = new ShotEffects(scene);
+
+const kind = Number(q.get('kind') ?? 0);
+const step = Number(q.get('step') ?? 6);
+const guns = Number(q.get('guns') ?? 4);
+const names = ['hierro', 'cadena', 'fuego', 'bomba'];
+
+// The projectile bodies themselves, built from the same tables the game uses so
+// this stage cannot drift away from what ships on screen. Without them a review
+// only ever sees muzzle, tracer and halo — the three layers that were never the
+// complaint.
+const ballGeometry = new THREE.SphereGeometry(.18, 7, 5);
+const ballMaterial = new THREE.MeshStandardMaterial({
+  color: BALL_COLOR[kind], roughness: .42, metalness: .55,
+  emissive: BALL_COLOR[kind], emissiveIntensity: .18,
+});
+const linkMaterial = new THREE.MeshStandardMaterial({
+  color: BALL_COLOR[1], roughness: .42, metalness: .55,
+  emissive: BALL_COLOR[1], emissiveIntensity: .18,
+});
+
+// Fire a line of guns on the left and fly the shots out to the right.
+const dt = 1 / 60;
+const slots = [];
+const balls = [];
+const wake = Array.from({ length: guns }, () => 0);
+const jitter = new THREE.Vector3();
+for (let frame = 0; frame < step; frame++) {
+  if (frame === 0) {
+    for (let g = 0; g < guns; g++) {
+      fx.muzzle(new THREE.Vector3(-9, 1.5, (g - (guns - 1) / 2) * 1.6), new THREE.Vector3(1, 0, 0), kind);
+      slots[g] = shotFx.begin(new THREE.Vector3(-9, 1.5, (g - (guns - 1) / 2) * 1.6), kind);
+      const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+      ball.scale.set(...BALL_SCALE[kind]);
+      // Chain shot is two extra links, built the way game.js builds them.
+      for (const side of [-1, 1]) {
+        const link = new THREE.Mesh(ballGeometry, linkMaterial);
+        link.position.x = side * .5; link.scale.set(.9, .9, .9); link.visible = kind === 1;
+        ball.add(link);
+      }
+      scene.add(ball); balls.push(ball);
+    }
+  }
+  fx.update(dt);
+  // One tracer per gun, walking right at the weapon's own speed.
+  const age = (frame + 1) * dt;
+  for (let g = 0; g < guns; g++) {
+    const at = new THREE.Vector3(-9 + age * 26, 1.5 + Math.sin(age * 2.2) * 1.2, (g - (guns - 1) / 2) * 1.6);
+    // Distance travelled has to be measured before the ball is moved to its new
+    // spot, or every frame reads as zero travelled and no wake is ever emitted.
+    wake[g] += at.distanceTo(balls[g].position);
+    shotFx.advance(slots[g], at);
+    balls[g].position.copy(at);
+    balls[g].rotation.z += dt * BALL_SPIN[kind];
+    if (kind === 1) {
+      balls[g].rotation.x += dt * 9;
+      for (const link of balls[g].children) link.rotation.x -= dt * 9;
+    }
+    while (wake[g] >= WAKE_GAP[kind]) {
+      wake[g] -= WAKE_GAP[kind];
+      const spread = WAKE_GAP[kind] * .7;
+      fx.emit(WAKE_PUFF[kind],
+        jitter.set(at.x + (Math.random() - .5) * spread, at.y + (Math.random() - .5) * spread, at.z + (Math.random() - .5) * spread),
+        { x: (Math.random() - .5) * spread, y: .15 + Math.random() * .2, z: (Math.random() - .5) * spread },
+        WAKE_SIZE[kind], WAKE_LIFE[kind]);
+    }
+  }
+  shotFx.update(dt, camera);
+}
+
+renderer.render(scene, camera);
+// Layer switches for judging one contributor at a time: with everything on, the
+// eye cannot tell which mesh is responsible for a shape it dislikes.
+if (q.has('noblast')) fx.blasts && (fx.blasts.visible = false);
+if (q.has('nojet')) { fx.jets.visible = false; fx.jetCores.visible = false; }
+if (q.has('nopuff')) fx.mesh.visible = false;
+if (q.has('noglow')) shotFx.glows.visible = false;
+renderer.render(scene, camera);
+document.getElementById('tag').textContent =
+  `${names[kind]} · ${guns} cañones · fotograma ${step} · ${fx.alive} partículas`
+  + ['noblast', 'nojet', 'nopuff', 'noglow'].filter(f => q.has(f)).map(f => ` · sin ${f.slice(2)}`).join('');
+window.__ready = true;
+window.__fx = fx; window.__shotFx = shotFx;
+// Exposed so a review harness can re-render inside its own animation frame and
+// read the pixels back: this page renders once and stops, so without a way to ask
+// for another frame there is nothing left to photograph.
+window.__renderer = renderer; window.__camera = camera; window.__scene = scene;
+</script>
+</body>
+</html>

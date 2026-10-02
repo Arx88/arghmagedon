@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {seaHeight} from '../src/sea-state.js';
+test('storm swells are substantial and sheltered coastlines stay calm',()=>{let max=0;for(let t=0;t<40;t+=.1)max=Math.max(max,Math.abs(seaHeight(40,50,t,1)));assert(max>3);const coast=[{x:0,y:0,z:12,w:9}];assert.equal(seaHeight(0,0,7,1,coast),0);assert(Math.abs(seaHeight(0,0,7,0))<.08);});

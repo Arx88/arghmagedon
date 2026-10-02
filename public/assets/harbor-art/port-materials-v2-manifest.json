@@ -1,0 +1,16 @@
+{
+  "mode": "built-in image_gen",
+  "referenceRole": "UI materials only; no screenshot crops, text and controls remain native.",
+  "assets": [
+    {
+      "asset": "port-ocean-backdrop-v2.png",
+      "prompt": "Use case: stylized-concept. Generate a NEW background illustration texture for the right main area of a premium Pirate Tides port upgrade menu. Input is UI STYLE reference only. Ignore characters and cards; create ONLY its midnight ocean / old nautical chart background. Landscape aspect 3:2. Deep ink navy #032439 with gently painted tonal water ripples, turquoise dark water texture concentrated toward TOP RIGHT and far RIGHT, fading into quiet near-solid dark navy across center and left so native white/gold text is very legible. Faint elegant antique brass compass rose integrated at top right at about 82% x, 14% y, subtle and ghosted with no letters. No panels, no cards, no ships, no islands, no icons, no typography, no text, no buttons, no borders. Restrained warm adventure game art direction, same refined navy of attached reference main menu background. Rich hand painted material texture with depth, quiet readable matte finish, no bright highlights crossing center. Opaque full-bleed rectangular background.",
+      "output": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-dde5fba4-93ba-453e-9aeb-9f26d8720ea6.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "asset": "arsenal-lore-paper-v2.png",
+      "prompt": "Use case: stylized-concept. Generate a single NEW empty parchment lore card background for a Pirate Tides pirate port menu, matching the warm cream parchment inset visible at lower LEFT of reference. Reference is only UI material style, not to crop. Landscape 4:3 piece of old ivory-golden parchment with irregular softly worn corners, hand painted crumpled folds, discreet aged edge stains, thin edge curl and warm light. Center quiet clean cream #f7dca8 for native black serif text. Very faint antique map marks near outer edges only; no writing, no symbols in center, no decorative frame. Entire paper fits canvas with 4% transparent margin, all outside genuine transparent alpha. Subtle soft shadow close to edge only. No text, letters, quote marks, icons, characters, props, background or full UI.",
+      "output": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-d55ca842-e036-4df3-8415-2673441b9a16.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ]
+}

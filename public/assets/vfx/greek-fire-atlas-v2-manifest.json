@@ -1,0 +1,8 @@
+{
+  "tool": "Built-in image_gen",
+  "date": "2026-10-01",
+  "asset": "greek-fire-atlas-v2.png",
+  "source": "exec-7c3e96b5-bd4f-4dff-b4ce-cad6a5fd6704.png",
+  "prompt": "Create one production VFX sprite atlas for a beautiful pixel / voxel pirate sea battle game. A perfectly square transparent canvas subdivided mentally into a precise 2 by 2 equal cell grid, with FOUR consecutive animation frames of the SAME small Greek fire flame cluster, in reading order. Each cell contains one upright flame cluster centered horizontally, base at 86% of its cell height, width at most 72% cell width and height at most 72% cell height. Keep every shape fully inside its cell with generous transparent gutters. Flame aesthetic: expert hand-painted high quality 2D game effect, stepped pixel contours and angular flame tongues appropriate for detailed voxel ships, rich deep red-orange edges, saturated amber body, small bright golden cores, many graceful curling wisps, a few tiny rising embers. The flame forks and flickers across the four frames while size and anchored base remain consistent. Strong warm chromatic separation, not a pale white triangular cone. No backgrounds, no ocean, no characters, no objects, no shadows, no labels, no text, no grid lines, no border, no UI. TRUE ALPHA transparency, not a painted checkerboard. This atlas will be sampled as four separate billboard frames at small in-game size.",
+  "notes": "Freshly generated true-alpha 2×2 atlas. UV bounds normalize each generated frame; no user reference screenshot is used as a production crop."
+}

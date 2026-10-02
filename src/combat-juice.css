@@ -1,0 +1,55 @@
+/* Battle juice: screen-space feedback that never blocks a click. */
+#combat-juice{position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden;contain:strict}
+#combat-juice>*{position:absolute;inset:0;pointer-events:none}
+
+.juice-layer{opacity:0;transition:none}
+.juice-hurt{background:radial-gradient(120% 90% at var(--jx,50%) var(--jy,50%),#ff5a3c00 34%,#b7231bcc 78%,#5d0d09 100%);mix-blend-mode:screen}
+.juice-hurt.threat{background:radial-gradient(120% 90% at var(--jx,50%) var(--jy,50%),#ffd08a00 42%,#d98a2a55 84%,#4a2a00 100%);mix-blend-mode:screen}
+.juice-crit{background:radial-gradient(circle at 50% 46%,#fff4cf 0%,#ffca6a33 26%,#ff8b2a00 62%);mix-blend-mode:screen}
+.juice-low{background:radial-gradient(115% 88% at 50% 50%,#7c0f1300 42%,#8e1b1899 84%,#40070a 100%);opacity:0}
+
+.juice-arrows b{position:absolute;left:50%;top:50%;width:0;height:0;opacity:0;transform:translate(-50%,-50%) rotate(var(--d,0deg));transition:opacity .18s}
+.juice-arrows b::before{content:'';position:absolute;left:-9px;top:-26px;border:9px solid transparent;border-bottom-color:#ffb35c;filter:drop-shadow(0 0 6px #ff7a2a88)}
+.juice-arrows b.creature::before{border-bottom-color:#ff8f7a;filter:drop-shadow(0 0 6px #ff5a3c88)}
+.juice-arrows u{position:absolute;left:0;top:-38px;transform:translate(-50%,0) rotate(calc(-1 * var(--d,0deg)));font:700 9px/1 Manrope,sans-serif;letter-spacing:.6px;text-decoration:none;white-space:nowrap;color:#ffe0b0;text-shadow:0 2px 4px #04161d;opacity:0}
+.juice-arrows b.on{opacity:1}
+.juice-arrows b.on u{opacity:1}
+
+.juice-markers i{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;opacity:0}
+.juice-markers i::before,.juice-markers i::after{content:'';position:absolute;inset:0;border:2px solid #fff0c8;border-radius:2px;clip-path:polygon(0 0,34% 0,34% 8%,8% 8%,8% 34%,0 34%)}
+.juice-markers i::before{transform:rotate(0)}
+.juice-markers i::after{transform:rotate(180deg)}
+.juice-markers i.crit{border-color:#ffd36a}
+.juice-markers i.crit::before,.juice-markers i.crit::after{border-color:#ff8f3a}
+
+/* These three are placed by hand, so they must out-specify the `#combat-juice>*`
+   inset reset above. Anchoring is what keeps the combo off the topbar. */
+#combat-juice>.juice-target{left:0;top:0;right:auto;bottom:auto;width:104px;margin:-64px 0 0 -52px;opacity:0;transform-origin:50% 50%}
+.juice-target b{display:block;font:800 11px/1.3 Manrope,sans-serif;letter-spacing:1.2px;text-align:center;color:#ffe7bd;text-shadow:0 2px 4px #03151d}
+.juice-target span{display:block;margin-top:2px;font:600 9px/1.2 Manrope,sans-serif;letter-spacing:.5px;text-align:center;color:#ffb98f;text-shadow:0 2px 3px #03151d}
+.juice-target i{display:block;height:5px;margin-top:5px;background:#0b2028cc;border:1px solid #c08b4f99;border-radius:2px;overflow:hidden;box-shadow:0 2px 6px #04161d99}
+.juice-target i em{display:block;height:100%;background:linear-gradient(90deg,#c9503a,#ffb35c);transition:width .12s linear}
+.juice-target.burning i em{background:linear-gradient(90deg,#ff7a2a,#ffe08a)}
+
+#combat-juice>.juice-combo{left:50%;top:15%;right:auto;bottom:auto;width:340px;margin-left:-170px;text-align:center;opacity:0}
+.juice-combo b{display:block;font:800 40px/1 Manrope,sans-serif;letter-spacing:-1px;color:#ffcf6a;text-shadow:0 4px 0 #7a3a12,0 6px 18px #ff8a2a66;transform:scale(.7)}
+.juice-combo small{display:block;margin-top:2px;font:700 11px/1 Manrope,sans-serif;letter-spacing:3px;color:#ffe7bd;text-shadow:0 2px 6px #03151d}
+.juice-combo.blaze b{color:#ff9a4a;text-shadow:0 4px 0 #7a2a12,0 6px 20px #ff6a2a88}
+.juice-combo.storm b{color:#ffd36a;text-shadow:0 4px 0 #7a4a12,0 6px 24px #ffb02a99}
+.juice-combo.legend b{color:#fff3d0;text-shadow:0 4px 0 #a04414,0 8px 28px #ffb02acc}
+
+#combat-juice>.juice-banner{left:0;right:0;top:33%;bottom:auto;text-align:center;opacity:0}
+.juice-banner b{display:block;font:800 34px/1.05 Manrope,sans-serif;letter-spacing:3px;color:#fff0cf;text-shadow:0 3px 0 #5c1c10,0 8px 26px #000000aa}
+.juice-banner small{display:block;margin-top:6px;font:600 12px/1 Manrope,sans-serif;letter-spacing:5px;color:#ffb98f;text-shadow:0 2px 8px #000000aa}
+.juice-banner.ram b{color:#ffd36a;text-shadow:0 3px 0 #6b3a08,0 8px 26px #ff9a2aaa}
+.juice-banner.ram small{color:#fff0cf}
+
+@media(max-width:760px){
+  .juice-combo b{font-size:30px}
+  .juice-banner b{font-size:23px;letter-spacing:2px}
+  .juice-banner small{font-size:10px;letter-spacing:3px}
+  .juice-target{transform:scale(.82)}
+}
+@media(prefers-reduced-motion:reduce){
+  .juice-markers i,.juice-arrows b{transition:none}
+}

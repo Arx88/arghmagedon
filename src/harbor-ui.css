@@ -1,0 +1,275 @@
+/* The port has one stable canvas. Artwork never contains functional text. */
+body.game-hud #captain-dialog{--port-gold:#f6cf68;--port-rule:#887347;--port-paper:#f6f0df;width:100vw;height:100dvh;max-width:none;max-height:none;min-height:0;inset:0;margin:0;padding:0;border:0;border-image:none;border-radius:0;background:#032438;box-shadow:none;overflow:hidden;color:var(--port-paper)}
+body.game-hud #captain-dialog[open]{display:grid;grid-template-columns:29% minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0}
+body.game-hud #captain-dialog .harbor-illustration{clip-path:polygon(0 0,100% 0,96% 100%,0 100%);position:relative;min-width:0;overflow:hidden;background:#163b4d}
+body.game-hud #captain-dialog .harbor-illustration>img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block}
+body.game-hud #captain-dialog .harbor-illustration:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(#02253a86,transparent 20%,transparent 65%,#001b2aa8)}
+body.game-hud #captain-dialog .harbor-brand{position:absolute;inset:25px 24px auto;z-index:1;display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid #e7c26e;font:700 clamp(21px,1.9vw,32px)/1.2 Georgia,serif;letter-spacing:2.5px;color:#ffdc81;white-space:nowrap;text-shadow:0 2px 6px #021d31}
+body.game-hud #captain-dialog .harbor-brand .hud-icon{width:42px;height:48px;flex:none}
+body.game-hud #captain-dialog blockquote{position:absolute;bottom:28px;left:25px;right:25px;z-index:1;margin:0;text-align:center;color:#ffedc9;background:#05273ccc;padding:17px 15px;border:1px solid #b3955f}
+body.game-hud #captain-dialog:not([data-tab="weapons"]) blockquote{display:none}
+body.game-hud #captain-dialog blockquote>span{font:700 12px/1.5 Manrope,sans-serif;letter-spacing:2px;color:#ffdc81}
+body.game-hud #captain-dialog #company-quip{display:block;font:600 23px/1.3 Georgia,serif;color:#f9eace;margin:10px 0 0;text-wrap:pretty}
+body.game-hud #captain-dialog .harbor-main{position:relative;min-width:0;min-height:0;padding:38px 34px 22px;display:grid;grid-template-rows:126px 58px minmax(0,1fr);gap:14px;background:#032439 url('/assets/harbor-art/port-ocean-backdrop-v2.png') right top/cover no-repeat}
+body.game-hud #captain-dialog .harbor-main:before{content:'';position:absolute;inset:0;opacity:.15;pointer-events:none;background:repeating-linear-gradient(25deg,transparent 0 26px,#14506233 27px 28px,transparent 29px 55px);mix-blend-mode:soft-light}
+body.game-hud #captain-dialog .harbor-main>*{position:relative;min-width:0}
+body.game-hud #captain-dialog .close{position:absolute;right:17px;top:17px;width:43px;height:43px;padding:0;border:1px solid #d4ab5d;border-radius:50%;font:300 35px/1 Georgia,serif;display:grid;place-items:center;color:#f9d475;background:#022537;z-index:5}
+body.game-hud #captain-dialog .close:hover{background:#244757}
+body.game-hud #captain-dialog .harbor-heading{position:relative;padding:0;margin:0;border:0;display:grid;grid-template-rows:21px minmax(0,1fr) 40px;gap:8px;min-height:0}
+body.game-hud #captain-dialog .harbor-heading:after{display:none}
+body.game-hud #captain-dialog .eyebrow{font:800 12px/1.6 Manrope,sans-serif;letter-spacing:1.4px;color:var(--port-gold);padding-right:180px}
+body.game-hud #captain-dialog #company-title{display:block;height:auto;min-height:0;margin:0;padding-right:0;font:600 clamp(30px,2.8vw,48px)/1.12 Georgia,serif;letter-spacing:-1px;color:#fff8ee;text-wrap:pretty;overflow:visible;align-self:center;z-index:1;text-shadow:0 2px 10px #022436}
+body.game-hud #captain-dialog .harbor-scene{position:absolute;top:-19px;right:50px;left:auto;width:170px;height:100px;object-fit:contain;opacity:1;mask:none;pointer-events:none;filter:drop-shadow(0 6px 4px #00182577);z-index:0}
+body.game-hud #captain-dialog #company-wallet{display:flex;gap:14px;align-items:center;min-width:0;font:400 16px/1.3 Georgia,serif;margin:0;padding:0;white-space:normal;overflow:visible;color:#deebee;z-index:1}
+body.game-hud #captain-dialog #company-wallet>span{display:flex;align-items:center;gap:8px;min-width:0}
+body.game-hud #captain-dialog #company-wallet b{font-weight:400;font-size:21px;color:var(--port-gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+body.game-hud #captain-dialog #company-wallet .hud-icon{width:43px;height:43px;flex:none}
+body.game-hud #captain-dialog .harbor-docked{padding-right:18px;border-right:1px solid #a6874c}
+body.game-hud #captain-dialog .company-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:0;border:0;overflow:visible;align-items:stretch}
+body.game-hud #captain-dialog .company-tabs button{display:flex;justify-content:center;align-items:center;gap:10px;width:auto;min-width:0;min-height:58px;padding:10px 7px;font:400 18px/1.2 Georgia,serif;border:1px solid #17647b;background:#022638;border-radius:5px;color:#e5edf0;white-space:nowrap;transition:background .15s,border-color .15s,box-shadow .15s}
+body.game-hud #captain-dialog .company-tabs .hud-icon{width:38px;height:38px;filter:grayscale(1) brightness(1.6);flex:none}
+body.game-hud #captain-dialog .company-tabs button.selected{background:linear-gradient(#303e35,#1c322f);border-color:#f4ca66;color:#ffda72;box-shadow:inset 0 0 14px #fdd36920,0 0 0 1px #e4b253,0 0 12px #f3cc4938}
+body.game-hud #captain-dialog .company-tabs button.selected .hud-icon{filter:none}
+body.game-hud #captain-dialog .company-tabs button:hover{border-color:#c5ae6d;background:#153b48}
+body.game-hud #captain-dialog #company-content{display:block;min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#a1874e #032638;padding:2px 8px 15px 2px;border:0}
+body.game-hud #captain-dialog #company-note{position:absolute;bottom:8px;left:34px;right:34px;display:flex;align-items:center;pointer-events:none;font:500 12px/1.5 Manrope,sans-serif;min-height:0;color:#a8c5ce;margin:0;padding:0;overflow:visible;text-wrap:pretty;border:0}
+body.game-hud #captain-dialog .harbor-section-heading{display:flex;align-items:center;gap:18px;justify-content:space-between;margin:0 0 16px;border-bottom:1px solid #8c795055;padding-bottom:10px}
+body.game-hud #captain-dialog .harbor-section-heading h3{font:600 26px/1.2 Georgia,serif;margin:0;color:var(--port-gold)}
+body.game-hud #captain-dialog .harbor-section-heading>span{font:500 12px/1.5 Manrope,sans-serif;color:#b6ced6;text-align:right}
+body.game-hud #captain-dialog .harbor-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;align-items:stretch}
+body.game-hud #captain-dialog .harbor-card{display:flex;flex-direction:column;min-width:0;min-height:0;border:1px solid #968157;border-radius:7px;padding:8px 8px 0;background:#022435;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+body.game-hud #captain-dialog .harbor-card:hover{border-color:#e5c67b;box-shadow:0 0 12px #deb15d15}
+body.game-hud #captain-dialog .harbor-card-art{position:relative;aspect-ratio:4/3;width:100%;background:#234c5a;border-radius:4px;overflow:hidden;flex:none}
+body.game-hud #captain-dialog .harbor-card-art>img{width:100%;height:100%;display:block;object-fit:contain;object-position:center}
+body.game-hud #captain-dialog [data-item="recruit"] .harbor-card-art>img{object-position:50% 43%}
+body.game-hud #captain-dialog .harbor-cutout>img{object-fit:contain;padding:25px;background:radial-gradient(#2b5664,#092937)}
+body.game-hud #captain-dialog .harbor-badge{font:400 14px/1.2 Georgia,serif;white-space:nowrap;border:1px solid #a38b52;border-radius:3px;color:#f2cf76;background:#082839;padding:5px 9px}
+body.game-hud #captain-dialog .harbor-card-art .harbor-badge{position:absolute;right:8px;bottom:8px;background:#032536ed}
+body.game-hud #captain-dialog .harbor-card-copy{display:flex;flex-direction:column;padding:13px 10px 10px;flex:1;min-width:0}
+body.game-hud #captain-dialog .harbor-card h3{font:600 clamp(22px,1.8vw,30px)/1.15 Georgia,serif;letter-spacing:-.3px;color:#fff4e6;margin:0 0 10px;text-wrap:pretty}
+body.game-hud #captain-dialog .harbor-card p{font:400 15px/1.5 Georgia,serif;color:#ccdde3;margin:0;text-wrap:pretty;flex:1}
+body.game-hud #captain-dialog .harbor-benefit{font:500 12px/1.5 Manrope,sans-serif;color:#f3d883;margin:14px 0 17px;min-height:36px;text-wrap:pretty}
+body.game-hud #captain-dialog .harbor-purchase{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;min-width:0}
+body.game-hud #captain-dialog .harbor-price{display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;color:#ffdd7d}
+body.game-hud #captain-dialog .harbor-price .hud-icon{width:44px;height:44px;flex:none}
+body.game-hud #captain-dialog .harbor-price b{font:600 25px/1 Georgia,serif;font-variant-numeric:tabular-nums}
+body.game-hud #captain-dialog .harbor-price small{font:400 15px/1 Georgia,serif}
+body.game-hud #captain-dialog .harbor-max{font:500 13px/1.4 Manrope,sans-serif;white-space:normal}
+body.game-hud #captain-dialog .harbor-buy{min-height:43px;flex:none;border:1px solid #ffe58b;border-radius:5px;background:linear-gradient(#ffd04c,#eca610);color:#2c230c;padding:10px 17px;font:600 18px/1.2 Georgia,serif;box-shadow:inset 0 1px 0 #fff8c566,0 2px 3px #00172780}
+body.game-hud #captain-dialog .harbor-buy:hover{background:linear-gradient(#ffe48a,#fbc23e)}
+body.game-hud #captain-dialog .harbor-buy:disabled{opacity:1;background:#213d43;border-color:#617170;color:#a7b7b5;box-shadow:none;cursor:not-allowed}
+body.game-hud #captain-dialog button:focus-visible{outline:2px solid #ffdc80;outline-offset:3px}
+body.game-hud #captain-dialog .harbor-card:focus-visible{outline:2px solid #ffdc80;outline-offset:2px}
+body.game-hud #captain-dialog .harbor-lock{font:500 12px/1.4 Manrope,sans-serif;color:#d8b997;margin:9px 0 0;min-height:34px;flex:none;text-wrap:pretty}
+body.game-hud #captain-dialog .harbor-lock-empty{visibility:hidden}
+body.game-hud #captain-dialog .harbor-active-fleet{margin-top:20px;border-top:1px solid #a18b5550;color:#dcebf0;font-size:14px}
+body.game-hud #captain-dialog .harbor-active-fleet summary{padding:14px 0;cursor:pointer}
+body.game-hud #captain-dialog .harbor-active-fleet article{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid #1f5362;border-radius:3px;gap:14px;margin-bottom:8px}
+body.game-hud #captain-dialog .harbor-active-fleet strong{display:block;font:600 18px/1.3 Georgia,serif}
+body.game-hud #captain-dialog .harbor-active-fleet small{font:500 12px/1.5 Manrope,sans-serif;color:#b4cbd4}
+body.game-hud #captain-dialog .harbor-active-fleet button{padding:9px 16px;border:1px solid #a58a52;background:#1c3b47;color:#f2d99d;font-size:14px;min-height:42px;border-radius:3px}
+body.game-hud #captain-dialog .harbor-crew-footer{display:grid;grid-template-columns:1fr 1.6fr;gap:20px;border:1px solid #907a49;border-radius:4px;padding:18px;margin-top:20px;min-width:0}
+body.game-hud #captain-dialog .harbor-crew-total,body.game-hud #captain-dialog .harbor-rum{display:flex;align-items:center;gap:14px;min-width:0}
+body.game-hud #captain-dialog .harbor-crew-total>.hud-icon,body.game-hud #captain-dialog .harbor-rum>.hud-icon{width:42px;height:44px;flex:none}
+body.game-hud #captain-dialog .harbor-crew-footer strong{font:600 19px/1.3 Georgia,serif;display:block;color:#f6ebd4}
+body.game-hud #captain-dialog .harbor-crew-footer small{display:block;font:500 12px/1.5 Manrope,sans-serif;color:#acc9d4}
+body.game-hud #captain-dialog .harbor-crew-footer progress{appearance:none;height:7px;display:block;width:100%;margin-top:8px;border:0;border-radius:4px;overflow:hidden;background:#264656}
+body.game-hud #captain-dialog progress::-webkit-progress-bar{background:#264656}body.game-hud #captain-dialog progress::-webkit-progress-value{background:#fbd379}
+body.game-hud #captain-dialog .harbor-rum{flex-wrap:wrap;padding-left:20px;border-left:1px solid #8e7753}
+body.game-hud #captain-dialog .harbor-rum .harbor-purchase{margin-left:auto;gap:10px}
+body.game-hud #captain-dialog .harbor-rum .harbor-lock{width:100%;margin-top:-8px;text-align:right}
+body.game-hud #captain-dialog .harbor-arsenal{display:grid;grid-template-columns:42% minmax(0,1fr);gap:20px;align-items:start;min-width:0}
+body.game-hud #captain-dialog .arsenal-list{display:flex;flex-direction:column;gap:9px;min-width:0}
+body.game-hud #captain-dialog .arsenal-list button{display:grid;grid-template-columns:70px minmax(0,1fr) 26px;gap:13px;padding:9px;border:1px solid #255268;border-radius:5px;background:#022538;color:#f4f0df;text-align:left;align-items:center;min-height:98px;min-width:0}
+body.game-hud #captain-dialog .arsenal-list img{width:70px;height:70px;object-fit:contain;background:#204657;border:1px solid #ad8b50;border-radius:4px;padding:7px}
+body.game-hud #captain-dialog .arsenal-list strong{font:600 20px/1.1 Georgia,serif;display:block;margin-bottom:6px;text-wrap:pretty}
+body.game-hud #captain-dialog .arsenal-list small{font:500 12px/1.4 Manrope,sans-serif;color:#b7cfdb;display:block;text-wrap:pretty}
+body.game-hud #captain-dialog .arsenal-list-level{font:400 14px/1.2 Georgia,serif;color:#f2d27b;align-self:start;text-align:center;border:1px solid #ad8b50;border-radius:3px;padding:3px 2px}
+body.game-hud #captain-dialog .arsenal-list button.selected{border-color:#efce79;box-shadow:0 0 0 1px #e8be5d,0 0 13px #e8be5d44;background:#173740}
+body.game-hud #captain-dialog .arsenal-list button:hover{background:#143b4e}
+body.game-hud #captain-dialog .arsenal-detail{border:1px solid #ad9156;border-radius:6px;background:#032538;overflow:hidden;min-width:0}
+body.game-hud #captain-dialog .arsenal-hero{height:170px;background:#163f50;overflow:hidden}
+body.game-hud #captain-dialog .arsenal-hero>img{width:100%;height:100%;object-fit:cover;display:block}
+body.game-hud #captain-dialog .arsenal-hero-icon>img{object-fit:contain;padding:20px;background:radial-gradient(#28545e,#062937)}
+body.game-hud #captain-dialog .arsenal-detail-copy{padding:16px 18px}
+body.game-hud #captain-dialog .arsenal-detail-title{display:flex;justify-content:space-between;align-items:center;gap:12px}
+body.game-hud #captain-dialog .arsenal-detail h3{font:600 32px/1.15 Georgia,serif;color:#fff3e1;margin:0}
+body.game-hud #captain-dialog .arsenal-detail p{font:400 16px/1.5 Georgia,serif;color:#bdceda;margin:8px 0 15px;text-wrap:pretty}
+body.game-hud #captain-dialog .arsenal-stats{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+body.game-hud #captain-dialog .arsenal-stat{display:grid;grid-template-columns:25px 105px minmax(0,1fr) 62px;align-items:center;gap:10px;font:400 16px/1.2 Georgia,serif;min-width:0}
+body.game-hud #captain-dialog .arsenal-stat>.hud-icon{width:25px;height:25px}
+body.game-hud #captain-dialog .arsenal-stat>div{height:9px;background:#244253;border:1px solid #3e5864;border-radius:5px;overflow:hidden}
+body.game-hud #captain-dialog .arsenal-stat i{display:block;height:100%;background:#fbd078;border-radius:4px}
+body.game-hud #captain-dialog .arsenal-stat b{font-weight:400;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:14px}
+body.game-hud #captain-dialog .arsenal-next{border:1px solid #a58850;border-radius:4px;padding:15px;margin-top:18px;background:#102e36}
+body.game-hud #captain-dialog .arsenal-next h4{font:600 20px/1.2 Georgia,serif;color:#fbd978;margin:0 0 8px}
+body.game-hud #captain-dialog .arsenal-next p{font:500 12px/1.5 Manrope,sans-serif;margin:0 0 15px;color:#bbd4db}
+body.game-hud #captain-dialog .arsenal-next .harbor-buy{flex:1}
+body.game-hud #captain-dialog .harbor-island-layout{display:grid;grid-template-columns:36% minmax(0,1fr);gap:24px;align-items:start}
+body.game-hud #captain-dialog .harbor-island-view{border:1px solid #65848a;border-radius:5px;text-align:center;background:radial-gradient(#215768,#072c3b);padding:15px;min-width:0}
+body.game-hud #captain-dialog .harbor-island-view>img{display:block;width:100%;height:auto;aspect-ratio:8/5;object-fit:contain}
+body.game-hud #captain-dialog .harbor-island-view h3{font:600 24px/1.25 Georgia,serif;color:#f5d685;margin:5px 0 12px}
+body.game-hud #captain-dialog .harbor-island-view p{font:500 12px/1.5 Manrope,sans-serif;color:#d4e5e3;margin:0}
+body.game-hud #captain-dialog .harbor-defense-list{display:flex;flex-direction:column;gap:16px;min-width:0}
+body.game-hud #captain-dialog .harbor-defense-list>article{padding:17px;border:1px solid #8b7850;background:#032636;border-radius:5px;min-width:0}
+body.game-hud #captain-dialog .harbor-defense-list>article>div:first-child{display:flex;align-items:center;gap:14px}
+body.game-hud #captain-dialog .harbor-defense-list>article>div:first-child>.hud-icon{width:38px;height:38px;flex:none}
+body.game-hud #captain-dialog .harbor-defense-list h3{font:600 25px/1.3 Georgia,serif;color:#f6eacb;margin:0}
+body.game-hud #captain-dialog .harbor-defense-list p{font:500 12px/1.5 Manrope,sans-serif;color:#b9d3dd;margin:5px 0 12px}
+body.game-hud #captain-dialog .harbor-defense-list>article>div:first-child>b{margin-left:auto;font:400 14px/1.3 Georgia,serif;color:#efd385;white-space:nowrap}
+body.game-hud #captain-dialog .harbor-defense-list .harbor-purchase~.harbor-purchase{margin-top:17px;padding-top:13px;border-top:1px solid #b5965133}
+body.game-hud #captain-dialog .harbor-defense-list .harbor-lock{min-height:18px;margin-top:7px}
+body.game-hud #captain-dialog .harbor-tower-upgrades{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:17px}
+body.game-hud #captain-dialog .harbor-tower-upgrades>section{min-width:0;border-top:1px solid #8a7751;padding-top:14px}
+body.game-hud #captain-dialog .harbor-tower-upgrades h4{font:600 20px/1.4 Georgia,serif;margin:0;color:#ffdeb2}
+body.game-hud #captain-dialog .harbor-tower-upgrades h4 small{font:500 12px/1.4 Manrope,sans-serif;display:block;color:#b9d3db}
+body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-purchase{flex-direction:column;align-items:stretch;gap:10px}
+body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-price{justify-content:center}
+body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-price b{margin:0}
+body.game-hud #captain-dialog .harbor-empty{max-width:500px;padding:60px 20px;margin:auto;text-align:center}
+body.game-hud #captain-dialog .harbor-empty h3{font:600 30px/1.3 Georgia,serif;color:#f5d384}
+body.game-hud #captain-dialog .harbor-empty p{font-size:16px;color:#c3dbe0}
+@media(max-width:1499px){body.game-hud #captain-dialog .harbor-scene{display:none}body.game-hud #captain-dialog .harbor-price small{display:none}body.game-hud #captain-dialog .harbor-price{flex:none}}
+@media(min-width:1500px){body.game-hud #captain-dialog .harbor-main{padding:50px 40px 26px;grid-template-rows:150px 65px minmax(0,1fr);gap:20px;padding-bottom:28px}body.game-hud #captain-dialog .harbor-card p{font-size:18px}body.game-hud #captain-dialog .harbor-card-copy{padding:15px 12px 12px}body.game-hud #captain-dialog .harbor-card-art{aspect-ratio:4/3}body.game-hud #captain-dialog .harbor-card-grid{gap:22px}}
+@media(max-width:1180px){body.game-hud #captain-dialog[open]{grid-template-columns:22% minmax(0,1fr)}body.game-hud #captain-dialog .harbor-brand{inset:25px 15px auto;gap:6px;letter-spacing:.6px;font-size:18px}body.game-hud #captain-dialog .harbor-brand .hud-icon{width:29px}body.game-hud #captain-dialog .harbor-main{padding:30px 22px 17px;grid-template-rows:134px 56px minmax(0,1fr);gap:14px}body.game-hud #captain-dialog .company-tabs button{font-size:16px;gap:6px}body.game-hud #captain-dialog .company-tabs .hud-icon{width:23px;height:23px}body.game-hud #captain-dialog .harbor-card-grid{gap:12px}body.game-hud #captain-dialog .harbor-card-copy{padding:12px 6px 9px}body.game-hud #captain-dialog .harbor-purchase{gap:7px}body.game-hud #captain-dialog .harbor-buy{font-size:16px;padding:10px 12px}body.game-hud #captain-dialog .harbor-price b{font-size:21px}body.game-hud #captain-dialog .harbor-price .hud-icon{width:25px;height:25px}body.game-hud #captain-dialog .harbor-price small{font-size:13px}body.game-hud #captain-dialog .harbor-arsenal{grid-template-columns:40% minmax(0,1fr);gap:15px}body.game-hud #captain-dialog .arsenal-list button{grid-template-columns:54px minmax(0,1fr) 21px;gap:9px}body.game-hud #captain-dialog .arsenal-list img{width:54px;height:54px}body.game-hud #captain-dialog .arsenal-list strong{font-size:18px}body.game-hud #captain-dialog .arsenal-stat{grid-template-columns:22px 88px minmax(0,1fr) 61px;gap:7px;font-size:14px}body.game-hud #captain-dialog .harbor-island-layout{grid-template-columns:30% minmax(0,1fr);gap:15px}}
+@media(max-width:860px){body.game-hud #captain-dialog[open]{grid-template-columns:1fr}body.game-hud #captain-dialog .harbor-illustration{display:none}body.game-hud #captain-dialog .harbor-main{padding:26px 26px 18px;grid-template-rows:132px 56px minmax(0,1fr);gap:13px}body.game-hud #captain-dialog #company-title{font-size:32px}body.game-hud #captain-dialog .harbor-crew-footer{grid-template-columns:1fr;gap:17px}body.game-hud #captain-dialog .harbor-rum{border-left:0;border-top:1px solid #8e7753;padding:17px 0 0}body.game-hud #captain-dialog .harbor-card-grid{gap:12px}body.game-hud #captain-dialog .harbor-card p{font-size:15px}body.game-hud #captain-dialog .harbor-card h3{font-size:23px}}
+@media(max-width:620px){body.game-hud #captain-dialog .harbor-main{padding:22px 16px 14px;grid-template-rows:143px 62px minmax(0,1fr);gap:10px}body.game-hud #captain-dialog .harbor-heading{grid-template-rows:18px minmax(0,1fr) 50px;gap:7px}body.game-hud #captain-dialog .eyebrow{padding-right:38px;font-size:10px;letter-spacing:.7px}body.game-hud #captain-dialog #company-title{font-size:28px;letter-spacing:-.5px;padding-right:0}body.game-hud #captain-dialog .harbor-scene{display:none}body.game-hud #captain-dialog .close{width:32px;height:32px;top:12px;right:12px;font-size:27px}body.game-hud #captain-dialog #company-wallet{gap:4px 10px;font-size:12px;flex-wrap:wrap}body.game-hud #captain-dialog #company-wallet b{font-size:18px}body.game-hud #captain-dialog #company-wallet .hud-icon{width:25px;height:25px}body.game-hud #captain-dialog .harbor-docked{border:0;padding:0}body.game-hud #captain-dialog .harbor-wallet-crew{width:100%}body.game-hud #captain-dialog .company-tabs{gap:5px}body.game-hud #captain-dialog .company-tabs button{flex-direction:column;gap:4px;font:600 12px/1.2 Manrope,sans-serif;padding:5px 2px;min-height:58px;white-space:normal;border-radius:3px}body.game-hud #captain-dialog .company-tabs .hud-icon{width:22px;height:22px}body.game-hud #captain-dialog #company-content{padding-right:3px}body.game-hud #captain-dialog .harbor-card-grid{grid-template-columns:1fr;gap:17px}body.game-hud #captain-dialog .harbor-card-art{aspect-ratio:4/3}body.game-hud #captain-dialog .harbor-card h3{font-size:28px}body.game-hud #captain-dialog .harbor-card-copy{padding:15px 12px 10px}body.game-hud #captain-dialog .harbor-card p{font-size:17px}body.game-hud #captain-dialog .harbor-buy{font-size:18px;min-width:122px}body.game-hud #captain-dialog .harbor-price b{font-size:26px}body.game-hud #captain-dialog .harbor-price small{font-size:16px}body.game-hud #captain-dialog .harbor-price .hud-icon{width:33px;height:33px}body.game-hud #captain-dialog .harbor-section-heading h3{font-size:23px}body.game-hud #captain-dialog .harbor-section-heading>span{max-width:115px}body.game-hud #captain-dialog .harbor-arsenal,body.game-hud #captain-dialog .harbor-island-layout{grid-template-columns:1fr}body.game-hud #captain-dialog .arsenal-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}body.game-hud #captain-dialog .arsenal-list button{grid-template-columns:39px minmax(0,1fr);gap:7px;min-height:69px;padding:7px;position:relative}body.game-hud #captain-dialog .arsenal-list img{width:39px;height:39px;padding:4px}body.game-hud #captain-dialog .arsenal-list strong{font-size:15px;margin:0}body.game-hud #captain-dialog .arsenal-list small{display:none}body.game-hud #captain-dialog .arsenal-list-level{display:none}body.game-hud #captain-dialog .arsenal-detail-copy{padding:15px 13px}body.game-hud #captain-dialog .arsenal-stat{grid-template-columns:22px 104px minmax(0,1fr) 57px;gap:7px}body.game-hud #captain-dialog .harbor-tower-upgrades{grid-template-columns:1fr;gap:16px}body.game-hud #captain-dialog .harbor-tower-upgrades>section{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-purchase{grid-column:2;grid-row:1/3;flex-direction:row;align-items:center;flex-wrap:wrap}body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-lock{grid-column:1/-1}body.game-hud #captain-dialog .harbor-tower-upgrades .harbor-buy{min-width:0;width:100%;font-size:16px}body.game-hud #captain-dialog .harbor-defense-list>article>div:first-child>b{white-space:normal;max-width:58px;text-align:right}body.game-hud #captain-dialog .harbor-crew-footer{padding:15px}body.game-hud #captain-dialog .harbor-rum .harbor-purchase{width:100%;margin:0}body.game-hud #captain-dialog .harbor-rum .harbor-lock{text-align:left;margin-top:0}}
+@media(max-height:780px) and (min-width:861px){body.game-hud #captain-dialog .harbor-main{padding:22px 28px 14px;grid-template-rows:102px 52px minmax(0,1fr);gap:12px}body.game-hud #captain-dialog .company-tabs button{min-height:48px}body.game-hud #captain-dialog #company-title{font-size:32px}body.game-hud #captain-dialog .harbor-section-heading{margin-bottom:12px;padding-bottom:8px}body.game-hud #captain-dialog .harbor-card-copy{padding:11px 9px 9px}body.game-hud #captain-dialog .harbor-card p{font-size:14px;line-height:1.4}body.game-hud #captain-dialog .harbor-card h3{font-size:23px;margin-bottom:8px}body.game-hud #captain-dialog .harbor-benefit{margin:10px 0 11px;min-height:30px}body.game-hud #captain-dialog .harbor-lock{margin-top:7px}body.game-hud #captain-dialog .harbor-price small{display:none}}
+@media(min-width:621px) and (max-width:1499px){body.game-hud #captain-dialog .harbor-price .hud-icon{width:36px;height:36px}body.game-hud #captain-dialog .company-tabs .hud-icon{width:32px;height:32px}}
+/* Keep whole illustrations; content scrolls within a stable port canvas. */
+body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon){height:auto;aspect-ratio:2.7}
+body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon)>img{object-fit:contain}
+body.game-hud #captain-dialog .arsenal-next .harbor-lock{min-height:18px}
+body.game-hud #captain-dialog .arsenal-next .harbor-lock-empty{display:none}
+body.game-hud #captain-dialog .harbor-defense-list .harbor-benefit{min-height:18px;margin:10px 0 12px}
+body.game-hud #captain-dialog .harbor-card .harbor-lock{min-height:18px}
+@media(min-width:1500px) and (min-height:781px){body.game-hud #captain-dialog .harbor-main{grid-template-rows:135px 65px minmax(0,1fr);gap:15px}}
+@media(max-width:1180px){body.game-hud #captain-dialog blockquote{display:none!important}}
+
+/* Reference measurements: header, tabs and both arsenal columns share fixed baselines. */
+body.game-hud #captain-dialog .weapon-tile{display:block;width:84px;height:84px;border:1px solid #c7a964;border-radius:5px;background-image:url('/assets/harbor-art/weapon-atlas-reference-style.png');background-size:300% 200%;background-position:var(--tile-x) var(--tile-y);flex:none}
+body.game-hud #captain-dialog .arsenal-list button{position:relative;grid-template-columns:84px minmax(0,1fr) 18px;gap:16px;min-height:102px;padding:8px;border-radius:9px}
+body.game-hud #captain-dialog .arsenal-list strong{font:600 22px/1.2 Georgia,serif;padding-right:88px;margin:0 0 7px}
+body.game-hud #captain-dialog .arsenal-list small{font:400 14px/1.45 Manrope,sans-serif;display:block;max-width:260px}
+body.game-hud #captain-dialog .arsenal-list-level{position:absolute;top:14px;right:55px;font:400 15px/1.2 Georgia,serif;white-space:nowrap;padding:4px 10px;border:1px solid #ae9051;border-radius:4px;color:#f4d16f;background:#042b3d}
+body.game-hud #captain-dialog .arsenal-arrow{font:400 34px/1 Georgia,serif;color:#f7d071}
+body.game-hud #captain-dialog .arsenal-list .selected{box-shadow:0 0 0 1px #f5ce71,0 0 10px #ffc85a66,inset 0 0 12px #ffc85a33}
+body.game-hud #captain-dialog[data-tab="weapons"] blockquote{background:url('/assets/harbor-art/arsenal-lore-paper-v2.png') center/100% 100% no-repeat;color:#2e261a;border:0;border-radius:0;bottom:45px;left:54px;right:76px;padding:36px 30px;box-shadow:none}
+body.game-hud #captain-dialog[data-tab="weapons"] blockquote>span{font:700 23px/1.2 Georgia,serif;color:#231c10;letter-spacing:.3px}
+body.game-hud #captain-dialog[data-tab="weapons"] #company-quip{font:400 21px/1.28 Georgia,serif;color:#231c10;margin-top:18px}
+body.game-hud #captain-dialog[data-tab="weapons"] blockquote>span:after{content:'◆ ◇ ◆';display:block;font:400 10px/1 Georgia,serif;letter-spacing:4px;color:#a57332;margin-top:12px}
+body.game-hud #captain-dialog .harbor-card{position:relative;border-color:#b89a59;background:linear-gradient(#062c3de8,#002335f5)}
+body.game-hud #captain-dialog .harbor-card:after,body.game-hud #captain-dialog .arsenal-detail:after{content:'';position:absolute;inset:0;border:4px solid transparent;border-image:url('/assets/pirate-ui/brass-frame.png') 85 / 8px / 0 stretch;pointer-events:none;opacity:.8}
+body.game-hud #captain-dialog .arsenal-detail{position:relative}
+body.game-hud #captain-dialog .harbor-card h3{font-weight:400}
+body.game-hud #captain-dialog .harbor-buy{font-weight:400}
+body.game-hud #captain-dialog .harbor-section-heading h3{font-weight:400}
+body.game-hud #captain-dialog .harbor-card:focus-within{border-color:#f7d278;box-shadow:0 0 0 1px #e9bb5a,0 0 12px #e9ba4d55}
+body.game-hud #captain-dialog .harbor-price{flex-wrap:wrap}
+body.game-hud #captain-dialog .harbor-purchase{flex-wrap:wrap}
+@media(min-width:1191px){
+ body.game-hud #captain-dialog[open]{grid-template-columns:31% minmax(0,1fr)}
+ body.game-hud #captain-dialog .harbor-illustration{clip-path:polygon(0 0,100% 0,90% 100%,0 100%)}
+ body.game-hud #captain-dialog .harbor-illustration>img{object-position:50% 50%}
+ body.game-hud #captain-dialog .harbor-brand{inset:25px 24% auto 24%;font-size:27px;letter-spacing:3px;padding-bottom:12px;gap:11px}
+ body.game-hud #captain-dialog .harbor-main{padding:62px 30px 24px 26px;grid-template-rows:133px 60px minmax(0,1fr);gap:15px;background:#032439 url('/assets/harbor-art/port-ocean-backdrop-v2.png') right top/cover no-repeat}
+ body.game-hud #captain-dialog #company-title{font:500 clamp(36px,3.1vw,52px)/1.07 Georgia,serif;letter-spacing:-.6px;text-wrap:nowrap}
+ body.game-hud #captain-dialog .eyebrow{font-size:14px;letter-spacing:.6px}
+ body.game-hud #captain-dialog #company-wallet{font-size:19px;gap:16px}
+ body.game-hud #captain-dialog .harbor-scene{top:-10px;right:40px;width:215px;height:130px;z-index:0}
+ body.game-hud #captain-dialog .harbor-heading{grid-template-rows:22px minmax(0,1fr) 42px;gap:6px}
+ body.game-hud #captain-dialog .company-tabs button{height:60px;font-size:20px}
+ body.game-hud #captain-dialog #company-content{padding:0 6px 4px 0;scrollbar-gutter:auto}
+ body.game-hud #captain-dialog .harbor-section-heading{height:34px;align-items:center;margin:0 0 12px;border:0;padding:0;gap:22px}
+ body.game-hud #captain-dialog .harbor-section-heading:after{content:'';height:1px;background:#c7a555;flex:1}
+ body.game-hud #captain-dialog .harbor-section-heading h3{font-size:27px;white-space:nowrap}
+ body.game-hud #captain-dialog .harbor-arsenal{grid-template-columns:42% minmax(0,1fr);gap:22px}
+ body.game-hud #captain-dialog .arsenal-list{gap:9px}
+ body.game-hud #captain-dialog .arsenal-hero{height:150px}
+ body.game-hud #captain-dialog .arsenal-hero>img{object-fit:cover;object-position:center 56%}
+ body.game-hud #captain-dialog .arsenal-detail-copy{padding:12px 18px}
+ body.game-hud #captain-dialog .arsenal-detail h3{font-size:36px;line-height:1.05;font-weight:400}
+ body.game-hud #captain-dialog .arsenal-detail p{font-size:17px;line-height:1.35;margin:6px 0 8px}
+ body.game-hud #captain-dialog .arsenal-stats{gap:10px;margin:14px 0}
+ body.game-hud #captain-dialog .arsenal-stat{grid-template-columns:27px 138px minmax(0,1fr) 62px;gap:9px;font-size:17px;min-height:26px}
+ body.game-hud #captain-dialog .arsenal-stat b{font-size:16px}
+ body.game-hud #captain-dialog .arsenal-stat>div{height:12px}
+ body.game-hud #captain-dialog .arsenal-next{padding:12px 16px;margin-top:10px}
+ body.game-hud #captain-dialog .arsenal-next h4{font-size:22px;margin-bottom:7px}
+ body.game-hud #captain-dialog .arsenal-next p{font:400 13px/1.4 Manrope,sans-serif;margin:0 0 10px}
+ body.game-hud #captain-dialog .arsenal-next .harbor-purchase{flex-wrap:nowrap;justify-content:center}
+ body.game-hud #captain-dialog .arsenal-next .harbor-buy{min-height:48px;font-size:22px}
+ body.game-hud #captain-dialog .arsenal-next .harbor-lock-empty{display:none}
+ body.game-hud #captain-dialog .arsenal-next .harbor-lock{min-height:0;margin-top:8px}
+}
+@media(min-width:1191px) and (max-height:800px){body.game-hud #captain-dialog .harbor-main{padding-top:26px;grid-template-rows:126px 54px minmax(0,1fr);gap:12px}}
+@media(max-width:1190px){body.game-hud #captain-dialog .weapon-tile{width:64px;height:64px}body.game-hud #captain-dialog .arsenal-list button{grid-template-columns:64px minmax(0,1fr) 14px;gap:11px;min-height:90px}body.game-hud #captain-dialog .arsenal-list strong{font-size:19px;padding-right:0}body.game-hud #captain-dialog .arsenal-list-level{position:static;grid-column:2;justify-self:start;font-size:12px;padding:2px 6px}body.game-hud #captain-dialog .arsenal-arrow{position:absolute;right:10px;top:35%;font-size:26px}body.game-hud #captain-dialog .arsenal-list small{font-size:12px}}
+body.game-hud #captain-dialog .arsenal-next .harbor-buy{display:flex;align-items:center;justify-content:center;gap:10px}
+body.game-hud #captain-dialog .arsenal-next .harbor-buy .hud-icon{width:38px;height:38px}
+body.game-hud #captain-dialog .arsenal-hero-icon{display:grid;place-items:center;background:radial-gradient(#19465b,#022435)}
+body.game-hud #captain-dialog .arsenal-hero-icon .weapon-tile{width:132px;height:132px}
+body.game-hud #captain-dialog .harbor-equipped{min-height:48px;border:1px solid #72998f;border-radius:4px;display:grid;place-items:center;color:#bfe3cf;font:500 18px/1.3 Georgia,serif;background:#123a3c}
+body.game-hud #captain-dialog .arsenal-list button{min-height:96px}
+body.game-hud #captain-dialog .arsenal-list strong{padding-right:0;padding-top:0;max-width:100%;font-size:21px}
+body.game-hud #captain-dialog .arsenal-list-level{top:9px;right:48px;font-size:13px;padding:3px 8px}
+body.game-hud #captain-dialog .arsenal-list-copy{padding-top:20px}
+@media(min-width:1191px){body.game-hud #captain-dialog .arsenal-list .weapon-tile{width:84px;height:84px}body.game-hud #captain-dialog .arsenal-list button{padding:6px 9px;gap:13px}body.game-hud #captain-dialog .arsenal-list small{font-size:13px;line-height:1.35}}
+@media(max-width:1190px){body.game-hud #captain-dialog .arsenal-list-copy{padding-top:0}}
+@media(min-width:1191px){
+ body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon){height:150px;aspect-ratio:auto}
+ body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon)>img{object-fit:cover;object-position:center 56%}
+ body.game-hud #captain-dialog .arsenal-list button{height:90px;min-height:90px;max-height:90px;grid-template-columns:76px minmax(0,1fr) 18px;gap:13px;padding:6px 9px}
+ body.game-hud #captain-dialog .arsenal-list .weapon-tile{width:76px;height:76px}
+ body.game-hud #captain-dialog .arsenal-list{gap:7px}
+ body.game-hud #captain-dialog .arsenal-list-copy{padding-top:12px}
+ body.game-hud #captain-dialog .arsenal-list strong{font-size:22px;line-height:25px;margin-bottom:3px;font-weight:400}
+ body.game-hud #captain-dialog .arsenal-list small{font-size:13px;line-height:17px}
+ body.game-hud #captain-dialog .arsenal-list-level{top:7px;right:47px}
+}
+/* Recruitment keeps all three portraits and the crew/rum footer in the desktop viewport. */
+@media(max-width:1190px){
+ body.game-hud #captain-dialog[open]{grid-template-columns:minmax(0,1fr)}
+ body.game-hud #captain-dialog .harbor-illustration{display:none}
+}
+@media(min-width:1191px){
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-card-copy{padding:10px 12px}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-benefit{min-height:18px;margin:9px 0}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-crew-footer{padding:9px 16px;margin-top:12px}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-rum{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px 12px}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-rum>.hud-icon{width:36px;height:40px}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-rum .harbor-purchase{margin-left:0}
+ body.game-hud #captain-dialog[data-tab="crew"] .harbor-rum .harbor-lock{grid-column:1/-1;min-height:18px;margin:0}
+}
+@media(min-width:1191px) and (max-width:1599px){
+ body.game-hud #captain-dialog .arsenal-list button{height:83px;min-height:83px;max-height:83px;grid-template-columns:68px minmax(0,1fr) 16px;gap:11px}
+ body.game-hud #captain-dialog .arsenal-list .weapon-tile{width:68px;height:68px}
+ body.game-hud #captain-dialog .arsenal-list-copy{padding-top:0}
+ body.game-hud #captain-dialog .arsenal-list strong{font-size:20px;line-height:24px}
+ body.game-hud #captain-dialog .arsenal-list small{font-size:12px;line-height:16px}
+ body.game-hud #captain-dialog .arsenal-list-level{left:10px;bottom:8px;top:auto;right:auto;padding:2px 4px;font-size:12px;background:#032638f2}
+ body.game-hud #captain-dialog .arsenal-stat{grid-template-columns:24px 128px minmax(0,1fr) 62px;gap:8px;font-size:16px}
+ body.game-hud #captain-dialog .harbor-defense-list>article{padding:14px}
+ body.game-hud #captain-dialog .harbor-tower-upgrades{gap:10px;margin-top:12px}
+ body.game-hud #captain-dialog .harbor-defense-list .harbor-lock-empty{display:none}
+}
+@media(min-width:621px) and (max-width:1190px){
+ body.game-hud #captain-dialog .arsenal-list{gap:7px}
+ body.game-hud #captain-dialog .arsenal-list button{height:82px;min-height:82px;grid-template-columns:64px minmax(0,1fr) 14px}
+ body.game-hud #captain-dialog .arsenal-list-level{position:absolute;grid-column:auto;left:9px;bottom:8px;top:auto;right:auto;padding:2px 4px;font-size:12px;background:#032638f2}
+ body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon){height:150px;aspect-ratio:auto}
+ body.game-hud #captain-dialog .arsenal-hero:not(.arsenal-hero-icon)>img{object-fit:cover}
+ body.game-hud #captain-dialog .arsenal-detail h3{font-weight:400}
+ body.game-hud #captain-dialog .arsenal-stats{gap:9px;margin:14px 0}
+ body.game-hud #captain-dialog .arsenal-next{margin-top:12px;padding:12px}
+ body.game-hud #captain-dialog .arsenal-next p{margin-bottom:12px}
+ body.game-hud #captain-dialog .arsenal-list strong{font-weight:400}
+}
+@media(max-width:620px){
+ body.game-hud #captain-dialog .arsenal-list button{grid-template-columns:43px minmax(0,1fr);gap:8px;min-height:78px;padding:8px;height:auto;max-height:none}
+ body.game-hud #captain-dialog .arsenal-list .weapon-tile{width:43px;height:43px}
+ body.game-hud #captain-dialog .arsenal-list strong{font:400 15px/1.2 Georgia,serif;margin:0;padding:0;white-space:normal;overflow-wrap:normal}
+ body.game-hud #captain-dialog .arsenal-list small,body.game-hud #captain-dialog .arsenal-list-level,body.game-hud #captain-dialog .arsenal-arrow{display:none}
+ body.game-hud #captain-dialog .arsenal-list-copy{min-width:0;padding:0}
+ body.game-hud #captain-dialog .arsenal-detail h3{font-weight:400}
+ body.game-hud #captain-dialog .arsenal-stat{grid-template-columns:22px 86px minmax(0,1fr) 58px;gap:6px}
+}

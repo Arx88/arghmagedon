@@ -1,0 +1,59 @@
+{
+  "asset": "cannon-upgrade-card.png",
+  "created": "2026-09-30",
+  "generator": "built-in image_gen.imagegen",
+  "source": "C:/Users/juanp/.codex/generated_images/01a0f383-6dc5-7781-80c9-1f0ad8734703/exec-6aeb615a-3c63-4221-8fa6-a3f97843080e.png",
+  "destination": "C:/Users/juanp/Documents/POLYMARKET BOT/microfish/pirate-tides/public/assets/harbor-art/cannon-upgrade-card.png",
+  "dimensions": {
+    "width": 1448,
+    "height": 1086,
+    "aspect": "4:3"
+  },
+  "colorMode": "RGB",
+  "transparentBackground": false,
+  "prompt": "Use case: stylized-concept.\nAsset type: one finished opaque 4:3 landscape illustration for a cannon upgrade card in the Pirate Tides harbor menu.\nInput images: Image 1 (cannon-card.png) is a subject, material and world reference only. Image 2 (repairer-card.png) is the matching character and painted art style reference only. Generate a NEW composition. Do not crop, extend, paste or reuse any part of a screenshot or UI.\nPrimary request: show a beautifully crafted pirate naval cannon, complete from the rear breech to its open muzzle, in dark black iron with restrained brass trunnions and muzzle trim, on a complete wooden four-wheel gun carriage. A cheerful bearded gunner with a red bandana, ivory rolled-sleeve shirt, brown leather belts and sturdy boots stands beside it, grinning proudly after firing. His full head, both anatomically coherent hands and full body are inside the composition. The cannon, carriage and all wheels are inside the picture.\nScene: sunlit polished wooden ship deck, rope and rigging framing the edges, turquoise ocean and a picturesque distant island harbor under a bright blue sky. One brief compact warm yellow-orange muzzle flash and a small puff of pale smoke, both fully contained, conveying lively action without covering the cannon or the gunner.\nStyle: exactly the premium hand-painted storybook pirate game illustration style of both supplied assets: expressive appealing face, confident clean shapes, rich warm timber and brass, detailed painterly brushwork, stylized proportions, vibrant turquoise and sky blue, strong but soft golden sunlight. It must look like a card belonging to the same art set.\nComposition: 4:3 landscape, ideally 1448x1086. Medium-wide view at deck height; gunner occupies the left third, cannon occupies the center-right, muzzle points diagonally right with foreshortening kept plausible. Eight percent safety margin around ALL primary objects including gunner hat/bandana, hands, boots, cannon barrel, all carriage wheels and the short flash. Show the full subject with breathing room, not a tight close-up. The cannon must remain large and clearly readable at a 280-pixel card width.\nText: none.\nAvoid: any letters, numbers, UI, card border, logo, watermark, cropped heads or hands, cropped muzzle or wheels, extra limbs, bent barrel, melted metal, huge elongated fireball, photorealism, flat vector art, collage, blank padding or letterboxing.\nOutput: one original full-frame opaque illustration, no transparency.",
+  "references": [
+    {
+      "path": "public/assets/harbor-art/cannon-card.png",
+      "role": "Generated subject/material/world reference; preserved unchanged"
+    },
+    {
+      "path": "public/assets/harbor-art/repairer-card.png",
+      "role": "Generated painted character style reference; preserved unchanged"
+    }
+  ],
+  "qa": {
+    "originalInspected": true,
+    "frame": "Entire cannon breech, barrel, muzzle, four-wheel carriage and flash inside the frame. Gunner head, visible boot and both hands remain inside frame; his farther leg is naturally obscured by the carriage.",
+    "anatomy": "Both visible hands have coherent grip/thumb anatomy. No detached fingers or limbs observed.",
+    "style": "Warm painted pirate art matches repairer-card and original cannon-card, with ivory clothes, warm wood and turquoise sea.",
+    "background": "Opaque full-frame image; no transparency, outline halo or padding.",
+    "finalSize": "Pending parent integration and review in native 4:3 cards at final display size.",
+    "lightDarkContainers": "Pending native browser review; opaque artwork has no matte/alpha edge to conflict with either background."
+  },
+  "arsenalBanner": {
+    "asset": "cannon-arsenal-banner.png",
+    "generator": "built-in image_gen.imagegen",
+    "source": "C:/Users/juanp/.codex/generated_images/01a0f383-6dc5-7781-80c9-1f0ad8734703/exec-de4cf626-83d2-4326-a78f-25fd7c3a7029.png",
+    "destination": "C:/Users/juanp/Documents/POLYMARKET BOT/microfish/pirate-tides/public/assets/harbor-art/cannon-arsenal-banner.png",
+    "dimensions": {
+      "width": 2061,
+      "height": 763,
+      "aspect": 2.7011795543905635
+    },
+    "colorMode": "RGB",
+    "transparentBackground": false,
+    "prompt": "Use case: stylized-concept.\nAsset type: one finished opaque panoramic cannon illustration for a 460x170 pixel arsenal detail banner in Pirate Tides.\nInput images: Image 1, cannon-card.png, is a material and pirate-world art reference only. Image 2, cannon-upgrade-card.png, is the matching painted style and full-cannon design reference only. Make a wholly NEW illustration, never a crop, copy/paste or extension of any UI screenshot.\nPrimary request: a complete pirate cannon in black iron with brass trunnions and a warm brass muzzle rim, mounted on a complete low wooden four-wheel carriage on a sunlit ship deck. Its entire rear breech, long straight barrel, open muzzle, carriage and wheels are visible. A brief compact golden-orange muzzle flash and ONE fully visible dark iron cannonball fly horizontally to the right. The shot is lively and polished, not a wall of flames.\nComposition: strongly panoramic 2.7:1 landscape, ideally 1856x688. Full cannon and ball horizontally centered with ten percent safe space at both ends. Center the entire cannon including wheels, complete muzzle flash and complete ball within the CENTRAL 38 percent of image height so all essential subjects fit if the picture is displayed in a shallow banner. Important: no tall objects in front of the cannon. Ample soft blue sky and sea above and warm wooden deck below, so these background margins can be cropped harmlessly. Avoid diagonal cannon perspective; use an appealing nearly horizontal three-quarter side view with modest foreshortening.\nScene: bright turquoise sea beyond a low ship rail, distant sunny Caribbean harbor and pale billowing clouds. Warm honey-colored planks, carefully painted dark iron texture, golden brass highlights and neatly coiled rope subtly around the sides.\nStyle: match the supplied generated illustrations exactly: premium cheerful hand-painted pirate game art, vivid sky blue and turquoise, warm timber, confidently drawn stylized shapes, rich brushwork and strong soft sunlight. It must clearly belong to the same Pirate Tides harbor art collection.\nConstraints: NO people, pirates, faces, hands, limbs or humanoid silhouettes anywhere; no text, letters, numbers, logos, UI, border, watermark or blank letterboxing. No cropped or distorted cannon, no cropped wheels, no ball touching an edge, no giant elongated flash, no collage, no photorealism.\nOutput: one original full-frame opaque panoramic illustration.",
+    "references": [
+      "public/assets/harbor-art/cannon-card.png",
+      "public/assets/harbor-art/cannon-upgrade-card.png"
+    ],
+    "qa": {
+      "originalInspected": true,
+      "frame": "Full cannon, carriage, visible wheels, flash and complete ball inside the frame; no humanoids or hands.",
+      "style": "Matches the warm painted pirate harbor collection. No UI, text, watermark, blank padding or alpha edges.",
+      "finalSize": "Pending native browser review at 460x170 over light and dark containers."
+    }
+  }
+}
+

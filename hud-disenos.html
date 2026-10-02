@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rediseños · Tarjeta de barco · Pirate Tides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e2b36b; --gold-hot:#f0cf96; --gold-dim:#8a6a35;
+  --name:#fff0d5; --sub:#a9cdd6; --lbl:#8fb6c1;
+  --hp-a:#c6f3a8; --hp-b:#5deaa1; --hp-c:#22dd82;
+  --ghost:#8f3520; --crit:#e4795a;
+  --hull:linear-gradient(90deg,var(--hp-a),var(--hp-b) 68%,var(--hp-c));
+  --panel-a:#0b2836; --panel-b:#123c4d;
+  --hull-crit:linear-gradient(90deg,#f6b189,#d1563d);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#040b12;color:#cfe3e8;font:400 14px/1.6 Manrope,system-ui,sans-serif;padding:34px 26px 100px}
+h1{font:600 31px/1.15 'Cormorant Garamond',Georgia,serif;color:var(--name);margin:0 0 9px;letter-spacing:.5px}
+h1 small{display:block;font:700 10px/1.6 Manrope,sans-serif;letter-spacing:2.6px;color:var(--lbl);text-transform:uppercase;margin-top:10px}
+.lede{max-width:920px;color:#9dc0cb;font-size:13.5px;margin:16px 0 22px;line-height:1.8}
+.lede b{color:var(--gold);font-weight:600}
+
+/* ---------- controles ---------- */
+.panel{margin:0 0 40px;padding:15px 20px;border-radius:10px;
+  background:linear-gradient(180deg,#0f3040,#0a2130);border:1px solid #2a5a6b;
+  box-shadow:0 10px 28px #0008;display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+.panel .ctl{display:flex;flex-direction:column;gap:7px;flex:1;min-width:230px}
+.panel label{display:flex;justify-content:space-between;align-items:baseline;font:700 9px/1 Manrope,sans-serif;letter-spacing:1.9px;color:var(--lbl);text-transform:uppercase}
+.panel label b{font:800 14px/1 Manrope,sans-serif;letter-spacing:0;color:var(--name);font-variant-numeric:tabular-nums}
+.panel input[type=range]{width:100%;accent-color:var(--gold);height:18px;cursor:pointer}
+
+/* ---------- escenario ---------- */
+.stage{margin:0 0 52px;max-width:1120px}
+.stage-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:0 0 14px;
+  padding-bottom:12px;border-bottom:1px solid #173b48}
+.stage-head h3{margin:0;font:800 11px/1 Manrope,sans-serif;letter-spacing:2.4px;color:var(--name);text-transform:uppercase;white-space:nowrap}
+.stage-head h3 span{color:var(--gold)}
+.stage-head p{margin:0;font-size:12.5px;color:#93b6c1;max-width:840px;line-height:1.75}
+.stage-head p i{color:#c9e3ea;font-style:italic}
+.scene{position:relative;border-radius:9px;overflow:hidden;border:1px solid #1a4553;
+  background:radial-gradient(125% 100% at 72% 12%,#12505f 0%,#0a2f3e 44%,#051520 100%)}
+.scene .vig{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(110% 88% at 42% 42%,transparent 40%,#000a 100%)}
+.corner{position:absolute;left:0;bottom:0;z-index:2}
+.corner::before{content:'ESQUINA INFERIOR IZQUIERDA';position:absolute;left:14px;bottom:-22px;
+  font:700 8px/1 Manrope,sans-serif;letter-spacing:1.8px;color:#5c8494}
+.note{margin-top:30px;padding:14px 17px;border-left:2px solid var(--gold);background:#0b2432;border-radius:0 7px 7px 0;
+  font-size:12.5px;line-height:1.78;color:#a5c6d0}
+.note b{color:var(--name)}
+.verdict{margin-top:26px;padding:14px 17px;border-radius:8px;border:1px solid #2f6675;
+  background:linear-gradient(95deg,#0f3a49,#0a2130);font-size:12.5px;line-height:1.78;color:#a5c6d0}
+.verdict b{color:var(--gold)}
+
+/* ---------- piezas ---------- */
+.seg{display:flex;gap:2px;flex:1;min-width:0}
+.seg u{flex:1;min-width:0;background:#26596b;transform:skewX(-13deg)}
+.seg u.on{background:var(--gold);box-shadow:0 0 5px #e2b36b55}
+.shipSvg{display:block;width:100%;height:auto}
+
+.plate{position:relative;color:#dff0f4}
+.plate.crit{--hull:var(--hull-crit)}
+.plate>*{position:relative;z-index:2}
+.plate .bg{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(100deg,#0a2635,#113c4c 62%,#0d3243);border:1px solid #2b5f70;border-radius:3px}
+.plate .bg::after{content:'';position:absolute;left:96px;right:18px;top:0;height:1px;
+  background:linear-gradient(90deg,#e2b36b,#e2b36b00)}
+
+/* fila de EXP, siempre con el mismo ritmo que las de datos */
+.exp{display:flex;align-items:center;gap:12px;margin-top:11px;padding-top:10px;border-top:1px solid #1e4b5b}
+.exp .k{font:700 8.5px/1 Manrope,sans-serif;letter-spacing:1.7px;color:var(--lbl);text-transform:uppercase;white-space:nowrap}
+.exp .tr{position:relative;flex:1;height:4px;background:#3d3020;border:1px solid #55452a}
+.exp .tr i{position:absolute;left:0;top:0;bottom:0;z-index:1;display:block;
+  background:linear-gradient(90deg,#c99a52,var(--gold-hot));box-shadow:0 0 7px #e2b36b55}
+.exp .v{font:800 10.5px/1 Manrope,sans-serif;letter-spacing:1.1px;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.crit .exp .tr{animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* fila de recurso compartida por A y C */
+.rw{display:flex;align-items:center;gap:12px}
+.rw .k{font:700 8.5px/1 Manrope,sans-serif;letter-spacing:1.7px;color:var(--lbl);text-transform:uppercase;white-space:nowrap}
+.rw .tr{position:relative;flex:1;height:14px;background:#0b2632;border:1px solid #2a5a6b;overflow:hidden}
+.rw .tr u{position:absolute;left:0;top:0;bottom:0;z-index:0;background:linear-gradient(90deg,#6d2a1c,var(--ghost));
+  transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+.rw .tr i{position:absolute;left:0;top:0;bottom:0;z-index:1;display:block;
+  background:var(--hull);transition:width .13s linear}
+.rw .v{font:800 13px/1 Manrope,sans-serif;font-variant-numeric:tabular-nums;color:#fff2dc;white-space:nowrap;min-width:64px;text-align:right}
+.rw.cr .tr{display:flex;gap:2px;background:#0b2632}
+.rw.cr .tr u{position:static;flex:1;min-width:0;background:#26596b;transform:skewX(-13deg);transition:none;box-shadow:none}
+.rw.cr .tr u.on{background:var(--gold);box-shadow:0 0 5px #e2b36b55}
+
+/* =====================================================================
+   0 · REFERENCIA — la estructura de hoy, intocada
+   ===================================================================== */
+.ref{width:410px;display:flex;gap:14px;align-items:center;padding:0 15px 0 0;height:170px}
+.ref .emb{position:relative;flex:none;width:144px;height:144px;margin-left:24px;border-radius:50%;
+  background:url('/assets/pirate-ui/compass-rim-v3.png') center top/100% auto no-repeat}
+.ref .det{flex:1;min-width:0;padding:12px 0}
+.ref h2{margin:0;font:400 23px/1.1 Georgia,serif;text-transform:uppercase;letter-spacing:.6px;color:var(--name);white-space:nowrap}
+.ref .rk{display:block;font:600 12px/1.5 Manrope,sans-serif;letter-spacing:.6px;margin-top:6px;color:var(--sub)}
+.ref .xp{position:relative;height:1px;background:#8a6a35aa;margin:10px 0 9px}
+.ref .xp i{display:block;height:100%;background:#79c5d7}
+.ref .grp{display:flex;align-items:center;gap:10px}
+.ref .grp+.grp{margin-top:9px}
+.ref .grp img{width:22px;height:22px;flex:none}
+.ref .grp>div{flex:1;min-width:0}
+.ref .hr{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 4px;font:800 12px/1 Manrope,sans-serif;font-variant-numeric:tabular-nums}
+.ref .hr span{font:700 7px/1 Manrope,sans-serif;letter-spacing:1.4px;color:var(--lbl);text-transform:uppercase}
+.ref .ht{height:11px;background:#0b2632;overflow:hidden;position:relative}
+.ref .ht i{position:absolute;left:0;top:0;bottom:0;display:block;background:linear-gradient(90deg,var(--hp-a),var(--hp-b) 68%,var(--hp-c))}
+.ref .cl{font:600 12px/1 Manrope,sans-serif;letter-spacing:1px;color:#c4dde2}
+.ref .cl b{color:#fff0cc}
+.ref .dots{display:flex;gap:3px;margin-top:5px}
+.ref .dots i{position:relative;flex:1 1 8px;max-width:12px;height:12px}
+.ref .dots i::before{content:'';position:absolute;left:2px;top:0;width:4px;height:4px;border-radius:50%;background:#eab96d}
+.ref .dots i::after{content:'';position:absolute;left:0;top:4px;width:8px;height:8px;background:#eab96d;
+  clip-path:polygon(25% 0,75% 0,100% 60%,75% 60%,75% 100%,25% 100%,25% 60%,0 60%)}
+
+/* =====================================================================
+   A · CABECERA + FILAS A ANCHO COMPLETO
+   ===================================================================== */
+.a{width:472px;height:160px;padding:14px 18px 15px}
+.a .hd{display:flex;align-items:center;gap:13px;margin-bottom:13px}
+.a .emb{position:relative;flex:none;width:56px;height:56px;border-radius:50%;
+  background:radial-gradient(circle at 50% 42%,#24647a,#072430 76%);box-shadow:inset 0 0 0 1.5px #2f6675;display:grid;place-items:center}
+.a .emb .md{position:absolute;right:-7px;bottom:-7px;width:27px;height:27px;display:grid;place-items:center;
+  font:700 15px/1 Georgia,serif;color:#ffe6b8;background:url('/assets/pirate-ui/v2/medal.webp') center/contain no-repeat}
+.a .nm{flex:1;min-width:0}
+.a h2{margin:0;font:400 21px/1.05 Georgia,serif;text-transform:uppercase;letter-spacing:.5px;color:var(--name);white-space:nowrap}
+.a .tag{display:inline-block;margin-top:5px;padding:3px 9px;border:1px solid var(--gold-dim);border-radius:2px;
+  font:800 9px/1 Manrope,sans-serif;letter-spacing:1.9px;color:var(--gold-hot)}
+.a .rows{display:flex;flex-direction:column;gap:9px}
+
+/* =====================================================================
+   B · EL CASCO ES LA TARJETA
+   ===================================================================== */
+.b{width:406px;height:146px}
+.b .bg{border:0;border-radius:0;background:linear-gradient(105deg,#08222f,#0e3644 64%,#0c3040)}
+.b .bg::after{display:none}
+.b .art{position:absolute;inset:0;width:100%;height:100%;z-index:1;object-fit:cover;object-position:left top;
+  clip-path:inset(0 0 0 27%);opacity:.2}
+.b .xp{position:absolute;left:0;right:0;top:0;height:3px;z-index:3;background:#0a2029}
+.b .xp i{display:block;height:100%;background:linear-gradient(90deg,#c99a52,var(--gold-hot));box-shadow:0 0 9px #e2b36b77}
+.b .hd{display:flex;align-items:center;gap:14px;padding:17px 18px 0 17px}
+.b .emb{position:relative;flex:none;width:62px;height:62px;border-radius:50%;
+  background:radial-gradient(circle at 50% 42%,#24647a,#072430 76%);box-shadow:inset 0 0 0 1.5px #2f6675;display:grid;place-items:center}
+.b .emb .md{position:absolute;right:-7px;bottom:-7px;width:27px;height:27px;display:grid;place-items:center;
+  font:700 15px/1 Georgia,serif;color:#ffe6b8;background:url('/assets/pirate-ui/v2/medal.webp') center/contain no-repeat}
+.b .nm{flex:1;min-width:0}
+.b h2{margin:0;font:400 21px/1.05 Georgia,serif;text-transform:uppercase;letter-spacing:.5px;color:var(--name);white-space:nowrap}
+.b .rk{display:block;margin-top:6px;font:700 9.5px/1 Manrope,sans-serif;letter-spacing:1.8px;color:var(--gold)}
+.b .cr{display:flex;align-items:center;gap:12px;padding:15px 18px 0 17px}
+.b .cr .k{font:700 8.5px/1 Manrope,sans-serif;letter-spacing:1.7px;color:var(--lbl);text-transform:uppercase;white-space:nowrap}
+.b .cr .seg{height:13px;flex:1;min-width:0;display:flex;gap:2px}
+.b .cr .seg u{flex:1;min-width:0;background:#26596b;transform:skewX(-13deg)}
+.b .cr .seg u.on{background:var(--gold);box-shadow:0 0 5px #e2b36b55}
+.b .cr .v{font:800 12px/1 Manrope,sans-serif;font-variant-numeric:tabular-nums;color:#fff2dc;white-space:nowrap}
+.b .foot{position:absolute;left:0;right:0;bottom:19px;z-index:3;display:flex;justify-content:space-between;align-items:baseline;
+  padding:0 18px 0 17px}
+.b .foot .k{font:700 8.5px/1 Manrope,sans-serif;letter-spacing:2.1px;color:var(--lbl);text-transform:uppercase}
+.b .foot .n{font:800 15px/1 Manrope,sans-serif;color:#fff2dc;font-variant-numeric:tabular-nums}
+.b .foot .n em{font-style:normal;font-size:11px;color:var(--lbl);font-weight:600}
+.b .wl{position:absolute;left:0;right:0;bottom:0;height:12px;z-index:2;background:#0a2029;
+  box-shadow:inset 0 1px 0 #24505f}
+.b .wl u{position:absolute;left:0;top:0;bottom:0;z-index:0;background:linear-gradient(90deg,#6d2a1c,var(--ghost));
+  transition:width 1.1s cubic-bezier(.2,.7,.3,1)}
+.b .wl i{position:absolute;left:0;top:0;bottom:0;z-index:1;display:block;
+  background:var(--hull);transition:width .13s linear}
+.crit .b .foot .n{color:var(--crit)}
+.crit .b .xp{animation:pulse 1.5s ease-in-out infinite}
+
+/* =====================================================================
+   C · BITÁCORA — fuera el retrato, máxima densidad
+   ===================================================================== */
+.c{width:340px;height:126px;padding:14px 16px 15px;border-left:2px solid var(--gold-dim)}
+.c .bg{border-left:0;border-radius:0 3px 3px 0}
+.c .bg::after{left:78px}
+.c .hd{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.c h2{margin:0;flex:1;font:400 20px/1.1 Georgia,serif;text-transform:uppercase;letter-spacing:.4px;color:var(--name);white-space:nowrap}
+.c .rk{font:800 9.5px/1 Manrope,sans-serif;letter-spacing:1.6px;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.c .rows{display:flex;flex-direction:column;gap:9px}
+.c .rw .k{min-width:70px}
+.c .rw .v{min-width:52px;font-size:12px}
+</style>
+</head>
+<body>
+
+<h1>Tarjeta de barco, tres estructuras<small>Rediseño de verdad · nada implementado todavía</small></h1>
+
+<p class="lede">
+  Las dos versiones anteriores fallaron en lo mismo: dejaron intacta la estructura y se entretuvieron con la pintura. El problema de fondo es que el bloque de identidad —retrato, nombre, medalla— se come más de la mitad de la tarjeta y <b>nada de eso cambia cuando te disparan</b>. Por eso la columna de datos está encajonada en 238 px y por eso todo lo que intentaba meter dentro no cabía.
+  Estos tres rediseños cambian la estructura partiendo de la misma pregunta: <b>¿qué es lo único que necesitas ver mientras te disparan?</b> Casco y tripulación. Todo lo demás decorativo tiene que ganarse el sitio o irse.
+</p>
+
+<section class="panel">
+  <div class="ctl">
+    <label>Casco <b id="hpOut">160 / 170</b></label>
+    <input type="range" id="hp" min="0" max="170" value="160">
+  </div>
+  <div class="ctl">
+    <label>Tripulación <b id="crOut">12 / 12</b></label>
+    <input type="range" id="cr" min="0" max="12" value="12">
+  </div>
+  <div class="ctl">
+    <label>Rango <b id="rkOut">3</b></label>
+    <input type="range" id="rk" min="1" max="9" value="3">
+  </div>
+</section>
+
+<div id="stages"></div>
+
+<script>
+const A='/assets/pirate-ui/';
+const MAXHP=170, MAXCR=12;
+const st={hp:160,cr:12,rank:3,xp:70};
+
+const ship=`<svg viewBox="0 0 100 100" class="shipSvg" aria-hidden="true">
+  <path d="M14 64h72l-9 15H23z" fill="#9a6634"/><path d="M14 64h72l-3.5 6h-65z" fill="#7a5029"/>
+  <rect x="47.6" y="14" width="3.4" height="50" fill="#7a5630"/>
+  <path d="M51.5 18c14 6.5 21.8 16.8 23.7 31.2H51.5z" fill="#f6ead1" stroke="#c3b088" stroke-width=".9"/>
+  <path d="M47.2 24c-11.2 5.4-17 14.8-19 27.4h19z" fill="#e4d3ac" stroke="#c3b088" stroke-width=".9"/>
+  <rect x="29" y="62" width="3.6" height="6.6" fill="#d8a95c"/><rect x="43" y="62" width="3.6" height="6.6" fill="#d8a95c"/><rect x="59" y="62" width="3.6" height="6.6" fill="#d8a95c"/>
+</svg>`;
+const pct=()=>Math.max(0,st.hp/MAXHP*100);
+const crit=()=>st.hp/MAXHP<.3;
+const seg=n=>Array.from({length:MAXCR},(_,i)=>`<u class="${i<n?'on':''}"></u>`).join('');
+const need=()=>st.rank*80;
+const expPct=()=>Math.min(100,st.xp/need()*100);
+const hpTxt=()=>`${Math.ceil(st.hp)} <em>/ ${MAXHP}</em>`;
+
+/* ---------- 0 · referencia ---------- */
+const ref=()=>`<section class="stage">
+  <div class="stage-head"><h3>Referencia · <span>la estructura de hoy</span></h3>
+    <p>Intocada, para tener de dónde partir. 144 px de retrato, 34 px de medalla, un nombre a 24 px… y luego <b>238 px</b> para tres datos. Dos tercios de la tarjeta son imagen y un tercio es información, y la información es lo único que cambia durante una batalla.</p></div>
+  <div class="scene" style="height:264px"><div class="corner">
+    <div class="ref">
+      <img src="${A}ship-panel-v3.png" alt="" style="position:absolute;inset:0 0 0 auto;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 0 34%);opacity:.62;z-index:0">
+      <div class="emb" style="z-index:1">${ship}
+        <span style="position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:34px;height:34px;display:grid;place-items:center;font:700 24px/1 Georgia,serif;color:#f7d9a4;background:url('${A}v2/medal.webp') center/contain no-repeat">${st.rank}</span></div>
+      <div class="det" style="z-index:1">
+        <h2>La Indomable</h2><span class="rk">RANGO ${st.rank} · ${st.xp}/${need()} EXP</span>
+        <div class="xp"><i style="width:${expPct()}%"></i></div>
+        <div class="grp"><img src="${A}shield.webp" alt=""><div>
+          <div class="hr"><span>Casco</span><b>${Math.ceil(st.hp)} / ${MAXHP}</b></div>
+          <div class="ht"><i style="width:${pct()}%"></i></div></div></div>
+        <div class="grp"><img src="${A}crew.webp" alt=""><div>
+          <span class="cl"><b>${st.cr}</b> / ${MAXCR} TRIPULANTES</span>
+          <span class="dots">${Array.from({length:st.cr},()=>'<i></i>').join('')}</span></div></div>
+      </div></div></div>
+    <div class="vig"></div></div>
+  <div class="note"><b>El problema, medido:</b> el retrato mide 144 px sobre 170 de alto. El adorno se lleva el 85 % del alto, y es el único bloque que <i>nunca</i> cambia durante un combate.</div></section>`;
+
+/* ---------- A ---------- */
+const rowA=(cls,k,inner,v)=>`<div class="rw ${cls}"><span class="k">${k}</span><span class="tr">${inner}</span><span class="v">${v}</span></div>`;
+const expRow=()=>`<div class="exp"><span class="k">Exp</span><span class="tr"><i style="width:${expPct()}%"></i></span><span class="v">${st.xp} / ${need()}</span></div>`;
+const desA=()=>`<section class="stage">
+  <div class="stage-head"><h3>Diseño <span>A</span> · cabecera + filas a ancho completo</h3>
+    <p>El retrato deja de ser una columna y pasa a ser <b>un sello en la cabecera</b>: 56 px en vez de 144. Eso libera el ancho entero de la tarjeta, y las dos filas de datos ya no tienen que repartirse 238 px estrechos sino los 436 px de abajo. Cada barra se lee de izquierda a derecha como se lee una línea de agua, y casco y tripulación quedan como hermanos porque son lo mismo: cosas que se gastan.</p></div>
+  <div class="scene" style="height:210px"><div class="corner">
+    <div class="a plate ${crit()?"crit":""}">
+      <span class="bg"></span>
+      <div class="hd">
+        <div class="emb">${ship}<span class="md">${st.rank}</span></div>
+        <div class="nm"><h2>La Indomable</h2><span class="tag">RANGO ${st.rank}</span></div>
+      </div>
+      <div class="rows">
+        ${rowA('','Casco',`<u></u><i style="width:${pct()}%"></i>`,`${Math.ceil(st.hp)} / ${MAXHP}`)}
+        ${rowA('cr','Tripul.',seg(st.cr),`${st.cr} / ${MAXCR}`)}
+      </div>
+      ${expRow()}
+    </div></div>
+    <div class="vig"></div></div>
+  <div class="verdict"><b>Medida:</b> 472 × 160 px, contra 410 × 170 de la actual. 62 px más ancha, 10 px más baja, y las barras de casco pasan de 206 px de largo a <b>310 px</b>.
+    <b>Lo bueno:</b> por fin las dos filas tienen aire y un número con sitio al lado; el nombre deja de empujar todo lo demás hacia abajo.
+    <b>Lo malo:</b> sigue siendo un rectángulo con barras horizontales, y ahora se nota más porque sobra sitio. Y 472 px invade la esquina más de lo que ya invadía la tarjeta actual.</div></section>`;
+
+/* ---------- B ---------- */
+const desB=()=>`<section class="stage">
+  <div class="stage-head"><h3>Diseño <span>B</span> · el casco es la tarjeta</h3>
+    <p>La idea más arriesgada y la que más encaja con el tema. <b>No hay ninguna barra de casco dentro del panel: el casco <i>es</i> el borde inferior</b>. La franja se vacía desde los lados hacia el centro mientras la tarjeta se queda quieta, y el borde de arriba es la EXP. Así el panel queda atrapado entre las dos únicas cosas que te importan —subir de rango y hundirte— y la EXP deja de pelear el sitio con el casco porque ya no compiten: ocupan bordes distintos.</p></div>
+  <div class="scene" style="height:216px"><div class="corner">
+    <div class="b plate ${crit()?"crit":""}">
+      <span class="bg"></span>
+      <img class="art" src="${A}ship-panel-v3.png" alt="">
+      <div class="xp"><i style="width:${expPct()}%"></i></div>
+      <div class="hd">
+        <div class="emb">${ship}<span class="md">${st.rank}</span></div>
+        <div class="nm"><h2>La Indomable</h2><span class="rk">RANGO ${st.rank}</span></div>
+      </div>
+      <div class="cr"><span class="k">Tripulación</span>
+        <span class="seg">${seg(st.cr)}</span><span class="v">${st.cr} / ${MAXCR}</span></div>
+      <div class="foot"><span class="k">Casco</span><span class="n">${hpTxt()}</span></div>
+      <div class="wl"><u></u><i style="width:${pct()}%"></i></div>
+    </div></div>
+    <div class="vig"></div></div>
+  <div class="verdict"><b>Medida:</b> 406 × 146 px. Casi la misma anchura que hoy y 24 px más baja.
+    <b>Lo bueno:</b> es el único de los tres que de verdad se siente del juego —una línea de flotación que sube mientras te hunden— en vez de un widget. Y libera la columna: por fin la EXP cabe con su número sin pelearse con nadie.
+    <b>Lo malo:</b> el casco queda en la posición más periférica de toda la pantalla, en el borde de abajo, y con 12 píxeles tardas más en leerlo que en una barra normal. En un juego donde te pueden volar la cabeza en dos segundos, <b>creo que es una mala idea</b>, aunque sea la más bonita de las tres.</div></section>`;
+
+/* ---------- C ---------- */
+const desC=()=>`<section class="stage">
+  <div class="stage-head"><h3>Diseño <span>C</span> · bitácora mínima</h3>
+    <p>El que más se atreve a quitar: <b>fuera el retrato</b>. Ya estás mirando tu barco en el mundo, ya tienes un marcador en el mapa, y el nombre aparece entero en la pantalla de resultados. Es lo único de la tarjeta que no cambia nunca y ocupa el 85 % del alto. Fuera eso queda lo que la tarjeta es de verdad: un registro de estado.</p></div>
+  <div class="scene" style="height:190px"><div class="corner">
+    <div class="c plate ${crit()?"crit":""}">
+      <span class="bg"></span>
+      <div class="hd"><h2>La Indomable</h2><span class="rk">RANGO ${st.rank}</span></div>
+      <div class="rows">
+        ${rowA('','Casco',`<u></u><i style="width:${pct()}%"></i>`,`${Math.ceil(st.hp)} / ${MAXHP}`)}
+        ${rowA('cr','Tripulación',seg(st.cr),`${st.cr} / ${MAXCR}`)}
+      </div>
+      ${expRow()}
+    </div></div>
+    <div class="vig"></div></div>
+  <div class="verdict"><b>Medida:</b> 340 × 126 px. <b>70 px menos de ancha y 44 menos de alta</b> que la actual, con los tres datos enteros y su número al lado.
+    <b>Lo bueno:</b> es la que mejor escala y la que menos estorba. Deja libre la esquina inferior izquierda, que es justo donde la barra de acciones crece cuando le metes más botones.
+    <b>Lo malo:</b> pierde la identidad visual del barco, que es la mitad del encanto del HUD, y las barras se quedan en 157 px: las mitad de largas que en el diseño A.
+    <b>Es la que mejor se lee en combate y la que menos se parece a Pirate Tides.</b></div></section>`;
+
+function render(){
+  document.getElementById('stages').innerHTML=ref()+desA()+desB()+desC();
+  paintGhost(st.hp/MAXHP*100);
+}
+function paintGhost(w){document.querySelectorAll('.rw .tr>u,.wl>u').forEach(u=>u.style.width=w+'%')}
+
+function read(){
+  st.hp=+hp.value; st.cr=+cr.value; st.rank=+rk.value;
+  hpOut.textContent=`${st.hp} / ${MAXHP}`;
+  crOut.textContent=`${st.cr} / ${MAXCR}`;
+  rkOut.textContent=`${st.rank}`;
+  render();
+}
+for(const id of ['hp','cr','rk']) document.getElementById(id).addEventListener('input',read);
+
+let g=st.hp;
+function tick(){
+  g+=(st.hp-g)*0.05;
+  paintGhost(Math.max(0,g/MAXHP*100));
+  requestAnimationFrame(tick);
+}
+read(); requestAnimationFrame(tick);
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "referencePolicy": "References guide style and composition only. Generated illustrations and native functional UI; no screenshots or screenshot crops.",
+  "generatedAssets": [
+    {
+      "file": "nav-arsenal.png",
+      "prompt": "Create ONE production game-navigation raster icon: two crossed pirate cutlasses, blades curving slightly outward, compact symmetrical silhouette. Flat solid warm-white (#fff3dc) pictorial silhouette, clean precisely defined edges, elegant nautical game UI, legible at 28 pixels. No shading, no bevel, no outlines, no decorations, no circular badge, no text, no numbers, no lettering, no gold elements. Artwork occupies 82 percent of a square image, centered, generous equal transparent margin. Genuine transparent alpha background. This is a native UI category icon for the polished Pirate Tides port, designed to sit on dark navy. Single standalone asset, no sheet, no montage.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-06044e9c-d641-4b9a-9897-1976ef7cad77.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    },
+    {
+      "file": "nav-fleet.png",
+      "prompt": "Create ONE production game-navigation raster icon: three sailing ships abreast, a larger central brig and two smaller flank ships, compact symmetrical silhouette. Flat solid warm-white (#fff3dc) pictorial silhouette, clean precisely defined edges, elegant nautical game UI, legible at 28 pixels. No shading, no bevel, no outlines, no decorations, no circular badge, no text, no numbers, no lettering, no gold elements. Artwork occupies 82 percent of a square image, centered, generous equal transparent margin. Genuine transparent alpha background. This is a native UI category icon for the polished Pirate Tides port, designed to sit on dark navy. Single standalone asset, no sheet, no montage.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-f8cc6f32-797b-4612-9c08-6f66e40fb488.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    },
+    {
+      "file": "nav-island.png",
+      "prompt": "Create ONE production game-navigation raster icon: one tropical palm tree on a small island above two short wave strokes, compact balanced silhouette. Flat solid warm-white (#fff3dc) pictorial silhouette, clean precisely defined edges, elegant nautical game UI, legible at 28 pixels. No shading, no bevel, no outlines, no decorations, no circular badge, no text, no numbers, no lettering, no gold elements. Artwork occupies 82 percent of a square image, centered, generous equal transparent margin. Genuine transparent alpha background. This is a native UI category icon for the polished Pirate Tides port, designed to sit on dark navy. Single standalone asset, no sheet, no montage.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-9f6014ea-0c20-4939-9b20-cfd6f3218c21.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    },
+    {
+      "file": "carpenter-avatar.png",
+      "prompt": "Create ONE new game dialogue character illustration in exactly the vivid hand-painted pirate cartoon family of the provided GENERATED illustration. Subject: the same blue-bandana brown-bearded carpenter as the reference, wearing his cream shirt and leather apron, one hand holds a small hammer upright below his shoulder, the other hand raised in a helpless shrug; expressive worried eyebrows and a wry smile. An isolated waist-up character cutout, three-quarter facing right toward his dialogue text. Golden warm lighting, angular tasteful painterly shading, rich vivid fabric, charismatic exaggerated face, detailed but clean at a final 144-pixel size. Entire hat or bandana, head, elbows, hands and held object are fully INSIDE the square frame, with 8 percent transparent breathing room around the silhouette. A clean waist termination inside frame. Genuine transparent alpha background, no scenery, no panel, no vignette, no text, no watermark, no glowing halo or detached fragments. Make a coherent standalone illustration, not a crop of the reference. No extra fingers, no duplicated limbs.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-996f9ee9-6adf-4e1c-960a-66bdb34b5fde.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    },
+    {
+      "file": "sailor-avatar.png",
+      "prompt": "Create ONE new game dialogue character illustration in exactly the vivid hand-painted pirate cartoon family of the provided GENERATED illustration. Subject: a distinct older round friendly pirate with auburn moustache, red knit cap, striped cream shirt and teal vest, holding one wooden rum mug at chest height; cheeky grin, slightly tipsy but alert, coherent single pair of arms and hands. An isolated waist-up character cutout, three-quarter facing right toward his dialogue text. Golden warm lighting, angular tasteful painterly shading, rich vivid fabric, charismatic exaggerated face, detailed but clean at a final 144-pixel size. Entire hat or bandana, head, elbows, hands and held object are fully INSIDE the square frame, with 8 percent transparent breathing room around the silhouette. A clean waist termination inside frame. Genuine transparent alpha background, no scenery, no panel, no vignette, no text, no watermark, no glowing halo or detached fragments. Make a coherent standalone illustration, not a crop of the reference. No extra fingers, no duplicated limbs.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-a2808ff4-c162-4fce-8d06-4772e1329b7c.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    },
+    {
+      "file": "harpooner-avatar.png",
+      "prompt": "Create ONE new game dialogue character illustration in exactly the vivid hand-painted pirate cartoon family of the provided GENERATED illustration. Subject: a distinct lanky anxious pirate with scruffy black beard and dark curls, yellow neck scarf, worn cream shirt and brown vest, holding a short harpoon beside his shoulder; wide worried eyes and comic nervous grin, harpoon tip fully contained in frame. An isolated waist-up character cutout, three-quarter facing right toward his dialogue text. Golden warm lighting, angular tasteful painterly shading, rich vivid fabric, charismatic exaggerated face, detailed but clean at a final 144-pixel size. Entire hat or bandana, head, elbows, hands and held object are fully INSIDE the square frame, with 8 percent transparent breathing room around the silhouette. A clean waist termination inside frame. Genuine transparent alpha background, no scenery, no panel, no vignette, no text, no watermark, no glowing halo or detached fragments. Make a coherent standalone illustration, not a crop of the reference. No extra fingers, no duplicated limbs.",
+      "source": "C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-7a6c7294-1880-4507-955d-97f99f295010.png",
+      "generator": "image_gen.imagegen",
+      "transparentBackground": true,
+      "qa": "Pending final-size browser review"
+    }
+  ]
+}

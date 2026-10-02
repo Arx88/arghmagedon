@@ -1,0 +1,163 @@
+/* Dedicated, non-overlapping zones for dialogue, invasions and creature health. */
+body.game-hud .team-compact{display:none}
+body.game-hud .world-label{font-size:12px}
+body.game-hud #chart-open,body.game-hud #map-mode{font-size:12px}
+/* Independent frame and cloth segments retain their proportions at every size. */
+body.game-hud .ship-card{aspect-ratio:2.75}
+body.game-hud .ship-card-art{clip-path:inset(0 0 0 34%)}
+body.game-hud .ship-emblem{width:35%;background:url('/assets/pirate-ui/compass-rim-v3.png') center top/100% auto no-repeat}
+body.game-hud #ship-portrait{left:12%;top:13%;width:76%;height:auto;aspect-ratio:1}
+body.game-hud .rank-medal{bottom:1%;width:24%;height:auto;aspect-ratio:1;background:url('/assets/pirate-ui/v2/medal.webp') center/contain no-repeat}
+body.game-hud .ship-details{left:36%;width:56%}
+body.game-hud .health-track{height:11px;padding:0;border:0;background:#102c34}
+body.game-hud .compass #minimap{inset:auto;left:50%;top:51%;transform:translate(-50%,-50%);width:78%;height:78%}
+body.game-hud .compass-n{left:50%;top:14%;transform:translateX(-50%)}
+body.game-hud .compass-s{left:50%;bottom:1%;transform:translateX(-50%)}
+body.game-hud .compass-w{left:1%;top:51%;transform:translateY(-50%)}
+body.game-hud .compass-e{right:1%;top:51%;transform:translateY(-50%)}
+/* Desktop geometry follows the supplied HUD. Character artwork has its own style reference. */
+@media(min-width:1191px){
+  body.game-hud{--card:500px;--chart:248px;--medal:84px}
+  body.game-hud .brand{font-size:32px;letter-spacing:3px;gap:16px;margin-top:9px}
+  body.game-hud .brand-icon{width:54px;height:60px}
+  body.game-hud .brand small{display:block;font:700 10px/1.5 Manrope,sans-serif;letter-spacing:3px;margin-top:10px;color:#edc471}
+  body.game-hud .match{width:640px;top:0}
+  body.game-hud .team{font-size:12px;top:30%;gap:9px}
+  body.game-hud .team b{font-size:18px}
+  body.game-hud .match-center>span{font-size:34px}
+  body.game-hud .top-actions{gap:14px}
+  body.game-hud .icon-button{width:44px;height:44px;padding:10px}
+  body.game-hud #sound{display:grid}
+  body.game-hud .voyage{top:95px;right:34px;width:190px;text-align:center}
+  body.game-hud .cargo>span{display:block;font:800 11px/1.4 Manrope,sans-serif;letter-spacing:1.5px;margin-bottom:9px}
+  body.game-hud .treasure-counts{justify-content:center;gap:26px;padding-bottom:10px;border-bottom:1px solid #b8995966}
+  body.game-hud .bank-balance{margin-top:8px;font-size:12px}
+  body.game-hud .ship-name>span{display:block;font:600 12px/1.5 Manrope,sans-serif;letter-spacing:1.5px;margin-top:6px;color:#b5d8df}
+  body.game-hud .ship-name h2{font:400 30px/1.1 Georgia,serif;letter-spacing:.6px}
+  body.game-hud .ship-card{aspect-ratio:2.75;bottom:18px}
+  body.game-hud .ship-card-art{clip-path:inset(0 0 0 34%)}
+  body.game-hud .ship-emblem{width:35%;background:url('/assets/pirate-ui/compass-rim-v3.png') center top/100% auto no-repeat}
+  body.game-hud #ship-portrait{left:12%;top:13%;width:76%;height:auto;aspect-ratio:1}
+  body.game-hud .rank-medal{bottom:1%;width:24%;height:auto;aspect-ratio:1;background:url('/assets/pirate-ui/v2/medal.webp') center/contain no-repeat;font-size:24px}
+  body.game-hud .ship-details{left:36%;width:53%;top:11%;height:73%;grid-template-rows:41% 30% 29%}
+  body.game-hud .experience-track{top:42%;height:1px;background:#cfad6a}
+  body.game-hud .hull-stats,body.game-hud .crew-stats{gap:10px}
+  body.game-hud .health-row{justify-content:flex-start;gap:12px;font-size:14px;margin-bottom:6px}
+  body.game-hud .health-row>span{display:none}
+  body.game-hud .health-track{height:11px;padding:0;border:0;background:#102c34}
+  body.game-hud .health-track div{background:linear-gradient(90deg,#b8ed99,#56e59b 70%,#21df81)}
+  body.game-hud .crew-line{font-size:13px;letter-spacing:.8px}
+  body.game-hud .crew-dots{display:flex;gap:4px;margin-top:5px}
+  body.game-hud .crew-dots i{position:relative;width:8px;height:12px;background:none}
+  body.game-hud .crew-dots i:before{content:'';position:absolute;left:2px;top:0;width:4px;height:4px;border-radius:50%;background:#e9c36e}
+  body.game-hud .crew-dots i:after{content:'';position:absolute;left:0;top:4px;width:8px;height:8px;background:#e9c36e;clip-path:polygon(25% 0,75% 0,100% 60%,75% 60%,75% 100%,25% 100%,25% 60%,0 60%)}
+  body.game-hud .map-panel{right:24px;bottom:26px}
+  body.game-hud .compass #minimap{inset:auto;left:50%;top:51%;transform:translate(-50%,-50%);width:78%;height:78%}
+  body.game-hud .compass-n{left:50%;top:14%;transform:translateX(-50%)}
+  body.game-hud .compass-s{left:50%;bottom:1%;transform:translateX(-50%)}
+  body.game-hud .compass-w{left:1%;top:51%;transform:translateY(-50%)}
+  body.game-hud .compass-e{right:1%;top:51%;transform:translateY(-50%)}
+  body.game-hud .compass-direction{font-size:21px}
+  body.game-hud .map-port{display:block;text-align:center;font:800 13px/1.5 Manrope,sans-serif;letter-spacing:1.4px;margin-top:13px;color:#fff2d4}
+  body.game-hud #port-status{display:block;position:static;inset:auto;width:auto;transform:none;text-align:center;font:700 14px/1.5 Manrope,sans-serif;margin-top:6px;color:#e9c66e}
+  body.game-hud #chart-open,body.game-hud #map-mode{bottom:55px;width:28px;height:28px;font-size:11px;opacity:0;transition:opacity .15s}
+  body.game-hud .map-panel{pointer-events:auto}
+  body.game-hud .map-panel:hover #chart-open,body.game-hud .map-panel:hover #map-mode,body.game-hud .map-panel:focus-within #chart-open,body.game-hud .map-panel:focus-within #map-mode{opacity:1}
+  body.game-hud .action-bar{width:520px;left:53%;bottom:18px}
+  body.game-hud .action strong{font-size:13px;letter-spacing:.6px}
+  body.game-hud .action small{display:block;top:calc(var(--medal) + 42px);bottom:auto;width:100%;max-width:none;font:400 12px/1.4 Manrope,sans-serif;padding:0;background:none;border:0;color:#edf4eb;white-space:nowrap;overflow:visible;text-shadow:0 1px 3px #001e2f,0 0 4px #001e2f}
+  body.game-hud #weapon{left:53%;bottom:calc(var(--medal) + 102px)}
+  body.game-hud .action-medal{background-image:url('/assets/pirate-ui/v2/medal.webp')!important}
+  body.game-hud .action[data-state="blocked"]{opacity:.78}
+  body.game-hud .action:disabled{opacity:.78}
+  body.game-hud #sailing-tools{right:calc(var(--chart) + 52px);bottom:90px}
+  body.game-hud .action-bar:before{content:'';position:absolute;left:-20px;right:-20px;top:41px;height:7px;background:url('/assets/pirate-ui/rope.webp') center/100% 100% no-repeat;z-index:-1;pointer-events:none}
+}
+@media(min-width:1600px){body.game-hud{--card:550px;--chart:260px;--medal:86px}body.game-hud .match{width:640px}body.game-hud .action-bar{width:550px}}
+/* Keep the same composition while preserving space between desktop HUD groups. */
+@media(min-width:1191px) and (max-width:1599px){
+  body.game-hud{--card:410px;--chart:220px;--medal:70px}
+  body.game-hud .brand{font-size:24px;letter-spacing:2px;gap:10px}
+  body.game-hud .brand-icon{width:44px;height:50px}
+  body.game-hud .brand small{font-size:9px;letter-spacing:2px;margin-top:8px}
+  body.game-hud .match{width:600px}
+  body.game-hud .ship-name h2{font-size:24px}
+  body.game-hud .ship-card{aspect-ratio:2.75;bottom:12px}
+  body.game-hud .ship-details{top:6%;height:82%;width:58%}
+  body.game-hud .ship-name>span{font-size:12px;letter-spacing:.6px;margin-top:4px}
+  body.game-hud .crew-line{font-size:12px;letter-spacing:0}
+  body.game-hud .crew-dots{margin-top:3px;gap:3px}
+  body.game-hud #weapon{left:calc(50% + 60px);bottom:calc(var(--medal) + 102px)}
+  body.game-hud .action-bar{width:min(440px,calc(100vw - 804px));left:calc(50% + 60px)}
+  body.game-hud .action strong{font-size:12px}
+  body.game-hud .action-bar:before{top:34px}
+}
+@media(max-width:620px){body.game-hud .team-full{display:none}body.game-hud .team-compact{display:block}}
+@media(max-width:620px){
+ body.game-hud .ship-card{width:min(260px,calc(100vw - var(--chart) - 34px))}
+ body.game-hud .ship-name h2{font:400 18px/1.15 Georgia,serif;text-transform:none;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ body.game-hud .health-row{font-size:12px}
+ body.game-hud .crew-line{font-size:12px;letter-spacing:0}
+}
+@media(min-width:621px) and (max-width:960px){body.game-hud #sailing-tools{bottom:320px}}
+body.game-hud #crew-dialogue{top:195px;right:24px;width:477px;height:150px;border:0;border-image:none;isolation:isolate}
+body.game-hud #crew-dialogue:before,body.game-hud #crew-dialogue:after{content:'';position:absolute;inset:0;z-index:-1;clip-path:polygon(0 10px,8px 10px,8px 2px,44% 2px,46% 10px,49% 10px,50% 0,51% 10px,calc(100% - 9px) 10px,calc(100% - 9px) 15px,100% 20px,100% 48%,calc(100% - 7px) 53%,100% 58%,100% calc(100% - 13px),calc(100% - 8px) calc(100% - 13px),calc(100% - 8px) 100%,9px 100%,9px calc(100% - 8px),0 calc(100% - 8px),0 60%,7px 55%,0 50%);background:#c5a36a}
+body.game-hud #crew-dialogue:after{inset:1px;background:linear-gradient(115deg,#082632,#062b3b 62%,#082e3c)}
+body.game-hud #crew-dialogue .dialogue-art{display:none}
+body.game-hud #dialogue-avatar{left:8px;bottom:2px;width:175px;height:150px;object-fit:contain;object-position:bottom center;mask:none;filter:none}
+body.game-hud .dialogue-copy{left:190px;top:32px;width:calc(100% - 210px);height:108px}
+body.game-hud #dialogue-name{font:600 20px/24px Georgia,serif;white-space:normal}
+body.game-hud #dialogue-message{font:400 20px/25px Georgia,serif;margin:5px 0 0;overflow-wrap:normal}
+body.game-hud #dialogue-close{right:13px;bottom:10px;width:24px;height:24px;font-size:19px;line-height:1;padding:0;color:#e4c48e;display:grid;place-items:center}
+body.game-hud #creature-bar{left:var(--edge);top:160px;transform:none;width:275px;font-size:15px;padding:12px 16px;border-color:#d2ad69;box-shadow:0 3px 10px #031c3c44}
+body.game-hud #creature-bar small{font-size:12px;line-height:1.4}
+body.game-hud #invasion-alert{top:151px;width:460px;max-width:calc(100vw - 36px);font-size:14px;line-height:1.4;padding:10px 18px;text-align:center;border:1px solid #e3b56c;background:linear-gradient(100deg,#422622ed,#743d2cf2,#422622ed);box-shadow:0 3px 12px #001b2880;clip-path:polygon(0 8px,8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px))}
+body.game-hud:has(#invasion-alert.show) #crew-dialogue{top:195px}
+body.game-hud:has(#invasion-alert.show) #creature-bar{top:222px}
+
+body.game-hud #settings-dialog,body.game-hud #chart-dialog,body.game-hud #result-dialog{border:1px solid #b89a5f;border-radius:7px;background:radial-gradient(ellipse at top right,#184757,#052a3c 60%,#032235);color:#edf2e8;box-shadow:0 20px 80px #00182688;max-height:calc(100dvh - 40px);scrollbar-width:thin;scrollbar-color:#ad915d #042538}
+body.game-hud #settings-dialog,body.game-hud #chart-dialog,body.game-hud #result-dialog{background:linear-gradient(#032438ec,#032438ec),url('/assets/harbor-art/port-ocean-backdrop-v2.png') top right/cover}
+body.game-hud #settings-dialog>small{font:400 12px/1.5 Manrope,sans-serif;color:#b9d1d8}
+body.game-hud #settings-dialog{width:min(660px,calc(100vw - 40px));padding:32px;overflow:auto}
+body.game-hud #settings-dialog h2,body.game-hud #chart-dialog h2,body.game-hud #result-dialog h2{font:600 36px/1.15 Georgia,serif;letter-spacing:-.5px;color:#fff4df;margin:12px 0 24px;max-width:100%;padding-right:28px;text-wrap:pretty}
+body.game-hud #settings-dialog .eyebrow,body.game-hud #chart-dialog .eyebrow,body.game-hud #result-dialog .eyebrow{font:700 12px/1.5 Manrope,sans-serif;letter-spacing:1.5px;color:#f4d385}
+body.game-hud #settings-dialog .close,body.game-hud #chart-dialog .close{top:17px;right:17px;width:34px;height:34px;font-size:27px;padding:0;border:1px solid #d4b474;border-radius:50%;color:#f7d789;background:#082d3d}
+body.game-hud #settings-dialog>label{display:flex;align-items:center;justify-content:space-between;gap:18px;font:500 15px/1.5 Manrope,sans-serif;margin:16px 0;color:#d3e0e7}
+body.game-hud #settings-dialog select{min-width:220px;min-height:42px;border:1px solid #496472;border-radius:4px;color:#f9edd0;background:#143a4b;padding:8px 10px;font:500 14px/1.4 Manrope,sans-serif;max-width:100%}
+body.game-hud .control-guide{border-top:1px solid #96845066;border-bottom:1px solid #96845066;margin:24px 0;padding:14px 0}
+body.game-hud .control-guide summary{font:600 16px/1.4 Georgia,serif;color:#f1d08b;cursor:pointer}
+body.game-hud .control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;margin:18px 0}
+body.game-hud .control-grid p{display:flex;align-items:center;gap:12px;margin:0;min-width:0;font:500 12px/1.4 Manrope,sans-serif;color:#d2e2e5}
+body.game-hud .control-grid kbd{flex:none;min-width:52px;text-align:center;padding:5px 6px;font:600 12px/1.4 Manrope,sans-serif;border:1px solid #647884;border-radius:3px;background:#183a48;color:#f3d49d}
+body.game-hud #settings-dialog .control-mouse{font:400 13px/1.6 Manrope,sans-serif;color:#afc9d4;margin:0}
+body.game-hud #settings-dialog .audio-settings{margin:20px 0;padding:18px;border:1px solid #65818b66;border-radius:5px}
+body.game-hud #settings-dialog .audio-settings legend{padding:0 10px;font:600 21px/1.4 Georgia,serif;color:#f1d48f}
+body.game-hud #settings-dialog .audio-settings label{display:grid;grid-template-columns:minmax(0,1fr) 180px 48px;align-items:center;gap:14px;font:500 14px/1.5 Manrope,sans-serif;color:#d8e6e8;margin:10px 0;min-height:28px}
+body.game-hud #settings-dialog .audio-settings input{width:100%!important;accent-color:#f0c569;height:22px}
+body.game-hud #settings-dialog .audio-settings output{font:500 13px/1.5 Manrope,sans-serif;min-width:0!important;color:#f3d28b}
+body.game-hud #settings-sound,body.game-hud #gallery-open{padding:10px 18px;border:1px solid #aa905a;border-radius:4px;font:500 14px/1.4 Manrope,sans-serif;background:#143b49;color:#f3d79d;min-height:42px}
+body.game-hud #settings-dialog>label:last-child{border-top:1px solid #907b5144;padding-top:20px;margin-top:24px;font-size:13px}
+body.game-hud #chart-dialog>p{font:400 15px/1.6 Georgia,serif;color:#c9dde3;margin:0 0 22px}
+body.game-hud #chart-dialog{padding:30px}
+body.game-hud #chart-dialog .destination{min-width:0;gap:12px}
+body.game-hud #chart-dialog .destination strong{font:600 18px/1.25 Georgia,serif;white-space:normal}
+body.game-hud #chart-dialog .destination small{font:500 12px/1.5 Manrope,sans-serif;color:#c1d5df;white-space:normal}
+body.game-hud #result-dialog{width:min(680px,calc(100vw - 40px));padding:32px 42px;overflow:auto;text-align:center}
+body.game-hud .result-host{width:168px;height:168px;object-fit:contain}
+body.game-hud #result-dialog h2{padding-right:0;margin:14px 0 18px}
+body.game-hud #result-story{font:400 17px/1.5 Georgia,serif;color:#d0e0e3;margin:0 auto;max-width:530px;text-wrap:pretty}
+body.game-hud .result-score{gap:24px;margin:22px 0;padding:18px 0;border-top:1px solid #9a824954;border-bottom:1px solid #9a824954;display:grid;grid-template-columns:1fr 1fr;font:600 12px/1.5 Manrope,sans-serif;color:#d8dbc4}
+body.game-hud .result-score b{font:600 24px/1.3 Georgia,serif;color:#f1d080;margin-top:10px;overflow-wrap:anywhere}
+body.game-hud #sail-again{min-height:48px;padding:12px 30px;border:1px solid #ffe38a;border-radius:5px;font:600 19px/1.25 Georgia,serif;color:#27220d;background:linear-gradient(#ffd053,#e8a910)}
+@media(max-width:1190px){body.game-hud #crew-dialogue{width:420px}body.game-hud #dialogue-avatar{width:148px;height:140px}body.game-hud .dialogue-copy{left:170px;width:calc(100% - 190px)}body.game-hud #dialogue-message{font-size:18px;line-height:24px}}
+@media(max-width:960px){body.game-hud #crew-dialogue{top:213px;width:390px}body.game-hud #invasion-alert{top:179px}body.game-hud:has(#invasion-alert.show) #crew-dialogue{top:249px}body.game-hud #creature-bar{top:216px;width:230px}body.game-hud:has(#invasion-alert.show) #creature-bar{top:249px}}
+@media(max-width:620px){body.game-hud #crew-dialogue{top:216px;width:calc(100vw - 24px);height:154px;right:12px}body.game-hud #dialogue-avatar{left:5px;width:125px;height:137px}body.game-hud .dialogue-copy{left:143px;top:23px;width:calc(100% - 163px);height:120px}body.game-hud #dialogue-name{font-size:18px}body.game-hud #dialogue-message{font-size:16px;line-height:22px}body.game-hud #invasion-alert{top:179px}body.game-hud #creature-bar{top:390px;width:230px}body.game-hud:has(#invasion-alert.show) #crew-dialogue{top:256px}body.game-hud:has(#invasion-alert.show) #creature-bar{top:422px}body.game-hud #settings-dialog,body.game-hud #chart-dialog,body.game-hud #result-dialog{width:calc(100vw - 24px);padding:24px 18px;max-height:calc(100dvh - 24px)}body.game-hud #settings-dialog h2,body.game-hud #chart-dialog h2,body.game-hud #result-dialog h2{font-size:29px}body.game-hud #settings-dialog>label{gap:10px;font-size:12px}body.game-hud #settings-dialog select{min-width:0;width:60%;font-size:12px}body.game-hud .control-grid{grid-template-columns:1fr}body.game-hud #settings-dialog .audio-settings{padding:12px}body.game-hud #settings-dialog .audio-settings label{grid-template-columns:minmax(0,1fr) 95px 43px;gap:8px;font-size:12px}body.game-hud .result-host{width:140px;height:140px}body.game-hud .result-score{gap:14px}body.game-hud .result-score b{font-size:21px}}
+body.game-hud .world-label .burn-timer{display:block;margin-top:4px;font:600 12px/1.3 Manrope,sans-serif;color:#ffc872;letter-spacing:.4px}
+/* Per-side gunnery: two lamps under the broadside button, port and starboard.
+   A lamp fills as its side rearms and glows when those guns are ready again. */
+body.game-hud #fire{position:relative}
+body.game-hud .side-guns{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);display:flex;gap:5px;pointer-events:none}
+body.game-hud .side-guns i{width:17px;height:5px;border-radius:3px;background:#16283a;border:1px solid #c9a45c88;display:block;position:relative;overflow:hidden}
+body.game-hud .side-guns i::after{content:'';position:absolute;inset:0;transform-origin:left;transform:scaleX(var(--ready,0));background:#f0c86a}
+body.game-hud .side-guns i.loaded{border-color:#f0c86a;box-shadow:0 0 7px #f0c86a99}
+body.game-hud.firefight-ready #rum{outline:2px solid #ff9a4a;outline-offset:2px}

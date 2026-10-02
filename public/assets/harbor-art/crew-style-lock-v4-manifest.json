@@ -1,0 +1,43 @@
+{
+  "tool": "built-in image_gen",
+  "characterStyleReference": "C:/Users/juanp/AppData/Local/Temp/codex-clipboard-78986893-0687-4c6d-be09-f9e9415b4a61.png",
+  "crewLayoutReference": "C:/Users/juanp/AppData/Local/Temp/codex-clipboard-e96e7f51-b1a2-4894-a32f-ee98fe7c5ebf.png",
+  "constraints": [
+    "Character art reference and UI layout reference have separate roles.",
+    "Never use screenshot crops as production artwork.",
+    "Use direct style reference in image generation, not a text-only remembered style.",
+    "Large angular cartoon eyes, expressive hooked nose, dark pointed beard, clean flat warm brush planes.",
+    "Reject realistic skin, detailed beard hair, grainy microtexture and photographic material rendering.",
+    "Review full illustration and final card size together before integration."
+  ],
+  "assets": [
+    {
+      "file": "repairer-card-character-style.png",
+      "status": "preserved"
+    },
+    {
+      "file": "looter-card-character-style.png",
+      "status": "preserved"
+    },
+    {
+      "file": "boarder-card-style-locked-v4.png",
+      "status": "new corrected style transfer",
+      "prompt": "Use case: style-transfer. Edit IMAGE 1 (our red bandana boarding pirate card) to correct its inconsistent art style. IMAGE 2 is the user's MASTER CHARACTER STYLE REFERENCE: use ONLY the pirate illustration at the LEFT of that screenshot to define rendering, faces, shapes and colors; the interface is irrelevant. IMAGE 3 is our blue bandana repairer card in the same required family. The output must be an ORIGINAL separate boarding pirate artwork, NOT a screenshot, NOT a crop from image 2.\nCRITICAL: Image 1's semi-realistic detailed face, textured skin, grainy beard, tiny brush strokes and realistic anatomy are WRONG. Redraw the entire character in the unmistakably CARTOON ANIMATED form language of the LEFT pirate in IMAGE 2, as faithfully as possible. Same LARGE expressive angular eyes, thick black angled brows, large hooked angular nose, chunky powerful hands, exaggerated open mischievous toothy grin, sharp pointed dark BLACK beard and curled BLACK moustache, red knotted bandana, tan warm orange skin. Clear bold shapes and large FLAT warm brush planes for skin and fabric, almost cel-shaded, refined vibrant animation key art. All microtexture and realistic fine beard hair must disappear. No realistic face, no photographic shading, no 3D render. Preserve the boarding ROLE: one curved cutlass in hand at upper LEFT, other hand gripping rope at RIGHT, ivory open-neck rolled-sleeve shirt, dark brown vest, gold earring, waist-up pirate. Redraw the background in the SAME simplified angular warm stylized shapes as IMAGE 2: blue sky, cream geometric clouds, distant cream fortress on teal rock, turquoise sea, amber mast/deck ropes. Whole hatless head, two hands and sword visible; no clipping, no extra fingers. 4:3 full-bleed artwork, no UI, text, labels, frame or watermarks. Match Image 2's style exactly rather than the original Image 1 rendering.",
+      "hint": "Generated images are saved to C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44 as C:\\Users\\juanp\\.codex\\generated_images\\01a0e5a2-75c5-7fe3-80a4-f517c39abd44\\exec-fb4c4c11-4ff7-4492-a165-a3babd436605.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "file": "mariner-card-character-style.png",
+      "status": "preserved and assigned to Artilleros; existing art already depicts cannon operator"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "bb2250ec-6b48-4d36-8d3f-0fbf7a6cd3d0",
+      "reason": "Boarder face too realistic, rendering inconsistent."
+    },
+    {
+      "id": "6e51658b-9e9d-4bca-ba48-6664fcece03b",
+      "reason": "User rejected gunner; realistic fine texture inconsistent. Not integrated."
+    }
+  ]
+}

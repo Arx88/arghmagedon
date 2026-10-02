@@ -1,0 +1,62 @@
+{
+  "generator": "Built-in image_gen.imagegen",
+  "date": "2026-09-30",
+  "referencePolicy": "Generated illustration assets only. References informed style; no screenshot crops or source UI slices.",
+  "qaMethod": "Native browser asset review, actual HTML image dimensions, no cropping or stretching; asset QA only, not in-game layout gate.",
+  "evidence": [
+    "additional-qa-fleet.png",
+    "additional-qa.png"
+  ],
+  "assets": [
+    {
+      "file": "explorer-ii-card.png",
+      "width": 1448,
+      "height": 1086,
+      "sizeReviewed": [
+        320,
+        240
+      ],
+      "finding": "A different scout design with raised chart cabin, short aft mast and gold-compass blue sail. Whole silhouette visible.",
+      "prompt": "Use case: precise-object-edit. This image is the GENERATED Explorer I illustration for Pirate Tides; it is the only edit target. Create its more capable Explorer II sibling, matching the EXACT vivid angular hand-painted art style, warm orange timber, royal-blue sky, turquoise ocean and charming crew. Upgrade the boat DESIGN as well as its colors: slightly broader deeper hull, a compact raised aft navigation cabin with chart windows, the main crow's nest a bit higher, a second shorter aft mast carrying a small cream triangular navigation sail; still a sleek scout with no cannons, no ram, and no iron armor. The primary square sail is now deep navy-cobalt blue with one beautifully clear GOLD COMPASS-ROSE emblem, surrounded by restrained gold stitch trim. Keep the telescope lookout, deck navigator and rigging coherent and physically attached. Ship is unmistakably an upgraded swift explorer, not a warship. Keep the elevated three-quarter side view and whole ship including both mast tops, flag and bowsprit fully inside the landscape4:3 frame with the existing generous sky and sea margins. All illustration proportions stay natural. No text, labels, UI, borders, numbers, watermark or screenshot fragments. No photographic or plastic 3D rendering, no duplicated masts or disconnected rigging.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-bd88218b-8510-4961-b657-82288519a829.png"
+    },
+    {
+      "file": "harbor-port.png",
+      "width": 1619,
+      "height": 971,
+      "sizeReviewed": [
+        200,
+        120
+      ],
+      "finding": "RGBA tropical harbor and lighthouse tested on navy and cream, no visible halo or clipped silhouette.",
+      "prompt": "Use case: stylized-concept. Asset type: small isometric harbor thumbnail for the header of a premium pirate game menu; TRUE transparent background. Finished one isolated beautiful miniature tropical island pirate PORT, in an elevated isometric three-quarter view. A honey-sand island with a clustered cheerful little village of cream plaster houses with terracotta orange-red pitched roofs, a tall white lighthouse with two muted crimson horizontal bands and a glowing gold lantern top, wooden docks extending toward the lower right, two tiny docked wooden sailboats with cream sails, palm trees, brass harbor crane and a few dark timber barrels. Bright sunny honey-gold warm light, rich clear navy shadows, emerald palms, roof highlights. Style: polished vivid 2D hand-painted pirate cartoon miniature, crisp angular painted planes, lively slightly exaggerated proportions, visually coherent charming architecture. Keep the detailed island silhouette compact and readable when shown at 200×120 pixels. Composition: one centered island entirely inside a landscape5:3 canvas with generous 10 percent clear transparent margins all around, including palm tops, lighthouse top, pier ends and boats. Island is widest horizontally, no ground rectangle or frame; small fringe of turquoise shoreline may hug island but surroundings stay actually transparent. NO text, labels, lettering, symbols, numbers, UI, border, watermark, realistic 3D plastic, photographic surfaces, detached buildings or disconnected pier fragments.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-3926dca1-8cd9-4241-b46c-250af6a4045d.png"
+    },
+    {
+      "file": "nav-ship.png",
+      "width": 1254,
+      "height": 1254,
+      "sizeReviewed": [
+        28,
+        40,
+        64
+      ],
+      "finding": "Flat ivory ship silhouette readable at menu size; 40px image yields about28px visible glyph.",
+      "prompt": "Use case: logo-brand. Asset type: ONE small raster nautical menu icon, TRUE TRANSPARENT background. Primary request: a beautifully balanced flat IVORY WHITE silhouette of a compact pirate sailboat viewed side-on, for a dark navy pirate game navigation button. Single graceful curved hull, one central mast, one large curved triangular sail to right and one smaller triangular sail to left, two short simple white curved water strokes below. Elegant pictorial silhouette resembling classic painted maritime signage. Simple bold professional readable shape at 28×28 pixels; very small restrained gaps between sails and mast make silhouette clear. Pure warm ivory-white single color, without shading, gradient, gold, outlines or shadows; no dimensional sculpture or realistic scene. Center the whole boat in a square1:1 canvas, it occupies 70 percent width and 65 percent height, with clear transparent margins around ALL sides. Visually centered weight, smooth crisp clean raster edge, no haze or colored fringe. No text, logo text, letters, numbers, UI button, circle frame, tile, border, watermark, background, extra objects or fine tiny rigging details.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-e9568c3b-d171-4a24-8626-960ca549dc1e.png"
+    },
+    {
+      "file": "nav-crew.png",
+      "width": 1254,
+      "height": 1254,
+      "sizeReviewed": [
+        28,
+        40,
+        64
+      ],
+      "finding": "Flat ivory crew group readable at menu size, intact simple silhouette and transparent margins.",
+      "prompt": "Use case: logo-brand. Asset type: ONE small raster menu navigation icon for a beautiful nautical pirate game, TRUE transparent background. A pure flat solid IVORY WHITE silhouette representing a PIRATE CREW: three rounded simple human head-and-shoulder busts arranged symmetrically, the larger central person slightly in front, two smaller people behind at left and right. Center figure's chest is a simple angular vest silhouette; outer shoulders form a unified balanced group. Heads are plain circles with no tiny faces, no fingers, no complex hair, no pirate hats. Beautiful clean professional pictorial shape matching classic maritime ivory menu icons on dark navy. Silhouette readable at28×28pixels, strong simple negative gaps separate the three heads and shoulders, precisely symmetric placement. SINGLE flat ivory white fill with ABSOLUTELY smooth clean edges and opaque solid interiors, no speckle, no brush wear, no grain, no holes in silhouette, no gradients, no shading, no outlines, no 3D sculpture. Center the group inside a square canvas occupying about70 percent width and60 percent height with generous transparent margins. No text, letters, labels, numbers, UI button, circle frame, tile, border, watermark, colored fringe, colored shadow or background.",
+      "source": "C:/Users/juanp/.codex/generated_images/01a0f23d-b373-7623-8037-e7bdab5aae60/exec-15f01088-5b4d-4469-8443-04e5b52e35c3.png"
+    }
+  ]
+}
