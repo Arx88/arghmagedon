@@ -8,7 +8,7 @@ export const qaFixtures=Object.freeze([
   ['greek-fire','Marea Roja'],['fire-trail','Rastro en llamas'],['victory','Victoria visual'],['defeat','Derrota visual'],
   ['portrait-sailor','Aviso · Marinero'],['portrait-harpooner','Aviso · Arponero'],
   ['portrait-boatswain','Aviso · Contramaestre'],['portrait-lookout','Aviso · Vigía'],['portrait-carpenter','Aviso · Carpintero'],
-  ['fleet-purchases','Flota · compras y mejora'],['fleet-designs','Flota · tres diseños'],
+  ['fleet-purchases','Flota · compras y mejora'],['fleet-designs','Flota · cuatro diseños'],
 ]);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 // A throttled background tab still advances the explicit QA clock at the chosen rate.

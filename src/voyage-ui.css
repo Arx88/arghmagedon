@@ -1,0 +1,56 @@
+/* Quiet, legible navigation guidance leaves the center of the fight unobstructed. */
+body.game-hud #tactical-card{position:fixed;z-index:5;left:24px;top:111px;width:300px;overflow:hidden;color:#f4edda;background:linear-gradient(120deg,#082d40ed,#082d40d9);border:1px solid #ad935359;border-left:3px solid #e5be6b;border-radius:4px;box-shadow:0 8px 28px #001d3038;backdrop-filter:blur(12px)}
+#tactical-toggle{display:flex;align-items:center;gap:11px;width:100%;padding:14px 13px;border:0;background:transparent;text-align:left;color:inherit}
+#tactical-toggle:hover{background:#bcddeb0a}
+#tactical-toggle>.tactical-symbol{display:grid;place-items:center;flex:none;width:33px;height:33px;border:1px solid #cfb06f55;border-radius:50%;padding:6px}
+#tactical-card .hud-icon{width:100%;height:100%}
+#tactical-toggle>span:nth-child(2){flex:1;min-width:0}
+#tactical-toggle small{display:block;font:800 8px/1.5 Manrope,sans-serif;letter-spacing:1.7px;color:#dfbe7e}
+#tactical-toggle strong{display:block;font:600 18px/1.15 'Cormorant Garamond',Georgia,serif;margin-top:4px}
+#tactical-toggle .tactical-chevron{flex:none;color:#c5dbe1;font:400 19px/1 Manrope,sans-serif}
+#tactical-detail{padding:0 15px 13px 57px}
+#tactical-copy{margin:0 0 12px;font:400 11px/1.65 Manrope,sans-serif;color:#b7d0d9}
+#tactical-chart{display:flex;align-items:center;gap:8px;width:100%;border:0;border-top:1px solid #9bbec523;padding:10px 0 0;background:none;color:#f3d591;font:700 10px/1.5 Manrope,sans-serif;text-align:left}
+#tactical-chart>span{margin-left:auto;font-size:16px}
+#tactical-chart kbd{font:500 9px/1.2 Manrope,sans-serif;border-color:#b9cfc645;color:#bfd0d2;background:#264757;padding:3px 4px}
+body.game-hud #tactical-card[data-tone="danger"]{border-left-color:#f19570;background:linear-gradient(120deg,#3e2630ec,#092b3eea)}
+#tactical-card[data-tone="danger"] #tactical-toggle small{color:#ffb392}
+body.game-hud #tactical-card[data-tone="combat"]{border-left-color:#82e3e2}
+body.game-hud.showcase #tactical-card,body.game-hud.hidden-ui #tactical-card,body.embarking #tactical-card,body.voyage-paused #tactical-card,body:has(#result-dialog[open]) #tactical-card{display:none}
+body:has(#qa-bench) #tactical-card{top:158px}
+
+body.game-hud #pause-dialog{width:min(490px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:36px 40px 28px;border:1px solid #bf9f59;border-image:none;border-radius:10px;background:radial-gradient(ellipse at top,#1d4c5e,#072a3c 62%);text-align:center;color:#fff2d6;box-shadow:0 25px 110px #001828bb;overflow:auto}
+#pause-dialog::backdrop{background:#001b2bc9;backdrop-filter:blur(6px)}
+#pause-dialog .pause-seal{width:70px;height:70px;display:grid;place-items:center;margin:0 auto 22px;padding:18px;border:1px solid #d6b567;border-radius:50%;box-shadow:0 0 0 7px #c8ab5820}
+#pause-dialog .pause-seal>.hud-icon{width:100%;height:100%}
+#pause-dialog .eyebrow{font:800 10px/1.5 Manrope,sans-serif;letter-spacing:2px;color:#ebc67d}
+body.game-hud #pause-title{font:600 43px/1.1 'Cormorant Garamond',Georgia,serif;margin:12px 0 16px;text-wrap:balance}
+#pause-dialog>p{font:400 13px/1.8 Manrope,sans-serif;color:#c2d7e0;margin:0}
+.pause-keys{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px;text-align:left;margin:26px 0;padding:22px 0;border-block:1px solid #b6a06942}
+.pause-keys>span{display:flex;align-items:center;gap:8px;font:500 11px/1.5 Manrope,sans-serif;color:#bdced5}
+.pause-keys kbd{min-width:39px;font:700 9px/1.5 Manrope,sans-serif!important;color:#f9df9f;padding:4px 5px}
+body.game-hud #resume-voyage,body.game-hud #result-dialog #sail-again{width:100%;min-height:52px;padding:14px 22px;border:1px solid #ffe0a0;border-radius:4px;background:linear-gradient(120deg,#ffe19a,#efb949);color:#183440;box-shadow:0 3px 0 #a77836;font:800 13px/1.5 Manrope,sans-serif}
+#resume-voyage>span{margin-left:15px;font-size:17px}
+body.game-hud #resume-voyage:hover,body.game-hud #result-dialog #sail-again:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.pause-footnote{display:block;margin-top:18px;font:500 10px/1.5 Manrope,sans-serif;color:#99b9c9}
+
+body.game-hud #result-dialog{width:min(790px,calc(100vw - 40px));padding:0;border-radius:9px;overflow:auto;background:#062a3d}
+body.game-hud #result-dialog .result-banner{height:205px;position:relative;display:flex;align-items:flex-end;justify-content:center;padding:25px;background:linear-gradient(0deg,#062a3d,transparent 75%),url('/assets/voyage/archipelago-dawn.webp') 68% 44%/cover}
+.result-verdict{display:flex;align-items:center;gap:10px;position:relative;padding:9px 18px;border:1px solid #e7c7809c;border-radius:30px;background:#082c40e8;font:800 11px/1.5 Manrope,sans-serif;letter-spacing:2px;color:#ffe3a3}
+#result-dialog .result-verdict>.hud-icon{width:23px;height:23px;flex:none}
+body.game-hud #result-dialog[data-winner="red"] .result-banner{background-image:linear-gradient(0deg,#062a3d,#1e283258 90%),url('/assets/voyage/archipelago-dawn.webp');filter:saturate(.65)}
+.result-body{padding:0 38px 30px}
+body.game-hud #result-dialog h2{font:600 42px/1.05 'Cormorant Garamond',Georgia,serif;max-width:620px;margin:8px auto 15px;padding:0;text-wrap:balance}
+body.game-hud #result-dialog #result-story{font:400 13px/1.8 Manrope,sans-serif;max-width:570px;color:#bacfd9}
+body.game-hud #result-dialog .result-score{margin:20px 0;padding:14px 0;gap:16px;font-size:10px;letter-spacing:1px}
+body.game-hud #result-dialog .result-score b{font:600 26px/1.3 'Cormorant Garamond',Georgia,serif;letter-spacing:0;margin:4px 0 0}
+.result-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:20px 0 26px}
+.result-stats>div{padding:14px 8px;border:1px solid #719da52b;background:#12394a;border-radius:4px}
+.result-stats dt{font:700 8px/1.6 Manrope,sans-serif;letter-spacing:1px;color:#9cbdca}
+.result-stats dd{font:600 28px/1.4 'Cormorant Garamond',Georgia,serif;color:#f7dfac;margin:5px 0 0;font-variant-numeric:tabular-nums}
+.result-note{margin:15px 0 0;font:400 10px/1.6 Manrope,sans-serif;color:#87aab9}
+@media(max-width:1190px){body.game-hud #tactical-card{left:18px;width:265px;top:99px}}
+@media(max-width:960px){body.game-hud #tactical-card{top:151px;left:18px;width:260px}#tactical-toggle{padding:10px 12px}#tactical-toggle strong{font-size:17px}body:has(#qa-bench) #tactical-card{top:157px}}
+@media(max-width:620px){body.game-hud #tactical-card{top:198px;left:12px;width:calc(100vw - 24px)}#tactical-toggle small{font-size:7px}#tactical-toggle strong{font-size:17px;margin-top:3px}#tactical-toggle>.tactical-symbol{width:28px;height:28px;padding:5px}#tactical-detail{padding-left:52px}body.game-hud:has(#crew-dialogue.show) #tactical-card,body.game-hud:has(#invasion-alert.show) #tactical-card{display:none}body.game-hud #pause-dialog{padding:28px 24px 24px}body.game-hud #pause-title{font-size:37px}.pause-keys{gap:12px 8px}.pause-keys>span{font-size:10px}.result-body{padding:0 20px 24px}body.game-hud #result-dialog{width:calc(100vw - 24px);padding:0}body.game-hud #result-dialog .result-banner{height:160px}body.game-hud #result-dialog h2{font-size:33px}body.game-hud #result-dialog #result-story{font-size:12px}.result-stats{grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}.result-stats>div{padding:10px}.result-stats dt{font-size:8px}.result-stats dd{font-size:26px}body:has(#qa-bench) #tactical-card{top:198px}}
+@media(max-height:560px) and (min-width:621px){body.game-hud #tactical-card{display:none}#tactical-detail{display:none}#tactical-toggle strong{font-size:16px}#pause-dialog .pause-seal{display:none}.pause-keys{margin:18px 0;padding:14px 0}body.game-hud #pause-dialog{padding:24px 30px}body.game-hud #result-dialog .result-banner{height:135px}}
+@media(prefers-reduced-motion:no-preference){#pause-dialog[open],#result-dialog[open]{animation:voyage-panel-in .23s ease-out}@keyframes voyage-panel-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}}

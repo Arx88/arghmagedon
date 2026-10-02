@@ -24,10 +24,11 @@ Prototipo local de guerra pirata en Three.js. El mundo navegable mide 344 × 306
 | E | Conquistar o saquear una isla cercana; repetir durante la invasión para retirarse |
 | Q | Abordar un barco cercano |
 | B | Astillero: casco, cañones y capacidad |
-| F | Compañía: exploradores, guardias, especialistas y arsenal |
+| F | Compañía: exploradores, guardias, corsarios, especialistas y arsenal |
 | J | Defensas de la isla cercana |
-| G | Fijar el puesto del guardacostas que te sigue |
+| G | Fijar el puesto de una escolta que te sigue |
 | T / P / H | Clima / pausa / ocultar interfaz |
+| Tab | Carta náutica y destinos descubiertos |
 | Rueda | Zoom |
 | M / botón de la carta | Alternar mapa cercano y archipiélago completo |
 
@@ -54,7 +55,8 @@ Los barcos tienen cascos y aparejos propios: cúter de vela latina, bergantín d
 Empiezas junto al puerto con un adelanto de 200 oro. La carta náutica está prácticamente cubierta. Conservas el terreno descubierto, pero la visión de enemigos depende de vigías, barcos aliados e islas propias. El oro saqueado viaja a bordo y se pierde al hundirse; solo se acredita en el puerto.
 
 - Explorador: 160 oro, máximo dos, velocidad 2,25; no dispara y puede ser destruido. Tier I revela, II detecta tesoros y grandes criaturas (180 oro), III saquea islas pequeñas sin enemigos (260 oro). Tarda 28 s y vuelve al puerto con los cofres.
-- Guardacostas: 140 oro, máximo tres, 95 casco, poco daño. Sigue al capitán hasta fijar una zona con G. Reagrupar desde Compañía permite cambiarla.
+- Guardacostas: 140 oro, 95 casco, velocidad 5,4 y 8 de daño base. Sigue al capitán hasta fijar una zona con G. Reagrupar desde Compañía permite cambiarla.
+- Goleta corsaria: 240 oro, 80 casco, velocidad 8 y 13 de daño base. Dos mástiles con velas latinas, ocho cañones y una silueta propia. Comparte el máximo de tres escoltas con los guardacostas.
 - Especialistas: 45 oro para convertir un marinero disponible. Reparadores: +0,18 casco/s por persona después de ocho segundos sin daño. Saqueadores: reducen 18 s de saqueo hasta un mínimo de 10. Todos comparten el límite del barco. Reponer una baja cuesta 15 oro.
 - Guarniciones: 5, 8, 12 y 16 piratas; independientes del barco. Se compran en la isla propia con oro asegurado. Las bajas se reponen por separado.
 - Torres: 180 casco, destruibles. Mejoras separadas de daño, alcance y cadencia, tres niveles. Cubren el desembarco y deben destruirse antes de conquistar.
@@ -64,7 +66,19 @@ Empiezas junto al puerto con un adelanto de 200 oro. La carta náutica está pr�
 
 Cada costado recarga por separado: la andanada sale del lado que apunta al objetivo y premia el ángulo (plena potencia de través, penalización de proa/popa); cruzar la T da +15%. La munición de cadena destroza el aparejo y ralentiza el barco hasta repararlo. El abordaje se roba el 60% del oro que lleva el rival. En combate intenso los diálogos de tripulación se diferencian hasta que la mar se calma.
 
-Los valores son una primera base de balance y requieren sesiones de juego. El mapa tiene más distancias, el saqueo tarda y no hay producción automática de oro. Las expediciones duran doce minutos.
+Los valores son una primera base de balance y requieren sesiones de juego. El mapa tiene más distancias, el saqueo tarda y no hay producción automática de oro. La partida termina al conquistar una base; el reloj muestra el tiempo transcurrido.
+
+## Pulido visual y experiencia
+
+[Ver capturas reales de la revisión visual](docs/visual-review/README.md).
+
+La bienvenida ilustrada explica el ciclo de explorar, equiparse y conquistar antes de arrancar el reloj. El puerto compara casco, velocidad y daño de los tres tipos de apoyo; las mejoras de explorador tienen una sección independiente. La goleta corsaria es una unidad funcional con estadísticas propias, no una tarjeta decorativa.
+
+Las costas incorporan arena y vegetación con colores más coherentes, espuma, reflejos suaves, destellos en aguas bajas, palmeras animadas y seis botes de pesca amarrados a los puertos y cayos. Los botes son ambientación y respetan la visibilidad de su isla. La geometría del terreno conserva su estilo voxel. El suavizado de bordes y la resolución del render mejoran la lectura de cascos y aparejos; Calidad baja sigue disponible.
+
+La guía de la expedición responde al estado real de la partida: invasión, incendio, casco dañado, combate, saqueo y botín. Se puede plegar y arranca compacta en pantallas pequeñas. El marcador de navegación queda anclado al destino real sobre el agua, incluido el ajuste de ruta que evita las costas; se retira al tomar el timón manualmente. La pausa admite P, Escape y botón; el resultado muestra bajas causadas, mejor racha, daño y duración reales.
+
+Las ilustraciones nuevas, sus prompts y usos están en [`public/assets/voyage/GENERATION.md`](public/assets/voyage/GENERATION.md). Se distribuyen como WebP optimizados. Manrope y Cormorant Garamond se sirven localmente en WOFF2 con sus licencias OFL, sin solicitudes a Google Fonts durante la partida. Las nuevas animaciones decorativas respetan la preferencia de movimiento reducido.
 
 ## Técnica y alcance
 

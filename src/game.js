@@ -30,6 +30,9 @@ import { TerritoryArt } from './territory-art.js';
 import { mountQABench, qaSimulationDelta } from './qa-bench.js';
 import { mountEmbark } from './embark.js';
 import { createCoastalLife } from './coastal-life.js';
+import { mountVoyageUI } from './voyage-ui.js';
+import { NavigationMarker } from './navigation-marker.js';
+import { icon } from './hud-art.js';
 
 const $ = id => document.getElementById(id);
 mountNauticalHUD();
@@ -124,6 +127,7 @@ const hostileProjectileMaterials = weapons.map(() => new THREE.MeshStandardMater
 const ballPool = Array.from({ length: 48 }, () => { const m = new THREE.Mesh(shotGeometry, shotMaterial); m.visible = false; scene.add(m); return m; });
 const shotRing = new THREE.Mesh(new THREE.RingGeometry(2.9, 3.05, 40), new THREE.MeshBasicMaterial({ color: 0xf2c66f, transparent: true, opacity: .65, side: THREE.DoubleSide, depthWrite: false }));
 shotRing.rotation.x = -Math.PI / 2; shotRing.visible = false; scene.add(shotRing);
+const navigationMarker = new NavigationMarker(scene, (x,z,t)=>weather.wave(x,z,t));
 const grapple = new GrapplingHook(scene,{onLaunch:(source)=>playSound('hook.launch',1,source),onHit:(target,p)=>{playSound('hook.hit',1,p);shakeImpulse(.3);fx.impact(new THREE.Vector3(p.x,p.y,p.z),true);},onRelease:()=>playSound('hook.release',.8,player)});
 
 // Hull flash needs per-ship materials. The ship builder marks the clones it
@@ -378,7 +382,7 @@ document.querySelectorAll('[data-upgrade]').forEach(button=>button.addEventListe
 
 function clearInput() { keys.clear(); rightHeld = buttonHeld = sprintHeld = false; fireBuffer = 0; voyage.boosting=false; voyage.boostIntensity=0; }
 function openDialog(id) { clearInput(); $(id).showModal(); if (id === 'upgrade-dialog') updateUpgrades(); }
-function togglePause() { paused = !paused; clearInput(); $('pause').textContent = paused ? '▷' : 'Ⅱ'; $('pause').setAttribute('aria-label', paused ? 'Continuar' : 'Pausar'); toast(paused ? 'Mar en pausa · P para continuar' : '¡Velas al viento!'); }
+function togglePause() { if(gameOver||showcase!==null)return;paused = !paused;clearInput();$('pause').textContent = paused ? '▷' : 'Ⅱ';$('pause').setAttribute('aria-label', paused ? 'Continuar' : 'Pausar');voyageUI.setPaused(paused);updateHUD(); }
 $('pause').onclick = togglePause; $('upgrades').onclick = () => openDialog('upgrade-dialog'); $('settings').onclick = () => openDialog('settings-dialog');
 $('board').onclick = board; $('loot').onclick = loot;
 function switchWeapon() { playSound('ui.select');weaponIndex = (weaponIndex + 1) % weapons.length; $('weapon-name').textContent = weapons[weaponIndex].name; director.log(`Artillero: «${weapons[weaponIndex].name}. Con cariño, capitán.»`); }
@@ -436,6 +440,7 @@ if(import.meta.hot)import.meta.hot.dispose(()=>{audio.dispose();menuAudio.discon
 $('atmosphere').onchange = e => weather.set(e.target.value);
 $('quality').onchange = e => { quality = e.target.value; renderer.setPixelRatio(quality === 'high' ? Math.min(devicePixelRatio || 1,1.5) : .7); renderer.shadowMap.enabled = quality === 'high'; renderer.shadowMap.needsUpdate=true; };
 window.addEventListener('keydown', e => {
+  if(e.code==='KeyP'&&!e.repeat&&voyageUI.pauseOpen){e.preventDefault();return togglePause();}
   if (e.target.matches('input,select,textarea') || modalOpen() || (['Space','Enter'].includes(e.code)&&e.target.closest('button,[role="button"],a'))) return;
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
   if (e.code === 'KeyP' && !e.repeat) return togglePause();
@@ -459,7 +464,7 @@ renderer.domElement.addEventListener('pointerdown', e => {
   const targets = [...ships.filter(s => s.team !== player.team), ...bestiary.entries, ...campaign.towers.filter(t=>t.team!=='blue')].filter(s => !s.dead&&s.object.visible);
   const hit = raycaster.intersectObjects(targets.map(s => s.object), true)[0];
   if (hit) { let object = hit.object; while (object.parent && object.parent !== scene) object = object.parent; selectedEnemy = targets.find(s => s.object === object); fire(player, selectedEnemy); }
-  else { if(grapple.active||boarding)return toast('Pulsa Q para soltar el cabo antes de cambiar de rumbo.');player.target = { x: clamp(aim.x, worldBounds.minX, worldBounds.maxX), z: clamp(aim.z, worldBounds.minZ, worldBounds.maxZ) }; selectedEnemy = null; const r = $('reticle'); r.style.left = `${e.clientX}px`; r.style.top = `${e.clientY}px`; r.style.display = 'block'; setTimeout(() => r.style.display = 'none', 650); }
+  else { if(grapple.active||boarding)return toast('Pulsa Q para soltar el cabo antes de cambiar de rumbo.');player.target = { x: clamp(aim.x, worldBounds.minX, worldBounds.maxX), z: clamp(aim.z, worldBounds.minZ, worldBounds.maxZ) }; selectedEnemy = null; renderer.domElement.dataset.navigation = 'active'; }
 });
 renderer.domElement.addEventListener('pointerup', () => { rightHeld = false; }); renderer.domElement.addEventListener('pointercancel', clearInput);
 renderer.domElement.addEventListener('wheel', e => { e.preventDefault(); requestedZoom = clamp(requestedZoom + e.deltaY * .025, showcase === null ? 40 : 14, showcase === null ? 115 : 70); }, { passive: false });
@@ -666,6 +671,7 @@ function updateHUD() {
   }
   const seconds=Math.floor(elapsed);$('timer').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
   updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal:26-campaign.greekLevel*2,greekActive,grapple,boarding,invasion:islands.find(i=>i.invasion?.source===player)?.invasion,lootProgress,paused,gameOver,voyage,weaponIndex,guns:player.guns,firefight:firefightCooldown});
+  voyageUI.update({player,home:port,docked:inPort(),bank,nearby:nearIsland(),target:selectedEnemy,loot:lootProgress,invasion:islands.find(i=>i.invasion?.source===player)?.invasion});
   if ($('upgrade-dialog').open) updateUpgrades(); minimap();
   // DOM diagnostics allow performance QA without altering live game state.
   renderer.domElement.dataset.fps = fps.toFixed(1); renderer.domElement.dataset.drawCalls = String(renderer.info.render.calls); renderer.domElement.dataset.particles = String(fx.alive);
@@ -712,11 +718,13 @@ function updateCamera(dt) {
   camera.updateMatrixWorld();ocean.water.position.x=cameraTarget.x;ocean.water.position.z=cameraTarget.z;
   sun.target.position.copy(cameraTarget); sun.position.copy(cameraTarget).add(new THREE.Vector3(-35, 70, 45));
   if (aimScreen.valid && rightHeld) { pointer.set(aimScreen.x / innerWidth * 2 - 1, 1 - aimScreen.y / innerHeight * 2); raycaster.setFromCamera(pointer, camera); raycaster.ray.intersectPlane(plane, aim); }
+  navigationMarker.update(player,time,showcase!==null||gameOver||modalOpen());
+  renderer.domElement.dataset.navigation=navigationMarker.object.visible?'active':'idle';
   shotRing.visible = !player.dead && (!!selectedEnemy && !selectedEnemy.dead || rightHeld);
   if (shotRing.visible) { const target = rightHeld ? aim : selectedEnemy; shotRing.position.set(target.x, .015, target.z); shotRing.scale.setScalar(rightHeld ? .45 : selectedEnemy.scale); shotRing.material.color.set(rightHeld ? 0xf2c66f : 0xef8e70); }
 }
 function updateLabels(dt) {
-  const reserved=[...document.querySelectorAll('.topbar,.ship-card,.action-bar,.map-panel,.captain-tools,#sailing-tools,#crew-dialogue.show,#weapon,#invasion-alert.show')].filter(e=>getComputedStyle(e).display!=='none').map(e=>e.getBoundingClientRect());
+  const reserved=[...document.querySelectorAll('.topbar,.ship-card,.action-bar,.map-panel,.captain-tools,#sailing-tools,#crew-dialogue.show,#weapon,#invasion-alert.show,#tactical-card')].filter(e=>getComputedStyle(e).display!=='none').map(e=>e.getBoundingClientRect());
   const candidates=[];
   for(const l of labels){
     l.el.style.display='none';if(!l.object.visible||l.object.position.y< -2)continue;
@@ -780,6 +788,7 @@ const territoryArt=new TerritoryArt(islands);
 const faunaCombat = new FaunaCombat(scene,bestiary.entries,ships,fx,damage,director,player);
 const crewRenderer=new CrewRenderer(scene);crewRenderer.update(0);
 const expeditions=new Expeditions({islands,player,director,toast,locked,clearInput,isBusy:()=>!!lootProgress||!!boarding||grapple.active,engage:()=>inputEngaged=true,mapState:()=>({bounds:worldBounds,islands,ships,creatures:bestiary.entries,player,sources:campaign.fog.sources,time})});
+const voyageUI=mountVoyageUI({onResume:()=>{if(paused)togglePause();},onChart:()=>expeditions.open()});
 for(const target of [...ships.filter(s=>s.team==='red'),...bestiary.entries]){
   if(!target.label)target.label=label(`${target.name.toUpperCase()}<small>${target.xp} EXP · CLIC PARA APUNTAR</small>`,target.object,target.isCreature?7:15,'enemy');
   target.label.setAttribute('role','button');target.label.tabIndex=0;target.label.setAttribute('aria-label',`Apuntar a ${target.name}`);
@@ -804,9 +813,21 @@ function closeGallery(){showcase=null;requestedZoom=50;document.body.classList.r
 $('gallery-close').onclick=closeGallery;window.addEventListener('keydown',e=>{if(e.code==='Escape'&&showcase!==null)closeGallery();});
 cameraTarget.set(player.x+2.88,0,player.z-11.16);
 const resultDialog=document.createElement('dialog');resultDialog.id='result-dialog';resultDialog.setAttribute('aria-label','Resultado de la expedición');
-resultDialog.innerHTML='<img class="result-host" src="/assets/harbor-art/boatswain-restyled-v2.png" alt="Almirante Roncero"><div class="eyebrow">LA COFRADÍA CIERRA LAS CUENTAS</div><h2 id="result-title"></h2><p id="result-story"></p><div class="result-score"><span>VELAS AZULES<b id="result-blue"></b></span><span>CORSARIOS ROJOS<b id="result-red"></b></span></div><button id="sail-again">Volver a zarpar</button>';
+resultDialog.innerHTML=`<div class="result-banner"><span class="result-verdict">${icon('anchor')}<span id="result-verdict"></span></span></div><div class="result-body"><div class="eyebrow">LA COFRADÍA CIERRA LAS CUENTAS</div><h2 id="result-title"></h2><p id="result-story"></p><div class="result-score"><span>VELAS AZULES<b id="result-blue"></b></span><span>CORSARIOS ROJOS<b id="result-red"></b></span></div><dl class="result-stats"><div><dt>ENEMIGOS ABATIDOS</dt><dd id="result-kills"></dd></div><div><dt>MEJOR RACHA</dt><dd id="result-combo"></dd></div><div><dt>DAÑO CAUSADO</dt><dd id="result-damage"></dd></div><div><dt>TIEMPO EN EL MAR</dt><dd id="result-time"></dd></div></dl><button id="sail-again" autofocus>Otra bandera por conquistar →</button><p class="result-note">Una nueva expedición. Todo el archipiélago por delante.</p></div>`;
 document.body.appendChild(resultDialog);$('sail-again').onclick=()=>location.reload();
-function finishExpedition(winner){if(gameOver)return;gameOver=true;clearInput();updateHUD();campaign.updateHUD();playSound(winner==='blue'?'victory':'defeat');const won=winner==='blue';$('result-title').textContent=won?'¡El Diente Roto es nuestro!':winner==='draw'?'Dos banderas. Ningún hogar.':'Ron Ron cayó en malas manos.';$('result-story').textContent=won?'Tu bandera ondea sobre la base corsaria. Presumían de disciplina; dejaron la puerta y los recibos abiertos.':'La base rival no se conquista con excusas. Protege Ron Ron, reúne una tripulación y vuelve a por su bandera.';$('result-blue').textContent=`${blueScore} oro depositado`;$('result-red').textContent=`${redScore} oro depositado`;resultDialog.showModal();}
+resultDialog.addEventListener('cancel',event=>event.preventDefault());
+function finishExpedition(winner){
+  if(gameOver)return;gameOver=true;clearInput();voyageUI.setPaused(false);updateHUD();campaign.updateHUD();playSound(winner==='blue'?'victory':'defeat');
+  const won=winner==='blue';resultDialog.dataset.winner=winner;
+  $('result-verdict').textContent=won?'VICTORIA':winner==='draw'?'EMPATE':'LA REVANCHA ESPERA';
+  $('result-title').textContent=won?'¡El Diente Roto es nuestro!':winner==='draw'?'Dos banderas. Ningún hogar.':'Ron Ron cayó en malas manos.';
+  $('result-story').textContent=won?'Tu bandera ondea sobre la base corsaria. Presumían de disciplina; dejaron la puerta y los recibos abiertos.':winner==='draw'?'Ambas bases cayeron. La cofradía declara un empate y exige otra ronda para saldar las cuentas.':'La base rival no se conquista con excusas. Protege Ron Ron, reúne una tripulación y vuelve a por su bandera.';
+  $('result-blue').textContent=`${blueScore} oro depositado`;$('result-red').textContent=`${redScore} oro depositado`;
+  $('result-kills').textContent=combat.kills;$('result-combo').textContent=`×${combat.bestCombo}`;
+  $('result-damage').textContent=Math.round(combat.damageDealt).toLocaleString('es');
+  $('result-time').textContent=`${String(Math.floor(elapsed/60)).padStart(2,'0')}:${String(Math.floor(elapsed%60)).padStart(2,'0')}`;
+  resultDialog.showModal();
+}
 // QA is deliberately visible and opt-in. Artificial review fixtures never count as a real run.
 const qaBench = qaEnabled ? mountQABench({
   campaign,
@@ -823,7 +844,7 @@ const qaBench = qaEnabled ? mountQABench({
   startInvasion:island=>campaign.startInvasion(island,player),
   cancelInvasion:island=>campaign.cancelInvasion(island),
   prepareRun:()=>{
-    qaFleetReview=false;
+    qaFleetReview=false;voyageUI.setPaused(false);
     for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close();
     if(showcase!==null)closeGallery();paused=false;clearInput();
     $('pause').textContent='Ⅱ';$('pause').setAttribute('aria-label','Pausar');
@@ -831,7 +852,7 @@ const qaBench = qaEnabled ? mountQABench({
   setSpeed:value=>{if([.25,1,4].includes(value))qaSpeed=value;},
   restore:()=>location.reload(),
   runFixture:id=>{
-    qaFleetReview=false;
+    qaFleetReview=false;voyageUI.setPaused(false);
     clearInput();stopLoot();stopBoarding();player.target=null;player.moored=true;qaSpeed=1;
     for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close();
     if(showcase!==null)closeGallery();
