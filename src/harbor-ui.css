@@ -1,4 +1,19 @@
 /* The port has one stable canvas. Artwork never contains functional text. */
+body.game-hud #captain-dialog .fleet-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 18px;padding:12px 0;border-block:1px solid #88b9c22c;text-align:center}
+body.game-hud #captain-dialog .fleet-specs dt{font:600 10px/1.4 Manrope,sans-serif;color:#abc8d2;text-transform:uppercase;letter-spacing:.5px}
+body.game-hud #captain-dialog .fleet-specs dd{margin:5px 0 0;font:700 23px/1 Georgia,serif;color:#f8e5b5;font-variant-numeric:tabular-nums}
+body.game-hud #captain-dialog .fleet-specs dd small{font:500 10px/1 Manrope,sans-serif;color:#b4d1d6}
+body.game-hud #captain-dialog .fleet-research{display:grid;grid-template-columns:78px minmax(0,1fr) 235px;gap:20px;align-items:center;padding:16px;margin-top:18px;border:1px solid #76939266;border-radius:6px;background:linear-gradient(100deg,#143b49aa,#052a3bbb)}
+body.game-hud #captain-dialog .fleet-research>img{width:78px;height:78px;object-fit:cover;border:1px solid #c7a36599;border-radius:50%}
+body.game-hud #captain-dialog .fleet-research-kicker{font:700 9px/1.4 Manrope,sans-serif;letter-spacing:1.5px;color:#78d3d5}
+body.game-hud #captain-dialog .fleet-research h3{font:600 23px/1.2 Georgia,serif;margin:5px 0;color:#ffe5ad}
+body.game-hud #captain-dialog .fleet-research p{font:400 12px/1.6 Manrope,sans-serif;color:#bcd3db;margin:0}
+body.game-hud #captain-dialog .fleet-research .harbor-lock{min-height:0;margin-top:8px}
+body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card-art>img{object-fit:cover;transition:transform .35s ease}
+body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card:hover .harbor-card-art>img{transform:scale(1.035)}
+body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card-art .harbor-badge{font:800 9px/1.4 Manrope,sans-serif;letter-spacing:1px;left:8px;right:auto;border-color:#e2c27c77}
+@media(min-width:861px){body.game-hud #captain-dialog[data-tab="fleet"] .harbor-main{grid-template-rows:130px 58px minmax(0,1fr);padding-top:28px;gap:15px}body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card-art{aspect-ratio:1.6}body.game-hud #captain-dialog[data-tab="fleet"] .harbor-benefit{margin:10px 0;min-height:36px}body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card h3{font-size:26px}body.game-hud #captain-dialog[data-tab="fleet"] .harbor-card p{font-size:14px;line-height:1.5}body.game-hud #captain-dialog[data-tab="fleet"] .harbor-lock{min-height:20px}}
+@media(max-width:1000px){body.game-hud #captain-dialog .fleet-research{grid-template-columns:58px minmax(0,1fr);gap:14px}body.game-hud #captain-dialog .fleet-research>img{width:58px;height:58px}body.game-hud #captain-dialog .fleet-research-purchase{grid-column:1/-1}}
 body.game-hud #captain-dialog{--port-gold:#f6cf68;--port-rule:#887347;--port-paper:#f6f0df;width:100vw;height:100dvh;max-width:none;max-height:none;min-height:0;inset:0;margin:0;padding:0;border:0;border-image:none;border-radius:0;background:#032438;box-shadow:none;overflow:hidden;color:var(--port-paper)}
 body.game-hud #captain-dialog[open]{display:grid;grid-template-columns:29% minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0}
 body.game-hud #captain-dialog .harbor-illustration{clip-path:polygon(0 0,100% 0,96% 100%,0 100%);position:relative;min-width:0;overflow:hidden;background:#163b4d}

@@ -8,6 +8,7 @@ export const fleetSailProfiles=Object.freeze({
  guard:Object.freeze({id:'guard',motif:'tower',color:0xb53627,path:'/assets/fleet-sails/guard-tower-v1.png'}),
 });
 export function fleetSailIdentity(ship,level=ship.scoutLevel??1){
+ if(ship.variant==='corsair')return null; // Its two lateen sails carry the raider's own cutlasses.
  if(ship.support==='guard'||ship.variant==='guard')return fleetSailProfiles.guard;
  if(ship.support==='scout'||ship.variant==='scout')return level>=2?fleetSailProfiles.scoutII:fleetSailProfiles.scoutI;
  return null;

@@ -10,6 +10,7 @@ import { getHomeBase,opposingTeam,isTeamDocked } from './battlefield.js';
 import { autopilot } from './navigation.js';
 import { Exploration } from './exploration.js';
 import {applyFleetSails} from './fleet-appearance.js';
+import {supportProfiles,supportPurchaseAllowed,equipSupport} from './fleet-rules.js';
 import { createGarrison,animateGarrison } from './garrison-renderer.js';
 import { balance, garrisons, garrisonCost, towerCost, weaponCost, scoutUpgradeCost, crewSpecialties, hireRole, dismissRole, reconcileRoles, invasionDuration, stepInvasion, canScoutLoot, lootDuration, purchaseBlockReason, rigRules } from './campaign-rules.js';
 
@@ -54,8 +55,7 @@ export class Campaign {
     const island=this.selectedIsland,isLand=['garrison','reinforce','tower'].includes(order)||order.startsWith('tower:');
     if(this.player.dead||(isLand?!island||island.owner!==this.player.team||distance(this.player,island)>=island.r+22||island.invasion:!order.startsWith('recall:')&&!this.inPort()))return;
     let cost=0,action=null;
-    if(order==='scout'&&this.living('scout').length<balance.scoutLimit){cost=balance.scoutCost;action=()=>this.spawnSupport('scout');}
-    if(order==='guard'&&this.living('guard').length<balance.guardLimit){cost=balance.guardCost;action=()=>this.spawnSupport('guard');}
+    if(Object.hasOwn(supportProfiles,order)&&supportPurchaseAllowed(order,this.ships,this.player.team)){cost=supportProfiles[order].cost;action=()=>this.spawnSupport(order);}
     if(order==='scout-up'&&this.scoutLevel<3&&this.living('scout').length){cost=scoutUpgradeCost(this.scoutLevel);action=()=>{this.scoutLevel++;for(const scout of this.living('scout'))applyFleetSails(scout,this.scoutLevel);this.director.log(`Los vigías ya son de categoría ${this.scoutLevel}. Y cobran igual.`,'victory');};}
     const specialty=crewSpecialties.find(role=>role.id===order);
     if(specialty&&this.player.crew<this.player.maxCrew){cost=specialty.cost;action=()=>hireRole(this.player,specialty.key);}
@@ -77,10 +77,12 @@ export class Campaign {
     action();this.onPurchase?.(order);this.refreshHUD?.();this.renderPanel();this.toast('Trato cerrado. El oro no se iba a gastar solo.');
   }
   spawnSupport(role) {
+    const profile=supportProfiles[role];if(!profile)throw new RangeError(`Unknown support ship: ${role}`);
     const n=++this.serial, p=berth(this.port);
-    const ship=this.makeShip(role==='scout'?`Ojo de Gaviota ${n}`:`Mosquito ${n}`,'blue',p.x+4+(n-1)%3*6,p.z+6+Math.floor((n-1)/3)*8,Math.PI,.65,role);
-    ship.id=`support-${n}`; ship.support=role; if(role==='scout')ship.scoutLevel=this.scoutLevel; ship.roles??={repairers:0,looters:0}; ship.maxSpeed=role==='scout'?balance.scoutSpeed:5.4; ship.hp=ship.maxHp=role==='scout'?65:95;
-    ship.damage=role==='scout'?0:8;ship.reload=ship.cooldownTotal=4.8;ship.crew=ship.maxCrew=4;ship.visited=new Set();ship.scanClock=0;ship.lootClock=0;
+    const ship=this.makeShip(`${profile.name} ${n}`,this.player.team,p.x+4+(n-1)%3*6,p.z+6+Math.floor((n-1)/3)*8,Math.PI,profile.scale,profile.variant);
+    equipSupport(ship,role);
+    ship.id=`support-${n}`; if(role==='scout')ship.scoutLevel=this.scoutLevel; ship.roles??={repairers:0,looters:0};
+    ship.visited=new Set();ship.scanClock=0;ship.lootClock=0;
     dressShips([ship]); ship.object.userData.flags.forEach(f=>f.material.color.set(role==='scout'?0xddc77e:0x3c7b9c));
     this.director.log(`${ship.name} ha zarpado. ${role==='scout'?'Promete volver con chismes.':'Pequeño barco, grandes molestias.'}`,'victory');
     return ship;
@@ -293,6 +295,5 @@ export class Campaign {
     if(island){const inv=island.invasion;$('invasion-alert').textContent=`${island.owner==='blue'?'¡INVADEN TU ISLA!':'DESEMBARCO'} · ${island.name} · ${inv.contested?'DISPUTADA':Math.ceil(inv.duration-inv.progress)+' s'}`;}
   }
 }
-
 
 

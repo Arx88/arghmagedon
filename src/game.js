@@ -33,8 +33,8 @@ import { mountEmbark } from './embark.js';
 const $ = id => document.getElementById(id);
 mountNauticalHUD();
 const scene = new THREE.Scene(); scene.background = new THREE.Color(0x60b6aa);
-const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
-renderer.setPixelRatio(.8); renderer.setSize(innerWidth, innerHeight);
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5)); renderer.setSize(innerWidth, innerHeight);
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.shadowMap.autoUpdate = false;
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -70,6 +70,7 @@ const scout = makeShip('Cuervo Carmesí', 'red',redEscort.x,redEscort.z,redEscor
 for (const ship of ships) if (ship !== player) { ship.damage = 16; ship.reload = ship.cooldownTotal = 4.2; }
 dressShips(ships);
 renderShipPortrait(player);
+document.addEventListener('ship-art-loaded',()=>renderShipPortrait(player));
 const labels = [];
 function label(text, object, offset, className = '') {
   const el = document.createElement('div'); el.className = `world-label ${className}`; el.innerHTML = text; $('labels').appendChild(el);
@@ -431,7 +432,7 @@ document.addEventListener('click',event=>{const button=event.target.closest('but
 window.addEventListener('pagehide',()=>audio.dispose(),{once:true});
 if(import.meta.hot)import.meta.hot.dispose(()=>{audio.dispose();menuAudio.disconnect();});
 $('atmosphere').onchange = e => weather.set(e.target.value);
-$('quality').onchange = e => { quality = e.target.value; renderer.setPixelRatio(quality === 'high' ? .8 : .6); renderer.shadowMap.enabled = quality === 'high'; };
+$('quality').onchange = e => { quality = e.target.value; renderer.setPixelRatio(quality === 'high' ? Math.min(devicePixelRatio || 1,1.5) : .7); renderer.shadowMap.enabled = quality === 'high'; renderer.shadowMap.needsUpdate=true; };
 window.addEventListener('keydown', e => {
   if (e.target.matches('input,select,textarea') || modalOpen() || (['Space','Enter'].includes(e.code)&&e.target.closest('button,[role="button"],a'))) return;
   if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
@@ -837,8 +838,8 @@ const qaBench = qaEnabled ? mountQABench({
     paused=true;
     if(id==='fleet-purchases'){bank=1000;toPort();campaign.open('fleet');}
     else if(id==='fleet-designs'){
-      place(player,0,105);player.heading=Math.PI;player.object.rotation.y=Math.PI;requestedZoom=zoom=24;qaFleetReview=true;resize();
-      for(const [key,role,x,level] of [['scout-i','scout',-13,1],['scout-ii','scout',0,2],['guard','guard',13,1]]){
+      place(player,0,105);player.heading=Math.PI;player.object.rotation.y=Math.PI;requestedZoom=zoom=34;qaFleetReview=true;resize();
+      for(const [key,role,x,level] of [['scout-i','scout',-20,1],['scout-ii','scout',-7,2],['guard','guard',7,1],['corsair','corsair',21,1]]){
         let ship=ships.find(s=>s.qaFleetKey===key);
         if(!ship){ship=campaign.spawnSupport(role);ship.qaFleetKey=key;}
         place(ship,x,61);ship.heading=-Math.PI*.18;ship.object.rotation.y=ship.heading;applyFleetSails(ship,level);
@@ -1010,8 +1011,6 @@ if (qaEnabled) window.pirateTides.probe = () => {
     tally: { ...qaStats, hitsByKind: [...qaStats.hitsByKind], damageByKind: qaStats.damageByKind.map(v => +v.toFixed(1)) },
   };
 };
-
-
 
 
 

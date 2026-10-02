@@ -4,6 +4,10 @@ import { batchPaint } from './batch.js';
 import { addLandmarks } from './landmarks.js';
 import {applyFleetSails} from './fleet-appearance.js';
 
+const flagshipCloth = typeof window==='undefined' ? new THREE.Texture() : new THREE.TextureLoader().load('/assets/voyage/flagship-cloth.webp', () => document.dispatchEvent(new Event('ship-art-loaded')));
+flagshipCloth.colorSpace=THREE.SRGBColorSpace;
+flagshipCloth.anisotropy=4;
+
 const glowCanvas = document.createElement('canvas'); glowCanvas.width = glowCanvas.height = 32;
 const glowContext = glowCanvas.getContext('2d');
 for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
@@ -15,15 +19,21 @@ const glowTexture = new THREE.CanvasTexture(glowCanvas); glowTexture.magFilter =
 
 function sailTexture(team, variant, shape='square') {
   const c = document.createElement('canvas'); c.width = c.height = 128; const ctx = c.getContext('2d');
-  const base = team === 'red' && !['scout','merchant'].includes(variant) && shape!=='jib' ? '#a64f3b' : '#f1e7c6', ink = team === 'red' ? '#e8d9ab' : '#335f6a';
+  const base = variant==='corsair'&&shape!=='jib'?'#19475e':team === 'red' && !['scout','merchant'].includes(variant) && shape!=='jib' ? '#a64f3b' : '#f1e7c6', ink = team === 'red' ? '#e8d9ab' : '#335f6a';
   ctx.fillStyle = base; ctx.fillRect(0, 0, 128, 128);
   for (let x = 0; x < 128; x += 16) { ctx.fillStyle = x % 32 ? '#ffffff0b' : '#2e4b3710'; ctx.fillRect(x, 0, 16, 128); ctx.fillStyle = '#233f391c'; ctx.fillRect(x + 15, 0, 1, 128); }
   ctx.fillStyle = team === 'red' ? '#e4cc99' : '#386b80'; ctx.fillRect(0, 105, 128, 13); ctx.fillStyle = '#cba56d'; ctx.fillRect(0, 103, 128, 2);
   // A small pixel crest, drawn on the cloth rather than floating in the interface.
   ctx.save();ctx.translate(shape==='lateen'?14:39,shape==='lateen'?77:34);ctx.scale(shape==='lateen'?2:3,shape==='lateen'?2:3);ctx.fillStyle = shape==='jib'||variant==='merchant'?'#00000000':ink;
   const skull = ['000111111100000','001111111110000','011111111111000','011001110011000','011001110011000','001111011110000','000111111100000','000101010100000','000111111100000'];
-  skull.forEach((row, y) => [...row].forEach((bit, x) => { if (bit === '1') ctx.fillRect(x, y, 1, 1); }));
-  for (let i = 0; i < 11; i++) { ctx.fillRect(1 + i, 13 + Math.floor(i * .4), 2, 1); ctx.fillRect(11 - i, 13 + Math.floor(i * .4), 2, 1); } ctx.restore();
+  if(variant!=='corsair'){
+    skull.forEach((row, y) => [...row].forEach((bit, x) => { if (bit === '1') ctx.fillRect(x, y, 1, 1); }));
+    for (let i = 0; i < 11; i++) { ctx.fillRect(1 + i, 13 + Math.floor(i * .4), 2, 1); ctx.fillRect(11 - i, 13 + Math.floor(i * .4), 2, 1); }
+  } ctx.restore();
+  if(variant==='corsair'&&shape!=='jib'){
+    ctx.save();ctx.translate(34,82);ctx.strokeStyle='#f7d17f';ctx.lineWidth=4;ctx.lineCap='round';
+    for(const side of [-1,1]){ctx.beginPath();ctx.moveTo(-side*12,15);ctx.lineTo(side*13,-12);ctx.quadraticCurveTo(side*20,-17,side*19,-25);ctx.stroke();ctx.beginPath();ctx.moveTo(-side*17,5);ctx.lineTo(-side*3,17);ctx.stroke();}ctx.restore();
+  }
   if (variant === 'scout') { ctx.fillStyle = '#c59664'; ctx.fillRect(9, 72, 25, 21); ctx.strokeStyle = '#886244'; ctx.setLineDash([2, 3]); ctx.strokeRect(10, 73, 23, 19); }
   if(variant==='merchant'&&shape!=='jib'){
     ctx.fillStyle='#b18a47';ctx.fillRect(27,77,31,18);ctx.fillStyle='#dec59a';ctx.fillRect(25,75,35,3);ctx.fillRect(33,75,3,22);ctx.fillRect(49,75,3,22);ctx.fillRect(40,82,5,5);
@@ -84,8 +94,9 @@ function portDistrict(island,fires,inhabitants,animations){
 
 export function dressShips(ships) {
   ships.forEach((ship, index) => {
-    const g = ship.object.userData.body,variant=ship.aiRole==='merchant'?'merchant':ship.variant==='scout'?'scout':'flagship',textures={square:sailTexture(ship.team,variant),lateen:sailTexture(ship.team,variant,'lateen'),jib:sailTexture(ship.team,variant,'jib')};
+    const g = ship.object.userData.body,variant=ship.aiRole==='merchant'?'merchant':ship.variant==='scout'?'scout':ship.variant==='corsair'?'corsair':'flagship',textures={square:sailTexture(ship.team,variant),lateen:sailTexture(ship.team,variant,'lateen'),jib:sailTexture(ship.team,variant,'jib')};
     ship.object.userData.sails.forEach((rig, i) => { rig.userData.cloth.material.map = textures[rig.userData.sailKind??'square']; rig.userData.cloth.material.color.set(0xffffff); if (i === 1) rig.userData.cloth.material.color.set(ship.team === 'red' ? 0xf0d4a5 : 0xfff4d1); });
+    if(ship.team==='blue'&&ship.variant==='brig')for(const rig of ship.object.userData.sails){if(rig.userData.sailKind==='square'){rig.userData.cloth.material.map=flagshipCloth;rig.userData.cloth.material.color.set(0xffffff);}}
     applyFleetSails(ship);
     barrel(g, -.6, 1.76, 3.2, .65); barrel(g, .7, 1.76, 3.8, .65);
     // The aft cabin gives each silhouette a more substantial stern.
@@ -192,5 +203,3 @@ export function animatePirate(p, time, effort = .5) {
   else{limbs[0].rotation.z=0;limbs[1].rotation.z=0;}
   if(p.userData.head){p.userData.head.rotation.y=Math.sin(time*.63)*.18;p.userData.head.rotation.z=Math.sin(time*.9)*.035;}
 }
-
-

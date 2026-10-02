@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {box,rod,mesh,pirate,chest,palette} from './world.js';
 
 const designs={
+ corsair:{frames:[[-8,.03],[-6.4,.82],[-4,1.6],[-1.5,1.85],[1,1.9],[3.7,1.6],[5.8,1.12]],masts:[[-2.7,11.8,6.6],[2.4,10.2,5.8]],guns:4,wood:0xa27343,lateen:true,sailRatio:.59},
  brig:{frames:[[-7,.04],[-5.7,1.1],[-4,1.9],[-2,2.25],[0,2.35],[2.6,2.2],[4.4,1.8],[5.5,1.35]],masts:[[-2.6,10,5.4],[2.1,11.5,6]],guns:4,wood:0x805333},
  galleon:{frames:[[-9,.05],[-7.3,1.4],[-5,2.6],[-2.5,2.95],[0,3.05],[3,2.9],[5.5,2.6],[7.4,2.2]],masts:[[-4.8,11.5,6],[0,14,7.6],[4.5,11,5]],guns:6,wood:0x653d2c},
  cutter:{frames:[[-6.5,.03],[-5,1],[-3,1.65],[0,1.85],[2.5,1.6],[4.5,.95]],masts:[[0,9.5,7]],guns:2,wood:0xa07d4c,lateen:true},
@@ -71,7 +72,16 @@ export function createShip(team='blue',size=1,variant='brig'){
  }
  rod(body,[0,1.8,bow+.8],[0,3.1,bow-2.1],.095,0x95734b);
  sails.push(foresail(body,d,bow));
- if(variant==='galleon'){
+ if(variant==='corsair'){
+  // Low quarterdeck, swept spars and a brass prow keep the raider recognisable at tactical zoom.
+  box(body,2.1,.65,1.75,0x174657,0,2.1,4.35);box(body,2.3,.13,1.9,0xd8b376,0,2.48,4.35);
+  for(const side of [-1,1]){
+   rod(body,[side*.26,2.1,bow+.65],[side*.22,3.05,bow-1.5],.09,0xf0cb76);
+   for(let n=0;n<4;n++)box(body,.19,.25,.07,0xffda8f,side*(.26+n*.18),2.15,5.27);
+   rod(body,[side*1.04,2.5,3.7],[side*1.04,2.86,5.1],.055,0xe6bd6c);
+  }
+  rod(body,[0,2.9,bow-1.3],[0,3.7,bow-1.8],.12,0xe8ba64);
+ }else if(variant==='galleon'){
   for(let l=0;l<3;l++){box(body,4.4-l*.35,1,2.9-l*.24,l%2?0x603d2e:0x7b4f33,0,2.25+l,5.6);box(body,4.55-l*.33,.15,3.05-l*.22,0xc7a363,0,2.8+l,5.6);for(let n=0;n<7;n++){const x=(n-3)*.5;const window=box(body,.27,.43,.04,0xffc677,x,2.2+l,7.1-l*.1);window.material=new THREE.MeshBasicMaterial({color:0xe8b76b});box(body,.035,.48,.07,0x80612e,x,2.2+l,7.14-l*.1);}}
   for(const side of [-1,1])for(let z=4;z<7.2;z+=.35)rod(body,[side*2.05,4.85,z],[side*2.05,5.3,z],.04,0xdcbd74);
   for(let n=0;n<8;n++)box(body,.65,.16,.31,0xb89458,0,1.8+n*.3,3.25+n*.23);
