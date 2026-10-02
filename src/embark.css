@@ -1,0 +1,36 @@
+body.game-hud #embark-dialog{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;overflow:auto;border:0;border-radius:0;background:#06293a;color:#fff5dc;isolation:isolate}
+#embark-dialog::backdrop{background:#06293a}
+#embark-dialog .embark-art,#embark-dialog .embark-shade{position:fixed;inset:0;width:100%;height:100%;z-index:-2;object-fit:cover;object-position:62% center;pointer-events:none}
+#embark-dialog .embark-shade{z-index:-1;background:linear-gradient(90deg,#031c30f5 0%,#03263ddd 24%,#03263d85 45%,transparent 69%),linear-gradient(0deg,#021b30f2,transparent 22%)}
+.embark-brand{display:flex;align-items:center;gap:16px;margin:clamp(24px,4vh,44px) 5.5vw;font:700 25px/1 Georgia,serif;letter-spacing:3px;color:#ffe0a0}
+#embark-dialog .embark-brand>.hud-icon{width:42px;height:52px;flex:none}
+.embark-brand small{display:block;margin-top:10px;font:700 9px/1.5 Manrope,sans-serif;letter-spacing:3px;color:#bad5df}
+.embark-content{width:min(590px,49vw);margin:6vh 0 100px 5.5vw}
+.embark-kicker{display:flex;align-items:center;gap:11px;color:#80e0e1;font:800 11px/1.5 Manrope,sans-serif;letter-spacing:3px}
+.embark-kicker>span{width:6px;height:6px;border-radius:50%;background:#8eeae0;box-shadow:0 0 12px #70efdf}
+#embark-title{font:600 clamp(44px,4.8vw,78px)/1.04 'Cormorant Garamond',Georgia,serif;letter-spacing:-1.4px;margin:24px 0 20px;text-wrap:balance;color:#fff6e6}
+#embark-title em{font-style:normal;color:#ffd175}
+#embark-dialog .embark-intro{font:400 15px/1.8 Manrope,sans-serif;max-width:490px;margin:0;color:#c9dce3}
+.embark-steps{display:grid;gap:17px;list-style:none;padding:0;margin:28px 0 32px}
+.embark-steps li{display:flex;gap:16px;align-items:center}
+.embark-steps li>span{font:600 20px/1 Georgia,serif;color:#efc77c;display:grid;place-items:center;width:40px;height:40px;border:1px solid #b5904b70;border-radius:50%;background:#05283e99}
+.embark-steps strong{display:block;font:700 14px/1.5 Manrope,sans-serif;color:#f8efdb}
+.embark-steps small{display:block;font:400 12px/1.6 Manrope,sans-serif;color:#a9c5d1}
+body.game-hud #embark-start{display:flex;align-items:center;gap:17px;width:350px;max-width:100%;padding:15px 23px;border:1px solid #ffe7a3;border-radius:5px;background:linear-gradient(115deg,#ffe29a,#efb845 75%);color:#242e30;box-shadow:0 4px 0 #a47232,0 8px 32px #00172f70;text-align:left;transition:transform .18s,filter .18s,box-shadow .18s}
+#embark-start>.hud-icon{width:36px;height:36px;filter:brightness(.25)}
+#embark-start>span{font:700 25px/1.1 Georgia,serif}
+#embark-start small{display:block;font:600 10px/1.4 Manrope,sans-serif;letter-spacing:.3px;margin-top:5px}
+#embark-start .embark-arrow{margin-left:auto;font:400 30px/1 Georgia,serif}
+body.game-hud #embark-start:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 6px 0 #a47232,0 10px 35px #ffd06925}
+body.game-hud #embark-start:active{transform:translateY(2px);box-shadow:0 1px 0 #a47232}
+.embark-guide{margin-top:24px;width:min(420px,100%);font:500 12px/1.6 Manrope,sans-serif;color:#bed3dc}
+.embark-guide summary{cursor:pointer;min-height:30px}
+.embark-guide>div{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 24px}
+.embark-guide>div>span{display:flex;align-items:center;gap:10px;font-size:11px}
+.embark-guide kbd{min-width:64px;text-align:center;font-size:10px!important}
+.embark-footer{position:fixed;inset:auto 5.5vw 24px;display:flex;justify-content:space-between;gap:20px;pointer-events:none;font:700 10px/1.6 Manrope,sans-serif;letter-spacing:1.7px;color:#9cbbc9}
+.embark-footer span:last-child{color:#d6e7e9;letter-spacing:.4px}
+.embarking #loading{display:none}
+@media(max-height:780px) and (min-width:761px){.embark-content{margin-top:3vh}.embark-brand{margin-top:24px;margin-bottom:20px}#embark-title{font-size:52px;margin:16px 0}.embark-steps{gap:10px;margin:20px 0}.embark-content{margin-bottom:70px}.embark-footer{bottom:18px}}
+@media(max-width:760px){#embark-dialog .embark-art{object-position:70% center;opacity:.65}#embark-dialog .embark-shade{background:linear-gradient(90deg,#021b30e8,#03263d8a),linear-gradient(0deg,#021b30,transparent)}.embark-brand{margin:26px 26px;font-size:21px;gap:12px}.embark-content{width:auto;max-width:520px;margin:44px 26px 60px}#embark-title{font-size:clamp(45px,10vw,64px);letter-spacing:-.8px}.embark-intro br{display:none}#embark-dialog .embark-intro{font-size:13px}.embark-steps small{font-size:11px}.embark-footer{position:static;margin:0 26px 24px;flex-direction:column;gap:7px;font-size:9px}.embark-guide>div{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:no-preference){#embark-dialog[open] .embark-content{animation:embark-arrive .65s ease-out both}@keyframes embark-arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}}

@@ -28,6 +28,7 @@ import { mountCombatJuice } from './combat-juice.js';
 import { islandDefinitions,worldBounds,getHomeBase,teamSpawn,isTeamDocked,battleWinner } from './battlefield.js';
 import { TerritoryArt } from './territory-art.js';
 import { mountQABench, qaSimulationDelta } from './qa-bench.js';
+import { mountEmbark } from './embark.js';
 
 const $ = id => document.getElementById(id);
 mountNauticalHUD();
@@ -971,7 +972,11 @@ function animate(now) {
 updateCamera(.016); renderReflections(); renderer.shadowMap.needsUpdate = true; updateHUD(); requestAnimationFrame(animate);
 setTimeout(() => { $('loading').style.opacity = 0; setTimeout(() => $('loading')?.remove(), 750); }, 500);
 
-setTimeout(()=>director.speak('captain','200 de adelanto. Saquea y trae el oro a puerto. ¡Y el barco!',{priority:2,key:'intro'}),1800);
+if (!qaEnabled) mountEmbark({ onStart: () => {
+  paused = false; clearInput(); updateHUD();
+  playSound('notice');
+  setTimeout(()=>director.speak('captain','200 de adelanto. Saquea y trae el oro a puerto. ¡Y el barco!',{priority:2,key:'intro'}),1000);
+} });
 window.pirateTides = { getState: () => ({ player: { x: player.x, z: player.z, speed: player.speed, heading: player.heading, hp: player.hp, gold: player.gold, crew: player.crew, level: player.level, upgrades: { ...player.upgrades } }, bank, blueScore, elapsed, paused, fps, drawCalls: renderer.info.render.calls, particles: fx.alive, shots: shots.length, lootProgress: lootProgress?.progress ?? null,audio:audio.status, combat: { ...combat }, camera: { roll: camera.rotation.z, timeScale: timeScale(combat) } }) };
 
 /**
@@ -1005,7 +1010,6 @@ if (qaEnabled) window.pirateTides.probe = () => {
     tally: { ...qaStats, hitsByKind: [...qaStats.hitsByKind], damageByKind: qaStats.damageByKind.map(v => +v.toFixed(1)) },
   };
 };
-
 
 
 
