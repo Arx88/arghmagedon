@@ -29,6 +29,7 @@ import { islandDefinitions,worldBounds,getHomeBase,teamSpawn,isTeamDocked,battle
 import { TerritoryArt } from './territory-art.js';
 import { mountQABench, qaSimulationDelta } from './qa-bench.js';
 import { mountEmbark } from './embark.js';
+import { createCoastalLife } from './coastal-life.js';
 
 const $ = id => document.getElementById(id);
 mountNauticalHUD();
@@ -53,6 +54,7 @@ createClouds(scene);
 const renderReflections = createReflections(renderer, scene, camera, ocean), fx = new SeaEffects(scene), shotFx = new ShotEffects(scene);
 const audio = new AudioDirector();
 const director = new Director({onEvent:event=>audio.play(event.type==='invasion'?'island.invasion':event.type==='discovery'?'island.discovered':event.role==='harpooner'?'creature.roar':'notice',{priority:event.priority})}), bestiary = createBestiary(scene), islandLife = enrichIslands(islands, scene);
+const coastalLife = createCoastalLife(islands);
 const weather = new Weather(scene, sun, ambient, ocean, (...args) => director.announce(...args));
 const ships = [];
 function makeShip(name, team, x, z, heading, scale, variant = scale < 1 ? 'cutter' : team === 'red' ? 'galleon' : 'brig') {
@@ -959,6 +961,7 @@ function animate(now) {
   audio.setScene({listener:{x:player.x,z:player.z,heading:0},climate:inMenu?'clear':{mode:weather.mode,storm:weather.storm},combat:!inMenu&&((player.audioCombatUntil??0)>time||shots.some(shot=>distance(player,shot.source)<65)),inPort:inMenu||inPort(),speed:inMenu?0:player.speed,burning:nearbyFire?1:0,time});
   if(!inMenu&&!player.dead&&time>=(player.audioCreakAt??4)){player.audioCreakAt=time+4.8;if(player.speed>4||weather.storm>.3||player.hp<player.maxHp*.65)playSound('ship.creak',.5,player);}
   ocean.time.value = time + (showcase!==null?previewTime:0);
+  coastalLife.update(ocean.time.value);
   greekSea.draw(ships,time,player);
   territoryArt.update(time+previewTime,realDt);
   for (const b of gulls) { b.g.position.set(Math.cos(time * .035 + b.phase) * b.r, b.y, Math.sin(time * .035 + b.phase) * b.r * .7); b.g.rotation.y = -time * .035 - b.phase; b.wings.forEach((w, i) => w.rotation.z = (i ? 1 : -1) * (.2 + Math.sin(time * 3 + b.phase) * .22)); }
