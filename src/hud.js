@@ -4,6 +4,8 @@ import { chartTransform } from './chart-geometry.js';
 import { coastRadius } from './coastline.js';
 import './hud-reference.css';
 import './hud-polish.css';
+import { mountFlagshipHUD } from './flagship-hud.js';
+let flagshipHUD;
 
 const $ = id => document.getElementById(id);
 
@@ -15,7 +17,8 @@ export function mountNauticalHUD() {
   document.querySelector('.match').innerHTML = `${matchArtwork()}<span class="team blue"><span class="team-full">VELAS AZULES</span><span class="team-compact" aria-hidden="true">AZULES</span><b id="blue-score">A SALVO</b></span><span class="match-center"><span id="timer">00:00</span><small>CONQUISTA</small></span><span class="team red"><span class="team-full">CORSARIOS ROJOS</span><span class="team-compact" aria-hidden="true">CORSARIOS</span><b id="red-score">A SALVO</b></span>`;
   $('sound').innerHTML = icon('note'); $('settings').innerHTML = icon('gear');
   document.querySelector('.voyage').innerHTML = `<div class="cargo"><span>BOTÍN A BORDO</span><div class="treasure-counts"><strong title="Oro a bordo">${icon('coin')}<span id="cargo">0</span></strong><strong title="Cofres a bordo">${icon('chest')}<span id="chest-count">0</span></strong></div><div id="cargo-hint">Llévalo a puerto para asegurarlo.</div><div class="bank-balance">EN CAJA <b id="bank">200</b> <span>oro</span></div></div>`;
-  document.querySelector('.ship-card').innerHTML = `<img class="ship-card-art" src="/assets/pirate-ui/ship-panel-v3.png" alt=""><div class="ship-emblem"><img id="ship-portrait" alt="Bergantín La Indomable"><span class="rank-medal" id="rank-medal" title="Rango del capitán">1</span></div><div class="ship-details"><div class="ship-name"><h2>La Indomable</h2><span id="ship-level">RANGO 1 · 0/80 EXP</span></div><div class="experience-track"><i id="experience-bar"></i></div><div class="hull-stats">${icon('shield')}<div><div class="health-row"><span>CASCO</span><b id="health-text">160 / 160</b></div><div class="health-track"><div id="health-bar"></div></div></div></div><div class="crew-stats">${icon('crew')}<div><div class="crew-line"><span><b id="crew">12</b> / <span id="max-crew">12</span> TRIPULANTES</span></div><span class="crew-dots" id="crew-dots"></span></div></div></div>`;
+  flagshipHUD=mountFlagshipHUD(document.querySelector('.ship-card'));
+  window.addEventListener('pagehide',()=>flagshipHUD?.dispose(),{once:true});
   const actions = [['fire','cannon','ESPACIO'],['board','hook','Q'],['loot','chest','E'],['greek-fire','fire','R']];
   for(const [id, name, key] of actions) {
     const button=$(id); button.querySelector('.action-glyph').innerHTML=icon(name,'action-art');
@@ -92,13 +95,10 @@ export function renderModelPortrait(source, size=288, {aspect=1}={}) {
 }
 export function renderShipPortrait(ship){$('ship-portrait').src=renderModelPortrait(ship.object);}
 
-export function updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal,greekActive=0,grapple,boarding,invasion,lootProgress,paused,gameOver=false,voyage,weaponIndex,guns,firefight=0}) {
+export function updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal,greekActive=0,grapple,boarding,invasion,lootProgress,paused,gameOver=false,voyage,weaponIndex,guns,firefight=0,docked=false}) {
   $('chest-count').textContent=Math.ceil(player.gold/35);
-  $('rank-medal').textContent=rank;
-  $('rank-medal').title=`Rango ${rank} · ${xp}/${rank*80} experiencia`;
+  flagshipHUD?.update(player,{rank,xp,docked,boosting:voyage?.boosting});
   $('sprint').setAttribute('aria-pressed',String(!!voyage?.boosting));
-  $('experience-bar').style.width=`${Math.min(100,xp/(rank*80)*100)}%`;
-  $('ship-level').textContent=`RANGO ${rank} · ${xp}/${rank*80} EXP`;
   $('fire').style.setProperty('--ready',Math.max(0,1-player.cooldown/player.cooldownTotal));
   $('greek-fire').style.setProperty('--ready',Math.max(0,1-greekCooldown/greekTotal));
   $('board').style.setProperty('--ready',boarding ? Math.min(1,boarding.progress/4):1);
@@ -140,6 +140,9 @@ export function updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal,greek
   const ammunitionImage=$('fire').querySelector('.action-glyph .hud-icon');
   if(ammunitionImage.getAttribute('src')!==ammunitionSource)ammunitionImage.src=ammunitionSource;
 }
+
+export function animateFlagshipHUD(time,dt,options){flagshipHUD?.frame(time,dt,options);}
+if(import.meta.hot)import.meta.hot.dispose(()=>flagshipHUD?.dispose());
 
 let fullChart=true;
 export function toggleChart(){fullChart=!fullChart;$('map-mode').textContent='M';$('map-mode').title=fullChart?'M · Ver mapa cercano':'M · Ver todo el archipiélago';$('map-mode').setAttribute('aria-pressed',String(fullChart));}

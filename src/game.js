@@ -13,7 +13,7 @@ import { Campaign } from './campaign.js';
 import {applyFleetSails} from './fleet-appearance.js';
 import { balance, lootDuration, applyAmmoEffect,reconcileRoles,cannonReload,boardingExchange,broadsideFactor,crossingTBonus,sideKey,splitDamage,rigSpeedFactor,rigRules,boardingLoot } from './campaign-rules.js';
 import { FaunaCombat } from './fauna-combat.js';
-import { mountNauticalHUD, renderShipPortrait, updateNauticalHUD, drawNauticalMap, toggleChart } from './hud.js';
+import { mountNauticalHUD, renderShipPortrait, updateNauticalHUD, drawNauticalMap, toggleChart, animateFlagshipHUD } from './hud.js';
 import { createVoyageState, drinkRum, stepVoyage, weaponProfiles } from './voyage-feel.js';
 import { BALL_COLOR, BALL_SCALE, BALL_SPIN, WAKE_PUFF, WAKE_GAP, WAKE_SIZE, WAKE_LIFE } from './projectile-look.js';
 import { Expeditions } from './expeditions.js';
@@ -641,17 +641,12 @@ const map = $('minimap').getContext('2d');
 function minimap() {
   drawNauticalMap(map, { bounds:worldBounds, islands, ships, creatures:bestiary.entries, player, sources:campaign.fog.sources,time });
 }
-let lastCrew = -1;
 function updateHUD() {
   $('cargo').textContent = player.gold; $('bank').textContent = bank;
   for(const team of ['blue','red']){const home=getHomeBase(islands,team),state=home.owner!==team?'CAÍDA':home.invasion?'DISPUTADA':'A SALVO';$(''+team+'-score').textContent=state;$(''+team+'-score').closest('.team').classList.toggle('contested',!!home.invasion);$(''+team+'-score').title=`${home.name}: ${state.toLowerCase()}`;}
-  $('health-text').textContent = `${Math.ceil(player.hp)} / ${player.maxHp}`; $('health-bar').style.width = `${player.hp / player.maxHp * 100}%`;
-  $('health-bar').classList.toggle('critical', player.hp < player.maxHp * .3); $('crew').textContent = player.crew; $('max-crew').textContent = player.maxCrew;
-  $('ship-level').textContent = `RANGO ${rank} · ${xp}/${rank*80} EXP · ${Math.hypot(player.vx, player.vz).toFixed(1)} NUDOS${combat.combo >= 2 ? ` · RACHA ×${combat.combo}` : ''}`;
   $('greek-status').textContent = greekActive > 0 ? '¡No mires atrás!' : greekCooldown > 0 ? `Recarga ${Math.ceil(greekCooldown)} s` : 'Fuego griego';
   $('greek-fire').disabled = greekCooldown > 0 || !!player.dead || paused; $('greek-fire').classList.toggle('active', greekActive > 0);
   const boss = selectedEnemy?.isCreature && !selectedEnemy.dead ? selectedEnemy : null; $('creature-bar').style.display = boss ? 'block' : 'none'; if(boss){$('creature-name').textContent=boss.name;$('creature-subtitle').textContent=`${boss.xp} EXP · ${boss.epithet}`;$('creature-health').style.width=`${boss.hp/boss.maxHp*100}%`;}
-  if (lastCrew !== player.crew) { $('crew-dots').innerHTML = '<i></i>'.repeat(Math.min(player.crew, 24)); lastCrew = player.crew; }
   const cooldown = player.cooldown > 0;
   $('reload').textContent = cooldown ? `Recarga ${player.cooldown.toFixed(1)} s` : 'Mantén para disparar';
   $('fire').style.setProperty('--reload', `${(1 - player.cooldown / player.cooldownTotal) * 100}%`);
@@ -670,7 +665,7 @@ function updateHUD() {
     if (s.label) { s.label.innerHTML = `${s.name.toUpperCase()}<small>◈ ${s.gold} ORO · ${Math.ceil(s.hp / s.maxHp * 100)}% CASCO</small>${s.burning>0?`<span class="burn-timer">ARDE · ${Math.ceil(s.burning)} s</span>`:''}<span class="enemy-health"><i style="width:${s.hp / s.maxHp * 100}%"></i></span>`; s.label.classList.toggle('selected', s === selectedEnemy);s.label.classList.toggle('burning',s.burning>0); }
   }
   const seconds=Math.floor(elapsed);$('timer').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
-  updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal:26-campaign.greekLevel*2,greekActive,grapple,boarding,invasion:islands.find(i=>i.invasion?.source===player)?.invasion,lootProgress,paused,gameOver,voyage,weaponIndex,guns:player.guns,firefight:firefightCooldown});
+  updateNauticalHUD({player,rank,xp,greekCooldown,greekTotal:26-campaign.greekLevel*2,greekActive,grapple,boarding,invasion:islands.find(i=>i.invasion?.source===player)?.invasion,lootProgress,paused,gameOver,voyage,weaponIndex,guns:player.guns,firefight:firefightCooldown,docked:inPort()});
   voyageUI.update({player,home:port,docked:inPort(),bank,nearby:nearIsland(),target:selectedEnemy,loot:lootProgress,invasion:islands.find(i=>i.invasion?.source===player)?.invasion});
   if ($('upgrade-dialog').open) updateUpgrades(); minimap();
   // DOM diagnostics allow performance QA without altering live game state.
@@ -859,7 +854,21 @@ const qaBench = qaEnabled ? mountQABench({
     const place=(ship,x,z)=>{Object.assign(ship,{x,z,vx:0,vz:0,speed:0,yawRate:0,dead:0,destroyed:false,moored:true,target:null});ship.object.position.set(x,0,z);ship.object.visible=true;ship.wake.clear();};
     const toPort=()=>place(player,blueSpawn.x,blueSpawn.z);
     paused=true;
-    if(id==='fleet-purchases'){bank=1000;toPort();campaign.open('fleet');}
+    if(id.startsWith('hud-')){
+      gameOver=false;selectedEnemy=null;player.burning=0;player.destroyed=false;
+      const mode=id.slice(4);place(player,0,65);player.vx=player.vz=0;
+      if(mode==='ready'){Object.assign(player,{maxHp:160,hp:160,maxCrew:12,crew:8,rig:100,maxRig:100});rank=1;xp=0;}
+      else if(mode==='damage'){player.hp=Math.max(1,player.hp-46);player.crew=Math.max(0,player.crew-2);}
+      else if(mode==='critical'){player.hp=29;player.crew=3;player.rig=22;}
+      else if(mode==='fire'){player.hp=72;player.burning=8;player.crew=5;}
+      else if(mode==='repair'){toPort();player.hp=82;player.rig=65;}
+      else if(mode==='rank'){rank=6;xp=341;Object.assign(player,{maxHp:265,hp:239,maxCrew:24,crew:19,rig:87});updateUpgradeModel(player);renderShipPortrait(player);}
+      else if(mode==='sunk'){player.dead=7;player.hp=0;player.crew=0;}
+      else throw new Error(`Fixture HUD desconocido: ${mode}`);
+      director.queue.pending.length=0;director.hideSpeech();director.queue.current=null;
+      cameraTarget.set(player.x+2.88,0,player.z-11.16);campaign.updateVision(.4);
+    }
+    else if(id==='fleet-purchases'){bank=1000;toPort();campaign.open('fleet');}
     else if(id==='fleet-designs'){
       place(player,0,105);player.heading=Math.PI;player.object.rotation.y=Math.PI;requestedZoom=zoom=34;qaFleetReview=true;resize();
       for(const [key,role,x,level] of [['scout-i','scout',-20,1],['scout-ii','scout',-7,2],['guard','guard',7,1],['corsair','corsair',21,1]]){
@@ -987,6 +996,7 @@ function animate(now) {
   territoryArt.update(time+previewTime,realDt);
   for (const b of gulls) { b.g.position.set(Math.cos(time * .035 + b.phase) * b.r, b.y, Math.sin(time * .035 + b.phase) * b.r * .7); b.g.rotation.y = -time * .035 - b.phase; b.wings.forEach((w, i) => w.rotation.z = (i ? 1 : -1) * (.2 + Math.sin(time * 3 + b.phase) * .22)); }
   updateCamera(realDt); updateLabels(dt); updateCombatFeel(realDt);
+  animateFlagshipHUD(time,realDt,{lowQuality:quality!=='high',visible:!modalOpen()&&!gameOver&&showcase===null&&!document.body.classList.contains('hidden-ui')});
   if (now > toastUntil) $('toast').classList.remove('visible');
   fpsClock += wallDt; fpsFrames++; if (fpsClock >= 1) { fps = fpsFrames / fpsClock; fpsFrames = 0; fpsClock = 0; }
   uiClock += realDt; if (uiClock > .1) { uiClock = 0; updateHUD();const state=audio.status;renderer.domElement.dataset.audioState=state.unlocked?(state.paused?'paused':'ready'):'locked';renderer.domElement.dataset.audioMusic=state.music;renderer.domElement.dataset.audioDecoded=String(state.decoded);renderer.domElement.dataset.audioVoices=String(state.voices);renderer.domElement.dataset.audioErrors=String(Object.keys(state.errors).length); }

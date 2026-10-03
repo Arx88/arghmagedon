@@ -78,6 +78,8 @@ Las costas incorporan arena y vegetación con colores más coherentes, espuma, r
 
 La guía de la expedición responde al estado real de la partida: invasión, incendio, casco dañado, combate, saqueo y botín. Se puede plegar y arranca compacta en pantallas pequeñas. El marcador de navegación queda anclado al destino real sobre el agua, incluido el ajuste de ruta que evita las costas; se retira al tomar el timón manualmente. La pausa admite P, Escape y botón; el resultado muestra bajas causadas, mejor racha, daño y duración reales.
 
+El HUD inferior izquierdo tiene una composición propia en `flagship-hud.js` y `flagship-hud.css`: retrato del bergantín, rango, casco, plazas de tripulación ocupadas y vacantes, velas, experiencia y velocidad. El daño deja una estela que permite leer cuánto casco se perdió; la reparación en puerto lleva un brillo suave y las subidas de rango un destello dorado. El retrato navega sobre un pequeño shader de agua, limitado a 12 actualizaciones por segundo (4 en calidad baja), con fondo CSS de respaldo. Las cifras siguen la capacidad real del barco, incluidas sus mejoras. La distribución reserva espacio para los controles y el minimapa; en pantallas muy angostas conserva los datos y traslada el rango al encabezado.
+
 Las ilustraciones nuevas, sus prompts y usos están en [`public/assets/voyage/GENERATION.md`](public/assets/voyage/GENERATION.md). Se distribuyen como WebP optimizados. Manrope y Cormorant Garamond se sirven localmente en WOFF2 con sus licencias OFL, sin solicitudes a Google Fonts durante la partida. Las nuevas animaciones decorativas respetan la preferencia de movimiento reducido.
 
 ## Técnica y alcance

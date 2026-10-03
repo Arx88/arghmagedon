@@ -8,6 +8,7 @@ export const qaFixtures=Object.freeze([
   ['greek-fire','Marea Roja'],['fire-trail','Rastro en llamas'],['victory','Victoria visual'],['defeat','Derrota visual'],
   ['portrait-sailor','Aviso · Marinero'],['portrait-harpooner','Aviso · Arponero'],
   ['portrait-boatswain','Aviso · Contramaestre'],['portrait-lookout','Aviso · Vigía'],['portrait-carpenter','Aviso · Carpintero'],
+  ['hud-ready','HUD · listo'],['hud-damage','HUD · impacto'],['hud-critical','HUD · crítico'],['hud-fire','HUD · incendio'],['hud-repair','HUD · reparación'],['hud-rank','HUD · rango / 24 plazas'],['hud-sunk','HUD · naufragio'],
   ['fleet-purchases','Flota · compras y mejora'],['fleet-designs','Flota · cuatro diseños'],
 ]);
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
